@@ -9,23 +9,22 @@
 <div class="info">
 <div class="container">
   <h1 class="titulo "> Diagrama De Clases</h1>
-  <img src="Diagrama nuevo.jpg">
+  <img src="./imagenes/Diagrama nuevo.jpg">
 </div>
 <div class="container">
   <h1 class="titulo"> Flujo De Trabajo</h1>
-  <img src="Ramas.png">
+  <img src="./imagenes/Ramas.png">
 </div>
 
     <div class="titulo">
       <h1>Conoce sobre nosostros</h1>
     </div>
      <div class="card2">
-      <button onclick="window.location.href='https://github.com/mauricioguachizaca/Proyecto-integral-de-saberes'">
-        Haz click para ir al repositorio del proyecto</button></div>
+      </div>
     <div class="contenido">
       <div class="card">
         <h2>Boris Rengel</h2>
-        <img src="./b.jpg">
+        <img src="./imagenes/b.jpg">
         <p>Estudiante de la carrera de computacion</p>
         <p>de la Universidad Nacional de Loja</p>
         <p>Programador de esta pagina</p>
@@ -39,7 +38,7 @@
 
       <div class="card">
         <h2>Letty Cañar</h2>
-        <img src="./l.jpg">
+        <img src="./imagenes/l.jpg">
         <p>Estudiante de la carrera de computacion</p>
         <p>de la Universidad Nacional de Loja</p>
         <p>Programador de esta pagina</p>
@@ -54,7 +53,7 @@
       <div class="contenido">
       <div class="card">
         <h2>Nathaly Angamarca</h2>
-        <img src="./n.jpg">
+        <img src="./imagenes/n.jpg">
         <p>Estudiante de la carrera de computacion</p>
         <p>de la Universidad Nacional de Loja</p>
         <P>Programador de esta pagina</P>
@@ -67,7 +66,7 @@
       </div>
       <div class="card">
         <h2>Jose Encalada</h2>
-        <img src="./f.jpg">
+        <img src="./imagenes/f.jpg">
         <p>Estudiante de la carrera de computacion</p>
         <p>de la Universidad Nacional de Loja</p>
         <p>Programador de esta pagina</p>
@@ -81,7 +80,7 @@
       </div>
       <div class="card">
         <h2>Mauricio Guachizaca</h2>
-        <img  src="./mau.jpg">
+        <img  src="./imagenes/mau.jpg">
         <p>Estudiante de la carrera de computacion</p>
         <p>de la Universidad Nacional de Loja</p>
         <p>Programador de esta pagina</p>
@@ -92,5 +91,39 @@
       </script>
         <button onclick="redirigirAPerfilGithub()">Mi GitHub</button>
       </div>
+      <button style="background-color: #000000; color: #fff; border: none; padding: 10px 20px; cursor: pointer; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; transition-duration: 0.4s; border-radius: 5px;" onclick="window.location.href='https://github.com/mauricioguachizaca/Proyecto-integral-de-saberes'">
+        Haz click para ir al repositorio del proyecto</button>
+      <button class="btn" id="show-code" style="background-color: #000000; color: #fff; border: none; padding: 10px 20px; cursor: pointer; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; transition-duration: 0.4s; border-radius: 5px;">Mostrar código HTML</button>
+      <pre id="code-container" style="display: none; background-color: #ffffff; color: #212529; border: 1px solid #dee2e6; padding: 15px; overflow-x: auto; max-height: 300px; width: 100%;">
+        <code id="code"></code>
+    </pre>
+      <script>
+        const showCodeBtn = document.getElementById('show-code');
+        const codeContainer = document.getElementById('code-container');
+        const codeElement = document.getElementById('code');
+    
+        showCodeBtn.addEventListener('click', () => {
+            codeContainer.style.display = codeContainer.style.display === 'none' ? 'block' : 'none';
+        });
+    
+        // Función para obtener el código HTML del elemento
+        function getHTMLCode(element) {
+            const clone = element.cloneNode(true);
+            const scripts = clone.getElementsByTagName('script');
+    
+            for (let i = 0; i < scripts.length; i++) {
+                scripts[i].remove();
+            }
+    
+            return clone.outerHTML;
+        }
+    
+        // Función para actualizar el contenido del código HTML
+        function updateCode() {
+            codeElement.textContent = getHTMLCode(document.documentElement);
+        }
+    
+        updateCode();
+    </script>
       </div>
 </html>
