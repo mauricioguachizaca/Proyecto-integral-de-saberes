@@ -73,3 +73,24 @@
   .container img {
     display: inline-block;
   }
+
+  /*Responsive*/
+  @media screen and (max-width: 768px) {
+    .contenido {
+      flex-direction: column;
+      align-items: center;
+    }
+    .card {
+      width: 80%;
+    }
+  }
+  @media screen and (max-width: 500px) {
+    .card {
+      width: 100%;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .card2 {
+      width: 80%;
+    }
+  }
