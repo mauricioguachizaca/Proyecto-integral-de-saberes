@@ -45,7 +45,7 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     width: 40%;
    }
- .capturas{
+.capturas {
     display: flex;
     justify-content: space-between;
     flex-direction: column;
