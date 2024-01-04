@@ -6,23 +6,25 @@
     <link rel="stylesheet" type="text/css" href="estilos.css">
     <title>Document</title>
 </head>
-<div class="info">
-<div class="container">
-  <h1 class="titulo "> Diagrama De Clases</h1>
-  <img src="./imagenes/Diagrama nuevo.jpg">
-</div>
-<div class="container">
-  <h1 class="titulo"> Flujo De Trabajo</h1>
-  <img src="./imagenes/FlujoDeTrabajo.png">
-</div>
+<body>
+    <div class="info">
+        <div class="container">
+            <h1 class="titulo "> Diagrama De Clases</h1>
+            <img src="./imagenes/Diagrama nuevo.jpg">
+        </div>
+        <div class="container">
+            <h1 class="titulo"> Flujo De Trabajo</h1>
+            <img src="./imagenes/FlujoDeTrabajo.png">
+        </div>
 
-    <div class="titulo">
-      <h1>Conoce sobre nosotros</h1>
-    </div>
-     <div class="card2">
-     </div>
-    <div class="contenido">
-      <div class="card">
+        <div class="titulo">
+            <h1>Conoce sobre nosotros</h1>
+        </div>
+        <div class="card2">
+        </div>
+        <div class="contenido">
+            <!-- Aquí van los perfiles de los estudiantes con sus botones de GitHub -->
+              <div class="card">
         <h2>Boris Rengel</h2>
         <img src="./imagenes/b.jpg">
         <p>Estudiante de la carrera de Computación</p>
@@ -77,54 +79,81 @@
       </script>
         <button onclick="redirigirAPerfilGithub5()">Mi GitHub</button>
       </div>
-      </div>
-      <div class="card">
-        <h2>Mauricio Guachizaca</h2>
-        <img  src="./imagenes/mau.jpg">
-        <p>Estudiante de la carrera de Computación</p>
-        <p>de la Universidad Nacional de Loja</p>
-        <p>Programador de esta página</p>
+
+        </div>
+        <div class="card">
+            <h2>Mauricio Guachizaca</h2>
+            <img  src="./imagenes/mau.jpg">
+            <p>Estudiante de la carrera de Computación</p>
+            <p>de la Universidad Nacional de Loja</p>
+            <p>Programador de esta página</p>
+            <script>
+                const redirigirAPerfilGithub = () => {
+                    window.location.href = 'https://github.com/mauricioguachizaca';
+                };
+            </script>
+            <button onclick="redirigirAPerfilGithub()">Mi GitHub</button>
+        </div>
+        <button style="background-color: #000000; color: #fff; border: none; padding: 10px 20px; cursor: pointer; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; transition-duration: 0.4s; border-radius: 5px;" onclick="window.location.href='https://github.com/mauricioguachizaca/Proyecto-integral-de-saberes'">
+            Haz click para ir al repositorio del proyecto
+        </button>
+        <button class="btn" id="show-code" style="background-color: #000000; color: #fff; border: none; padding: 10px 20px; cursor: pointer; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; transition-duration: 0.4s; border-radius: 5px;">
+            Mostrar código HTML
+        </button>
+        <pre id="code-container" style="display: none; background-color: #ffffff; color: #212529; border: 1px solid #dee2e6; padding: 15px; overflow-x: auto; max-height: 300px; width: 100%;">
+            <code id="code"></code>
+        </pre>
         <script>
-          const redirigirAPerfilGithub = () => {
-              window.location.href = 'https://github.com/mauricioguachizaca';
-          };
-      </script>
-        <button onclick="redirigirAPerfilGithub()">Mi GitHub</button>
-      </div>
-      <button style="background-color: #000000; color: #fff; border: none; padding: 10px 20px; cursor: pointer; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; transition-duration: 0.4s; border-radius: 5px;" onclick="window.location.href='https://github.com/mauricioguachizaca/Proyecto-integral-de-saberes'">
-        Haz click para ir al repositorio del proyecto</button>
-      <button class="btn" id="show-code" style="background-color: #000000; color: #fff; border: none; padding: 10px 20px; cursor: pointer; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; transition-duration: 0.4s; border-radius: 5px;">Mostrar código HTML</button>
-      <pre id="code-container" style="display: none; background-color: #ffffff; color: #212529; border: 1px solid #dee2e6; padding: 15px; overflow-x: auto; max-height: 300px; width: 100%;">
-        <code id="code"></code>
-    </pre>
-      <script>
-        const showCodeBtn = document.getElementById('show-code');
-        const codeContainer = document.getElementById('code-container');
-        const codeElement = document.getElementById('code');
-    
-        showCodeBtn.addEventListener('click', () => {
-            codeContainer.style.display = codeContainer.style.display === 'none' ? 'block' : 'none';
-        });
+            const showCodeBtn = document.getElementById('show-code');
+            const codeContainer = document.getElementById('code-container');
+            const codeElement = document.getElementById('code');
+        
+            showCodeBtn.addEventListener('click', () => {
+                codeContainer.style.display = codeContainer.style.display === 'none' ? 'block' : 'none';
+            });
 
-        // Función para obtener el código HTML del elemento
-        function getHTMLCode(element) {
-            const clone = element.cloneNode(true);
-            const scripts = clone.getElementsByTagName('script');
-    
-            for (let i = 0; i < scripts.length; i++) {
-                scripts[i].remove();
+            // Función para obtener el código HTML del elemento
+            function getHTMLCode(element) {
+                const clone = element.cloneNode(true);
+                const scripts = clone.getElementsByTagName('script');
+        
+                for (let i = 0; i < scripts.length; i++) {
+                    scripts[i].remove();
+                }
+        
+                return clone.outerHTML;
             }
-    
-            return clone.outerHTML;
-        }
-    
-        // Función para actualizar el contenido del código HTML
-        function updateCode() {
-            codeElement.textContent = getHTMLCode(document.documentElement);
-        }
-    
-        updateCode();
-    </script>
-      </div>
-</html>
+        
+            // Función para actualizar el contenido del código HTML
+            function updateCode() {
+                codeElement.textContent = getHTMLCode(document.documentElement);
+            }
+        
+            updateCode();
+        </script>
+    </div>
 
+    <!-- Información adicional -->
+    <button id="mostrar-informacion" style="background-color: #000000; color: #fff; border: none; padding: 10px 20px; cursor: pointer; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; transition-duration: 0.4s; border-radius: 5px;">
+        Mostrar Información Adicional
+    </button>
+    <div id="info-adicional" style="display: none; padding: 20px;">
+        <h2>OBJETIVO:</h2>
+        <p>Tu texto aquí...</p>
+
+        <h2>¿CÓMO FUNCIONA?</h2>
+        <p>Tu texto aquí...</p>
+
+        <h2>ADAPTABILIDAD</h2>
+        <p>Tu texto aquí...</p>
+    </div>
+    <script>
+        const mostrarInfoBtn = document.getElementById('mostrar-informacion');
+        const infoAdicional = document.getElementById('info-adicional');
+
+        mostrarInfoBtn.addEventListener('click', () => {
+            infoAdicional.style.display = infoAdicional.style.display === 'none' ? 'block' : 'none';
+        });
+    </script>
+</body>
+</html>
