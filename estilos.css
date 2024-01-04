@@ -6,9 +6,12 @@
     background-color: #f0f0f0;
     padding: 50px 0;
    }
-  body {
-    background-image: linear-gradient(to right, #ff7e5f, #feb47b);
+   body {
+    background-color: #red; /* Reemplaza con el color que desees, puedes usar nombres de color o códigos hexadecimales */
+    margin: 0; /* Para eliminar el margen predeterminado del cuerpo de la página */
+    padding: 0; /* Para eliminar el relleno predeterminado del cuerpo de la página */
   }
+
     img {
     text-align: center;
     width: 50%;
