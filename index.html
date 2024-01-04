@@ -106,30 +106,6 @@
             codeContainer.style.display = codeContainer.style.display === 'none' ? 'block' : 'none';
         });
 
-<button id="mostrar-informacion" style="background-color: #000000; color: #fff; border: none; padding: 10px 20px; cursor: pointer; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; transition-duration: 0.4s; border-radius: 5px;">
-  Mostrar Información Adicional
-</button>
-
-<div id="info-adicional" style="display: none; padding: 20px;">
-  <h2>OBJETIVO:</h2>
-  <p>Nuestra página web tiene como objetivo principal educar y concientizar a las personas sobre su uso de energía, permitiéndoles controlar y gestionar mejor su consumo, fomentando la sostenibilidad, la eficiencia energética y brindando herramientas para tomar decisiones informadas respecto a la optimización de la electricidad utilizada en casas, negocios o edificaciones.</p>
-
-  <h2>¿CÓMO FUNCIONA?</h2>
-  <p>La página web funciona proporcionando a los usuarios un espacio donde ingresan datos específicos, como tipos de electrodomésticos, duración de uso y hábitos de consumo. Basándose en esta información, la herramienta realiza cálculos precisos para estimar el consumo total de electricidad.</p>
-
-  <h2>ADAPTABILIDAD</h2>
-  <p>Nuestra página web pretende ser altamente responsiva, para de esta manera lograr adaptarse a diversos dispositivos como computadoras de escritorio, tablets y teléfonos móviles. Su diseño adaptable busca garantizar una experiencia de usuario óptima en cualquier pantalla, manteniendo la funcionalidad y facilitando la navegación, lo que permitirá a los usuarios calcular su consumo eléctrico de manera fácil y accesible desde cualquier lugar y dispositivo.</p>
-</div>
-
-<script>
-  const mostrarInfoBtn = document.getElementById('mostrar-informacion');
-  const infoAdicional = document.getElementById('info-adicional');
-
-  mostrarInfoBtn.addEventListener('click', () => {
-    infoAdicional.style.display = infoAdicional.style.display === 'none' ? 'block' : 'none';
-  });
-</script>
-
         // Función para obtener el código HTML del elemento
         function getHTMLCode(element) {
             const clone = element.cloneNode(true);
