@@ -84,6 +84,36 @@
   .container img {
     display: inline-block;
   }
+        body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    padding-top: 60px; /* Ajusta el valor según la altura de tu nav */
+}
+  nav {
+    background-color: #030060;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8); /* Agrega sombra */
+    position: fixed; /* Se mantiene fijo al desplazarse la página */
+    top: 0; /* Se muestra en la parte superior de la página */
+    width: 100%; /* Ancho completo */
+    z-index: 1000; /* Asegura que esté por encima de otros elementos */
+}
+
+nav div {
+    display: flex;
+    align-items: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 18px; /* Ajusta el tamaño del texto */
+   font-weight: bold; /* Ajusta el espacio entre los enlaces */
+}
 /*Responsive*/
   @media screen and (max-width: 768px) {
     .contenido {
