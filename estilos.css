@@ -10,6 +10,8 @@
     background-color: #f0f0f0; /* Reemplaza con el color que desees, puedes usar nombres de color o códigos hexadecimales */
     margin: 0; /* Para eliminar el margen predeterminado del cuerpo de la página */
     padding: 0; /* Para eliminar el relleno predeterminado del cuerpo de la página */
+    font-family: Arial, sans-serif;
+    padding-top: 60px;
   }
 
     img {
@@ -81,11 +83,6 @@
   .container img {
     display: inline-block;
   }
- body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    padding-top: 60px; /* Ajusta el valor según la altura de tu nav */
-}
   nav {
     background-color: #030060;
     display: flex;
