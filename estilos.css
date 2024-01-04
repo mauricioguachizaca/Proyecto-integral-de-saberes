@@ -74,12 +74,6 @@
     display: inline-block;
   }
 /*Responsive*/
-  @media (max-width: 768px) {
-    .card {
-        width: 90%; /* Cambia el ancho al 90% en dispositivos móviles */
-        flex-direction: row; /* Cambia la dirección de la disposición a filas */
-    }
-  }
   @media screen and (max-width: 768px) {
     .contenido {
       flex-direction: column;
