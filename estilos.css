@@ -130,8 +130,9 @@ nav a:hover {
 
   nav a {
     font-size: 14px; /* Ajusta el tamaño del texto para pantallas más pequeñas */
-    margin: 0 10px; /* Ajusta el espacio entre los enlaces para pantallas más pequeñas */
+    margin: 0 5px; /* Ajusta el espacio entre los enlaces para pantallas más pequeñas */
     line-height: 60px; /* Ajusta la altura del texto al centro verticalmente */
+    letter-spacing: 0.5px; /* Ajusta el espaciado entre letras */
   }
 }
   @media screen and (max-width: 768px) {
