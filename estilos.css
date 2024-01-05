@@ -91,7 +91,7 @@
 nav {
   width: 100%;
   height: 80px; /* Aumenta la altura del cuadro a 80px o el tamaño deseado */
-  background-color: #1c2388;
+  background-color: #15194e;
   position: fixed;
   top: 0;
   left: 0;
@@ -123,11 +123,18 @@ nav a:hover {
 }
 
 /*Responsive*/
-  @media screen and (max-width: 768px) {
-      nav a {
-    font-size: 18px; /* Reducir el tamaño del texto para dispositivos más pequeños */
-    margin: 10px 15px; /* Ajustar el margen para dispositivos más pequeños */
+@media screen and (max-width: 768px) {
+  nav {
+    height: 60px; /* Ajusta la altura del cuadro para pantallas más pequeñas */
   }
+
+  nav a {
+    font-size: 14px; /* Ajusta el tamaño del texto para pantallas más pequeñas */
+    margin: 0 10px; /* Ajusta el espacio entre los enlaces para pantallas más pequeñas */
+    line-height: 60px; /* Ajusta la altura del texto al centro verticalmente */
+  }
+}
+  @media screen and (max-width: 768px) {
     .contenido {
       flex-direction: column;
       align-items: center;
