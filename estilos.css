@@ -148,6 +148,14 @@ nav a:hover {
 }
 
 /*Responsive*/
+/* Estilos para dispositivos móviles */
+@media screen and (max-width: 768px) {
+  .info > div {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
 @media screen and (max-width: 768px) {
   nav {
     height: 60px; /* Ajusta la altura del cuadro para pantallas más pequeñas */
