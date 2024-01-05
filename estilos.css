@@ -123,6 +123,17 @@ nav a:hover {
 }
 
 /*Responsive*/
+@media screen and (max-width: 768px) {
+  nav {
+    height: 60px; /* Ajusta la altura del cuadro para pantallas más pequeñas */
+  }
+
+  nav a {
+    font-size: 3.5vw; /* Ajusta el tamaño del texto usando unidades de viewport width */
+    margin: 0 5px; /* Ajusta el espacio horizontal entre los enlaces */
+    line-height: 1.5; /* Ajusta el interlineado entre las palabras */
+  }
+}
   @media screen and (max-width: 768px) {
     .contenido {
       flex-direction: column;
