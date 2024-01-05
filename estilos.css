@@ -151,9 +151,10 @@ nav a:hover {
 /* Estilos para dispositivos móviles */
 @media screen and (max-width: 768px) {
     .container {
-        text-align: center; /* Asegura que el texto se centre en dispositivos móviles */
+        text-align: center !important; /* Asegura que el texto se centre en dispositivos móviles */
     }
 }
+
 @media screen and (max-width: 768px) {
   .info > div {
     margin-left: 10px;
