@@ -1,3 +1,28 @@
+/* Estilos para las secciones de Historias de Usuario y Conclusiones */
+
+/* Div contenedor */
+.info > div {
+  margin-bottom: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 800px; /* Ancho máximo del contenido */
+  padding-left: 20px; /* Espaciado a la izquierda */
+  padding-right: 20px; /* Espaciado a la derecha */
+  box-sizing: border-box; /* Incluye el relleno en el ancho total */
+}
+
+/* Títulos */
+.info h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Texto de las historias de usuario y conclusiones */
+.info p {
+  font-size: 16px;
+  line-height: 1.6; /* Espaciado entre líneas */
+  margin-bottom: 10px;
+}
 
 .info {
     display: flex;
