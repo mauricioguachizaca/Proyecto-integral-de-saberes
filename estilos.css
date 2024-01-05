@@ -149,9 +149,10 @@ nav a:hover {
 
 /*Responsive*/
 /* Estilos para dispositivos móviles */
+/* Consulta de medios para dispositivos móviles con un ancho máximo de 768px */
 @media screen and (max-width: 768px) {
-    .container {
-        text-align: center !important; /* Asegura que el texto se centre en dispositivos móviles */
+    body {
+        text-align: center !important; /* Asegura que todo el contenido se centre */
     }
 }
 
