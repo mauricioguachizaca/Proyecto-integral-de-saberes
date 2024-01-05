@@ -150,12 +150,6 @@ nav a:hover {
 /*Responsive*/
 /* Estilos para dispositivos móviles */
 @media screen and (max-width: 768px) {
-  .card {
-    text-align: center; /* Centra el contenido horizontalmente */
-    width: 80%; /* Ajusta el ancho del contenedor para centrarlo en dispositivos móviles */
-    margin: 0 auto; /* Centra el contenedor en la pantalla */
-  }
-
   .card p {
     text-align: center; /* Centra los párrafos de texto */
   }
