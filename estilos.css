@@ -149,7 +149,7 @@ nav a:hover {
 
 /*Responsive*/
 /* Estilos para dispositivos móviles */
-@media only screen and (max-width: 768px) {
+@media screen and (max-width: 768px) {
     .container {
         text-align: center; /* Asegura que el texto se centre en dispositivos móviles */
     }
