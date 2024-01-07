@@ -1,3 +1,28 @@
+/* Estilos para las secciones de Historias de Usuario y Conclusiones */
+
+/* Div contenedor */
+.info > div {
+  margin-bottom: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 800px; /* Ancho máximo del contenido */
+  padding-left: 20px; /* Espaciado a la izquierda */
+  padding-right: 20px; /* Espaciado a la derecha */
+  box-sizing: border-box; /* Incluye el relleno en el ancho total */
+}
+
+/* Títulos */
+.info h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Texto de las historias de usuario y conclusiones */
+.info p {
+  font-size: 16px;
+  line-height: 1.6; /* Espaciado entre líneas */
+  margin-bottom: 10px;
+}
 
 .info {
     display: flex;
@@ -16,8 +41,8 @@
 
     img {
     text-align: center;
-    width: 50%;
-    height: 50%;
+    width: 80%;
+    height: 80%;
     Border: 3px solid #101010;
     margin-bottom: 50px;
     }
@@ -88,33 +113,66 @@
     font-family: Arial, sans-serif;
     padding-top: 60px; /* Ajusta el valor según la altura de tu nav */
 }
-  nav {
-    background-color: #030060;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 30px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8); /* Agrega sombra */
-    position: fixed; /* Se mantiene fijo al desplazarse la página */
-    top: 0; /* Se muestra en la parte superior de la página */
-    width: 100%; /* Ancho completo */
-    z-index: 1000; /* Asegura que esté por encima de otros elementos */
+nav {
+  width: 100%;
+  height: 80px; /* Aumenta la altura del cuadro a 80px o el tamaño deseado */
+  background-color: #15194e;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
 }
 
 nav div {
-    display: flex;
-    align-items: center;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 nav a {
-    color: white;
-    text-decoration: none;
-    margin-left: 20px;
-    font-size: 18px; /* Ajusta el tamaño del texto */
-   font-weight: bold; /* Ajusta el espacio entre los enlaces */
+  color: #fff;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 80px; /* Ajusta la altura del texto al centro verticalmente */
+}
+
+nav a:hover {
+  color: #ddd;
+  font-weight: bold;
 }
 
 /*Responsive*/
+/* Estilos para dispositivos móviles */
+@media screen and (max-width: 768px) {
+  .card p {
+    text-align: center; /* Centra los párrafos de texto */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .info > div {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  nav {
+    height: 60px; /* Ajusta la altura del cuadro para pantallas más pequeñas */
+  }
+
+  nav a {
+    font-size: 3.5vw; /* Ajusta el tamaño del texto usando unidades de viewport width */
+    margin: 0 5px; /* Ajusta el espacio horizontal entre los enlaces */
+    line-height: 1.5; /* Ajusta el interlineado entre las palabras */
+  }
+}
   @media screen and (max-width: 768px) {
     .contenido {
       flex-direction: column;
