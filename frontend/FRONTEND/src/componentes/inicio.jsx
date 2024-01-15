@@ -155,7 +155,7 @@ export const Inicio = () => {
         <a href="#" className="bg-[#47d9e1] text-white  py-2 px-4 rounded-full text-lg hover:bg-blue-600 transition duration-300">Descubrelo aquí</a>
       </section>
 
-      <div className='mt-60 flex items-center justify-evenly mb-2'>
+      <div className='mt-52 flex items-center justify-evenly mb-2'>
         {/* boton y icono de iniciar sesion no cambiar solo agregar estilos*/}
         <Link to="/iniciar sesion" className="text-center flex flex-col items-center">
           <div className="border border-gray-300 p-4 rounded">
