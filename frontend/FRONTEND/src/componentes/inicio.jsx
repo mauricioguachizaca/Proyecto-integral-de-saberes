@@ -22,7 +22,7 @@ export const Inicio = () => {
         </div>
       </nav>
 
-      <section className=" w-1000 h-100 mt-20 flex items-center justify-center flex-col h-screen bg-cover bg-center "
+      <section className=" w-1000 h-100 mt-16 flex items-center justify-center flex-col h-screen bg-cover bg-center "
         style={{ backgroundImage: `url(${fondoImagen})` }}>
         <h1 className='font-semibold text-4xl text-red-500 mb-4'>Quieres saber cuánto 
         <p /> consumen tus dispositivos eléctricos</h1>
@@ -51,7 +51,7 @@ export const Inicio = () => {
         {/* aqui se agrega lo de mas de la pagina de inicio */}
 
 
-        <footer className="bg-cyan-900 mt-28 p-5  text-blue-gray-100 text-center">hola</footer>
+        <footer className="bg-cyan-90 mt-28 p-5  text-blue-gray-100 text-center">hola</footer>
         
 
       
