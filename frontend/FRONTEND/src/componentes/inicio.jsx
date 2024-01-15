@@ -31,7 +31,7 @@ const SeccionTestimonios = () => {
               <p className="testimony__review">Estudiante de la carrera de Ingeniería en Sistemas/Computación de la Universidad Nacional de Loja</p>
               <a href="https://github.com/NathalyAngamarca" className="testimony__github block bg-[#5d8dee] 
               border rounded p-2 max-w-xs mx-auto mt-10 mb-5 text-center font-bold" target="_blank" rel="noopener noreferrer">
-                Visita mi repositorio
+                Visita mi Github
               </a>
             </div>
           </section>
@@ -55,7 +55,7 @@ const SeccionTestimonios = () => {
               <p className="testimony__review">Estudiante de la carrera de Ingeniería en Sistemas/Computación de la Universidad Nacional de Loja</p>
               <a href="https://github.com/LettyYas" className="testimony__github block bg-[#478b6d]
               border rounded p-2 max-w-xs mx-auto mt-10 mb-5 text-center font-bold" target="_blank" rel="noopener noreferrer">
-                Visita mi repositorio
+                Visita mi Github
               </a>
             </div>
           </section>
@@ -72,7 +72,7 @@ const SeccionTestimonios = () => {
               <p className="testimony__review">Estudiante de la carrera de Ingeniería en Sistemas/Computación de la Universidad Nacional de Loja</p>
               <a href="https://github.com/FerminEncalada" className="testimony__github block bg-[#5d8dee]
               border rounded p-2 max-w-xs mx-auto mt-10 mb-5 text-center font-bold" target="_blank" rel="noopener noreferrer">
-                Visita mi repositorio
+                Visita mi Github
               </a>
             </div>
           </section>
@@ -97,7 +97,7 @@ const SeccionTestimonios = () => {
               <p className="testimony__review">Estudiante de la carrera de Ingeniería en Sistemas/Computación de la Universidad Nacional de Loja</p>
               <a href="https://github.com/mauricioguachizaca" className="testimony__github block bg-[#478b6d]
               border rounded p-2 max-w-xs mx-auto mt-10 mb-5 text-center font-bold" target="_blank" rel="noopener noreferrer">
-                Visita mi repositorio
+                Visita mi Github
               </a>
             </div>
           </section>
@@ -115,7 +115,7 @@ const SeccionTestimonios = () => {
               <p className="testimony__review">Estudiante de la carrera de Ingeniería en Sistemas/Computación de la Universidad Nacional de Loja</p>
               <a href="https://github.com/Borisir" className="testimony__github block bg-[#5d8dee]
               border rounded p-2 max-w-xs mx-auto mt-10 mb-5 text-center font-bold" target="_blank" rel="noopener noreferrer">
-                Visita mi repositorio
+                Visita mi Github
               </a>
             </div>
           </section>
@@ -195,7 +195,7 @@ export const Inicio = () => {
 
       <SeccionTestimonios />
 
-      <footer className="bg-cyan-900 mt-28 p-5  text-blue-gray-100 text-center">Derechos reservados © Click Wed</footer>
+      <footer className="bg-[#154918] mt-28 p-5  text-blue-gray-100 text-center">Derechos reservados © Click Wed</footer>
 
     </div>
   );
