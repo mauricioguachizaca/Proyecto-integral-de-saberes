@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const usuarioSchema = new mongoose.Schema({
-  nombre: {
+    nombre: {
         type: String,
         require: true,
         trim: true 
@@ -11,18 +11,35 @@ const usuarioSchema = new mongoose.Schema({
           require: true,
           trim: true 
     },
-    ID:{
+    cedula:{
         type:String,
         require:true,
         trim: true, 
         unique: true, 
+    },
+    correo:{
+        type:String,
+        require:true,
+        trim: true,
+        unique: true,
     },
     provincia:{
         type:String,
         require:true,
-        trim: true, 
-        unique: true, 
+        trim: true,
     },
+    nombreusuario:{
+        type:String,
+        require:true,
+        trim:true,
+        unique:true
+    },
+    password:{
+        type:String,
+        require:true,
+        trim:true
+    }
+
 });
 
 module.exports = mongoose.model('Usuario', usuarioSchema);

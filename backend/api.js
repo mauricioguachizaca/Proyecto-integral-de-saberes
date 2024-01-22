@@ -17,12 +17,12 @@ router.get('/usuarios', async (req, res) => {
   try {
     const mostrar = await Usuario.find();
     if (mostrar.length === 0) {
-      res.json({ mensaje: 'No hay turnos por atender' });
+      res.json({ mensaje: 'No hay usuarios' });
     } else {
       res.json(mostrar);
     }
   } catch (error) {
-    res.status(500).json({ error: 'Error al obtener los turnos' });
+    res.status(500).json({ error: 'Error al ingresar el usuario' });
   }
 });
 
@@ -42,9 +42,15 @@ router.get('/usuarios', async (req, res) => {
  *                 type: string
  *               apellido:
  *                 type: string
- *               ID:
+ *               cedula:
+ *                 type: string
+ *               correo:
  *                 type: string
  *               provincia:
+ *                 type: string
+ *               nombre de usuario:
+ *                 type: string
+ *               password:
  *                 type: string
  *     responses:
  *       200:
@@ -54,14 +60,48 @@ router.get('/usuarios', async (req, res) => {
  */
 router.post('/usuarios', async (req, res) => {
   try {
-    const { nombre, apellido, ID, provincia } = req.body;
-    const usuario = new Usuario({ nombre, apellido, ID, provincia });
+    const { nombre, apellido, cedula, correo, provincia, nombreusuario, password } = req.body;
+    const usuario = new Usuario({ nombre, apellido, cedula, correo, provincia, nombreusuario, password });
     await usuario.save();
     res.json(usuario);
   } catch (error) {
     res.status(500).json({ error: 'Nose pudo agregar el usuario' });
   }
 });
+/**
+ * @swagger
+ * /api/usuarios/{nombre}:
+ *   get:
+ *     summary: Obtiene un usuario por su nombre.
+ *     parameters:
+ *       - in: path
+ *         name: nombre
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Nombre del usuario a obtener.
+ *     responses:
+ *       200:
+ *         description: Usuario obtenido correctamente.
+ *       404:
+ *         description: Usuario no encontrado.
+ *       500:
+ *         description: Error al obtener el usuario.
+ */
+router.get('/usuarios/:nombre', async (req, res) => {
+  try {
+    const { nombre } = req.params;
+    const usuario = await Usuario.findOne({ nombre });
+    if (usuario) {
+      res.json(usuario);
+    } else {
+      res.status(404).json({ mensaje: 'Usuario no encontrado' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener el usuario' });
+  }
+});
+
 
 /**
  * @swagger
@@ -86,9 +126,15 @@ router.post('/usuarios', async (req, res) => {
  *                 type: string
  *               apellido:
  *                 type: string
- *               ID:
+ *               cedula:
+ *                 type: string
+ *               correo:
  *                 type: string
  *               provincia:
+ *                 type: string
+ *               nombre de usuario:
+ *                 type: string
+ *               password:
  *                 type: string
  *     responses:
  *       200:
@@ -99,21 +145,27 @@ router.post('/usuarios', async (req, res) => {
  *               type: object
  *               properties:
  *                 nombre:
- *                   type: string
- *                 apellido:
- *                   type: string
- *                 ID:
- *                   type: string
- *                 provincia:
- *                   type: string
+ *                 type: string
+ *               apellido:
+ *                 type: string
+ *               cedula:
+ *                 type: string
+ *               correo:
+ *                 type: string
+ *               provincia:
+ *                 type: string
+ *               nombre de usuario:
+ *                 type: string
+ *               password:
+ *                 type: string
  *       500:
  *         description: Error al cambiar la información del usuario.
  */
 router.put('/usuarios/:nombre', async (req, res) => {
   try {
     const { nombre: nombreParam } = req.params;
-    const { nombre, apellido, ID, provincia } = req.body;
-    const cambiar = await Usuario.findOneAndUpdate({ nombre: nombreParam }, { nombre, apellido, ID, provincia }, { new: true });
+    const { nombre, apellido, cedula, correo, provincia, nombreusuario, password } = req.body;
+    const cambiar = await Usuario.findOneAndUpdate({ nombre: nombreParam }, { nombre, apellido, cedula, correo, provincia, nombreusuario, password }, { new: true });
     res.json(cambiar);
   } catch (error) {
     res.status(500).json({ error: 'Error al cambiar la información del usuario' });
