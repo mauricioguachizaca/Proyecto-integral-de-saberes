@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Usuario = require('./models/Usuario');
+const bcrypt = require('bcryptjs');
 
 /**
  * @swagger
@@ -48,24 +49,51 @@ router.get('/usuarios', async (req, res) => {
  *                 type: string
  *               provincia:
  *                 type: string
- *               nombre de usuario:
+ *               nombreusuario:
  *                 type: string
  *               password:
  *                 type: string
  *     responses:
- *       200:
- *         description: Usuario agregado.
+ *       201:
+ *         description: Usuario agregado correctamente.
+ *       400:
+ *         description: Datos de usuario duplicados o inválidos.
  *       500:
- *         description: Nose pudo agregar el usuario.
+ *         description: Error al agregar el usuario.
  */
 router.post('/usuarios', async (req, res) => {
   try {
     const { nombre, apellido, cedula, correo, provincia, nombreusuario, password } = req.body;
-    const usuario = new Usuario({ nombre, apellido, cedula, correo, provincia, nombreusuario, password });
-    await usuario.save();
-    res.json(usuario);
+
+    // Verifica si el correo ya está en uso
+    const correoExistente = await Usuario.findOne({ correo });
+    if (correoExistente) {
+      return res.status(400).json({ message: 'Correo ya registrado' });
+    }
+
+    // Verifica si la cédula ya está en uso
+    const cedulaExistente = await Usuario.findOne({ cedula });
+    if (cedulaExistente) {
+      return res.status(400).json({ message: 'Cédula ya registrada' });
+    }
+
+    // Verifica si el nombre de usuario ya está en uso
+    const usuarioExistente = await Usuario.findOne({ nombreusuario });
+    if (usuarioExistente) {
+      return res.status(400).json({ message: 'Nombre de usuario ya en uso' });
+    }
+    // Encripta la contraseña antes de almacenarla en la base de datos
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Crea y guarda el nuevo usuario con la contraseña encriptada
+    const nuevoUsuario = new Usuario({ nombre, apellido, cedula, correo, provincia, nombreusuario, password: hashedPassword });
+    const usuarioGuardado = await nuevoUsuario.save();
+
+    
+    res.status(201).json(usuarioGuardado);
   } catch (error) {
-    res.status(500).json({ error: 'Nose pudo agregar el usuario' });
+    console.error(error); // Imprimir el error en la consola del servidor
+    res.status(500).json({ error: 'No se pudo agregar el usuario' });
   }
 });
 /**
