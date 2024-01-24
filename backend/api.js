@@ -229,5 +229,57 @@ router.delete('/usuarios/:nombre', async (req, res) => {
   }
 });
 
+/**
+ * @swagger
+ * /api/verificarCredenciales:
+ *   post:
+ *     summary: Verifica las credenciales del usuario.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               nombreusuario:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Credenciales válidas.
+ *       401:
+ *         description: Credenciales inválidas.
+ *       500:
+ *         description: Error en la verificación de credenciales.
+ */
+router.post('/verificarCredenciales', async (req, res) => {
+  try {
+    const { nombreusuario, password } = req.body;
+
+    // Busca el usuario en la base de datos por nombre de usuario
+    const usuario = await Usuario.findOne({ nombreusuario });
+
+    if (usuario) {
+      // Compara la contraseña proporcionada con la almacenada en la base de datos
+      const isValidPassword = await bcrypt.compare(password, usuario.password);
+
+      if (isValidPassword) {
+        // Credenciales válidas
+        res.json({ isValidUser: true });
+      } else {
+        // Credenciales inválidas
+        res.status(401).json({ isValidUser: false });
+      }
+    } else {
+      // Usuario no encontrado
+      res.status(401).json({ isValidUser: false });
+    }
+  } catch (error) {
+    console.error('Error al verificar credenciales:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+});
+
 module.exports = router;
 
