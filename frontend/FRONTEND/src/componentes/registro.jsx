@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import TextField from '@material-ui/core/TextField';
+import fondoregistro from './imagenes/fondoregistro.jpg';
 
 export const Registro = () => {
   const [formulario, setFormulario] = useState({
