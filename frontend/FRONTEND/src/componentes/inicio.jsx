@@ -10,6 +10,9 @@ import testimonio2 from './imagenes/face2.jpg';
 import testimonio3 from './imagenes/face3.jpg';
 import testimonio4 from './imagenes/face4.jpg';
 import testimonio5 from './imagenes/face5.jpg';
+import facebook from './imagenes/facebook.svg';
+import twitter from './imagenes/twitter.svg';
+import youtube from './imagenes/youtube.svg';
 
 const SeccionTestimonios = () => {
   return (
