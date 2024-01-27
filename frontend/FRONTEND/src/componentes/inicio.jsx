@@ -204,9 +204,21 @@ export const Inicio = () => {
     </div>
 
       <SeccionTestimonios />
-
-      <footer className="bg-[#154918] mt-10 md:mt-28 p-5 text-blue-gray-100 text-center">
-        Derechos reservados © Click Wed
+        <footer className="bg-[#154918] mt-28 p-5 text-blue-gray-100 text-center flex flex-col items-center">
+        <div className="flex">
+          <a href="https://www.facebook.com/UNLoficial/?locale=es_LA" target="_blank" rel="noopener noreferrer">
+            <img src={facebook} alt="facebook" style={{ width: '30px', height: '30px', color: 'black', marginRight: '10px' }} />
+          </a>
+          <a href="https://www.youtube.com/c/UNLOficial/videos" target="_blank" rel="noopener noreferrer">
+            <img src={youtube} alt="youtube" style={{ width: '30px', height: '30px', color: 'black', marginRight: '10px' }} />
+          </a>
+          <a href="uhttps://twitter.com/UNLoficial?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor" target="_blank" rel="noopener noreferrer">
+            <img src={twitter} alt="twitter" style={{ width: '30px', height: '30px', color: 'black', marginRight: '10px' }} />
+          </a>
+        </div>
+        <div>
+          Derechos reservados © Click Wed
+        </div>
       </footer>
     </div>
   );
