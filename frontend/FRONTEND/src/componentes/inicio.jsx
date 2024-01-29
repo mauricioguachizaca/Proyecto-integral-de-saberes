@@ -170,7 +170,7 @@ export const Inicio = () => {
       </section>
 
       <div className="mt-10 md:mt-20 flex items-center justify-evenly flex-wrap">
-        <Link to="/iniciar-sesion" className="text-center flex flex-col items-center mb-4">
+        <Link to="/iniciar" className="text-center flex flex-col items-center mb-4">
           <div className="border border-gray-300 p-4 rounded">
             <PersonIcon style={{ fontSize: '4rem' }} />
           </div>
