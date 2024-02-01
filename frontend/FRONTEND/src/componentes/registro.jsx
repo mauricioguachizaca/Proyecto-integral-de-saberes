@@ -127,6 +127,7 @@ export const Registro = () => {
             id="password"
             name="password"
             value={formulario.password}
+            type='password'
             onChange={handleInputChange}
             variant="outlined"
             fullWidth
