@@ -182,7 +182,7 @@ export const Inicio = () => {
         </Link>
 
         {/* boton y icono de registro no cambiar solo agregar estilos*/}
-        <Link to="/registro" className="text-center flex flex-col items-center mb-4">
+        <Link to="/registro" className="text-center flex flex-col items-center mb-10">
         <div className="border border-gray-300 p-4 rounded">
           <PersonAddIcon style={{ fontSize: '4rem' }} />
         </div>
