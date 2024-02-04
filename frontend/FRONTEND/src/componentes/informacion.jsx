@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
-import FlujoTrabajo from './imagenes/FlujoDeTrabajoPis.png';
+import FlujoTrabajo from './imagenes/FlujoDeTrabajoPis.png'; // Imagen original
+import DiagramaClases from './imagenes/Diagrama.jpg'; 
 
 export const Informacion = () => {
-  const [imagenAmpliada, setImagenAmpliada] = useState(false);
+  const [flujoAmpliada, setFlujoAmpliada] = useState(false);
+  const [DiagramaAmpliada, setDiagramaAmpliada] = useState(false);
 
-  const toggleImagenAmpliada = () => {
-    setImagenAmpliada(!imagenAmpliada);
+  const toggleFlujoAmpliada = () => {
+    setFlujoAmpliada(!flujoAmpliada);
+  };
+
+  const toggleDiagramaAmpliada = () => {
+    setDiagramaAmpliada(!DiagramaAmpliada);
   };
 
   return (
@@ -17,11 +23,11 @@ export const Informacion = () => {
           </div>
           <h2 className="text-xl font-bold mb-2 underline">Flujo de Trabajo</h2>
           <p className="mb-4"></p>
-          {imagenAmpliada && (
+          {flujoAmpliada && (
             <div
               className="fixed top-0 left-0 right-0 bottom-0 z-50 overflow-hidden flex items-center justify-center"
               style={{ background: 'rgba(255, 255, 255, 0.9)' }}
-              onClick={toggleImagenAmpliada}
+              onClick={toggleFlujoAmpliada}
             >
               <img
                 src={FlujoTrabajo}
@@ -33,12 +39,36 @@ export const Informacion = () => {
           <img
             src={FlujoTrabajo}
             alt="Descripción de la imagen"
-            className={`w-full h-auto rounded-md cursor-pointer ${imagenAmpliada ? 'filter brightness-50' : ''} mb-4 mx-auto`}
+            className={`w-full h-auto rounded-md cursor-pointer ${flujoAmpliada ? 'filter brightness-50' : ''} mb-4 mx-auto`}
             style={{ maxWidth: 'calc(100% + 20px)' }}
-            onClick={toggleImagenAmpliada}
+            onClick={toggleFlujoAmpliada}
           />
+
+          {DiagramaAmpliada && (
+            <div
+              className="fixed top-0 left-0 right-0 bottom-0 z-50 overflow-hidden flex items-center justify-center"
+              style={{ background: 'rgba(255, 255, 255, 0.9)' }}
+              onClick={toggleNuevaImagenAmpliada}
+            >
+              <img
+                src={DiagramaClases}
+                alt="Descripción de la nueva imagen"
+                className="max-h-full max-w-full cursor-pointer" 
+              />
+            </div>
+          )}
+            <h2 className="text-xl font-bold mb-2 underline">Diagrama de clases</h2>
+          <img
+            src={DiagramaClases}
+            alt="Descripción de la nueva imagen"
+            className={`w-full h-auto rounded-md cursor-pointer ${DiagramaAmpliada ? 'filter brightness-50' : ''} mb-4 mx-auto`}
+            style={{ maxWidth: 'calc(100% + 20px)' }}
+            onClick={toggleDiagramaAmpliada}
+          />
+
         </div>
       </div>
     </div>
   );
 };
+
