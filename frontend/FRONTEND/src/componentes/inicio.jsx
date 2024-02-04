@@ -140,7 +140,9 @@ export const Inicio = () => {
         </div>
       </nav>
 
+       {/* Sección de bienvenida */}
       <section id="bienvenida" className="w-full min-h-screen bg-cover bg-center bg-no-repeat bg-scroll flex items-center justify-center text-white mt-16" style={{ backgroundImage: `url(${fondoImagen})` }}>
+        {/* Contenido de la sección de bienvenida */}
         <div className="text-center bg-opacity-80 p-6">
           <h1 className="font-bold text-3xl md:text-5xl lg:text-6xl mb-4 md:mb-8">BIENVENIDO/A A NUESTRA PÁGINA WEB.</h1>
           <p className="text-base md:text-xl mb-4">¿Quieres conocer cuánto consume de energía tus dispositivos eléctricos?</p>
@@ -148,6 +150,7 @@ export const Inicio = () => {
         </div>
       </section>
 
+      {/* Sección de botones (Iniciar Sesión, Registrarse, Información) */}
       <div className="mt-10 md:mt-20 mb-40 flex items-center justify-evenly flex-wrap">
         {/* boton y icono de inicio sesion*/}
         <Link to="/iniciar" className="text-center flex flex-col items-center mb-4">
@@ -186,9 +189,11 @@ export const Inicio = () => {
         </Link>
       </div>
 
+       {/* Sección de los Perfiles de cada colaborador */}
       <SeccionTestimonios />
 
       <footer className="bg-[#154918] mt-28 p-5 text-blue-gray-100 text-center flex flex-col items-center">
+        {/* Iconos de redes sociales */}
         <div className="flex">
           <a href="https://www.facebook.com/UNLoficial/?locale=es_LA" target="_blank" rel="noopener noreferrer">
             <img src={facebook} alt="facebook" style={{ width: '30px', height: '30px', color: 'black', marginRight: '10px' }} />
