@@ -107,7 +107,7 @@ const SeccionTestimonios = () => {
             <p className="testimony__review mb-4">
               Estudiante de la carrera de Ingeniería en Sistemas/Computación de la Universidad Nacional de Loja
             </p>
-            <a href="https://github.com/FerminEncalada" className="testimony__github block bg-[#5d8dee] text-white font-bold py-2 px-4 rounded" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/borisir" className="testimony__github block bg-[#5d8dee] text-white font-bold py-2 px-4 rounded" target="_blank" rel="noopener noreferrer">
               Visita mi Github
             </a>
           </section>
