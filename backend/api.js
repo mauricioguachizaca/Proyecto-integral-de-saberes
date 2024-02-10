@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Usuario = require('./models/Usuario');
 const bcrypt = require('bcryptjs');
-
+const jwt =  require('jsonwebtoken')
 /**
  * @swagger
  * /api/usuarios:
@@ -26,12 +26,11 @@ router.get('/usuarios', async (req, res) => {
     res.status(500).json({ error: 'Error al ingresar el usuario' });
   }
 });
-
 /**
  * @swagger
  * /api/usuarios:
  *   post:
- *     summary: Crea un nuevo usuario.
+ *     summary: Crea un nuevo usuario y genera un token de autenticación.
  *     requestBody:
  *       required: true
  *       content:
@@ -55,11 +54,11 @@ router.get('/usuarios', async (req, res) => {
  *                 type: string
  *     responses:
  *       201:
- *         description: Usuario agregado correctamente.
+ *         description: Usuario agregado correctamente y token generado.
  *       400:
  *         description: Datos de usuario duplicados o inválidos.
  *       500:
- *         description: Error al agregar el usuario.
+ *         description: Error al agregar el usuario o al generar el token.
  */
 router.post('/usuarios', async (req, res) => {
   try {
@@ -82,6 +81,7 @@ router.post('/usuarios', async (req, res) => {
     if (usuarioExistente) {
       return res.status(400).json({ message: 'Nombre de usuario ya en uso' });
     }
+
     // Encripta la contraseña antes de almacenarla en la base de datos
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -89,48 +89,31 @@ router.post('/usuarios', async (req, res) => {
     const nuevoUsuario = new Usuario({ nombre, apellido, cedula, correo, provincia, nombreusuario, password: hashedPassword });
     const usuarioGuardado = await nuevoUsuario.save();
 
-    
-    res.status(201).json(usuarioGuardado);
+    // Genera el token para el nuevo usuario
+    jwt.sign({
+      id:nuevoUsuario._id,
+    },
+      "secret123",
+    {
+      expiresIn: "1d",
+    },
+      (err, token) => {
+    if (err) {
+    console.error('Error al generar el token:', err);
+    return res.status(500).json({ error: 'Error al generar el token' });
+  }
+  // Guarda el token en una cookie con nombre 'token'
+  res.cookie('token', token, { expires: new Date(Date.now() + 24 * 60 * 60 * 1000), httpOnly: true });
+  
+  // Usuario agregado correctamente y token generado
+  res.status(201).json({ usuario: usuarioGuardado, token });
+});
+
   } catch (error) {
-    console.error(error); // Imprimir el error en la consola del servidor
+    console.error('Error al agregar el usuario:', error);
     res.status(500).json({ error: 'No se pudo agregar el usuario' });
   }
 });
-/**
- * @swagger
- * /api/usuarios/{nombre}:
- *   get:
- *     summary: Obtiene un usuario por su nombre.
- *     parameters:
- *       - in: path
- *         name: nombre
- *         schema:
- *           type: string
- *         required: true
- *         description: Nombre del usuario a obtener.
- *     responses:
- *       200:
- *         description: Usuario obtenido correctamente.
- *       404:
- *         description: Usuario no encontrado.
- *       500:
- *         description: Error al obtener el usuario.
- */
-router.get('/usuarios/:nombre', async (req, res) => {
-  try {
-    const { nombre } = req.params;
-    const usuario = await Usuario.findOne({ nombre });
-    if (usuario) {
-      res.json(usuario);
-    } else {
-      res.status(404).json({ mensaje: 'Usuario no encontrado' });
-    }
-  } catch (error) {
-    res.status(500).json({ error: 'Error al obtener el usuario' });
-  }
-});
-
-
 /**
  * @swagger
 * /api/usuarios/{nombre}:
@@ -193,14 +176,12 @@ router.put('/usuarios/:nombre', async (req, res) => {
   try {
     const { nombre: nombreParam } = req.params;
     const { nombre, apellido, cedula, correo, provincia, nombreusuario, password } = req.body;
-    const cambiar = await Usuario.findOneAndUpdate({ nombre: nombreParam }, { nombre, apellido, cedula, correo, provincia, nombreusuario, password }, { new: true });
+    const cambiar = await Usuario.findOneAndUpdate({ nombre: nombreParam }, { nombre, apellido, cedula, correo, provincia, nombreusuario, password: hashedPassword }, { new: true });
     res.json(cambiar);
   } catch (error) {
     res.status(500).json({ error: 'Error al cambiar la información del usuario' });
   }
 });
-
-
 /**
  * @swagger
  * /api/usuarios/{nombre}:
@@ -228,12 +209,14 @@ router.delete('/usuarios/:nombre', async (req, res) => {
     res.status(500).json({ error: 'Error al eliminar el usuario' });
   }
 });
-
+function createAccessToken(payload) {
+  return jwt.sign(payload, "secret123", { expiresIn: "1d" });
+}
 /**
  * @swagger
  * /api/verificarCredenciales:
  *   post:
- *     summary: Verifica las credenciales del usuario.
+ *     summary: Verifica las credenciales del usuario y guarda el token en una cookie.
  *     requestBody:
  *       required: true
  *       content:
@@ -266,6 +249,8 @@ router.post('/verificarCredenciales', async (req, res) => {
 
       if (isValidPassword) {
         // Credenciales válidas
+        const token = createAccessToken({ id: usuario._id });
+        res.cookie('token', token, { expires: new Date(Date.now() + 24 * 60 * 60 * 1000), httpOnly: true });
         res.json({ isValidUser: true });
       } else {
         // Credenciales inválidas
@@ -280,6 +265,114 @@ router.post('/verificarCredenciales', async (req, res) => {
     res.status(500).json({ error: 'Error interno del servidor' });
   }
 });
+/**
+ * @swagger
+ * /api/cerracredenciales:
+ *   post:
+ *     summary: Cierra las credenciales del usuario y elimina la cookie del token.
+ *     responses:
+ *       200:
+ *         description: Credenciales cerradas correctamente.
+ */
+router.post('/cerracredenciales', async (req, res) => {
+  try {
+    // Elimina la cookie del token
+    res.clearCookie('token');
+    res.sendStatus(200);
+  } catch (error) {
+    console.error('Error al cerrar las credenciales:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+});
+/**
+ * @swagger
+ * /api/perfiles:
+ *   get:
+ *     summary: Obtiene los perfiles de usuario.
+ *     responses:
+ *       200:
+ *         description: Perfiles obtenidos correctamente.
+ *       401:
+ *         description: No hay token, autorización denegada.
+ *       403:
+ *         description: Token inválido.
+ *       500:
+ *         description: Error al obtener los perfiles.
+ */
+router.get('/perfiles', async (req, res) => {
+  try {
+    const token = req.cookies.token;
+
+    if (!token) {
+      return res.status(401).json({ message: "No hay token, autorización denegada" });
+    }
+
+    jwt.verify(token, "secret123", async (err, decoded) => {
+      if (err) {
+        return res.status(403).json({ message: "Token inválido" });
+      }
+      
+      // Accede a la información del usuario desde decoded
+      const usuario = await Usuario.findById(decoded.id);
+
+      if (!usuario) {
+        return res.status(400).json({ message: "Usuario no encontrado" });
+      }
+
+      return res.json({
+        id: usuario._id,
+        nombre: usuario.nombre
+        // Agrega más propiedades del usuario según tus necesidades
+      });
+    });
+  } catch (error) {
+    console.error("Error al obtener los perfiles:", error);
+    res.status(500).json({ error: "Error al obtener los perfiles" });
+  }
+});
+
+/**
+ * @swagger
+ * /api/medidor:
+ *   get:
+ *     summary: Obtiene información del medidor (protegido por token).
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Información del medidor obtenida correctamente.
+ *       401:
+ *         description: No hay token, autorización denegada.
+ *       403:
+ *         description: Token inválido.
+ *       500:
+ *         description: Error al obtener la información del medidor.
+ */
+router.get('/medidor', async (req, res) => {
+  try {
+    const token = req.cookies.token;
+
+    if (!token) {
+      return res.status(401).json({ message: "No hay token, autorización denegada" });
+    }
+
+    jwt.verify(token, "secret123", async (err, decoded) => {
+      if (err) {
+        return res.status(403).json({ message: "Token inválido" });
+      }
+
+      // Coloca el código para obtener la información del medidor aquí
+      // ...
+
+      return res.json({ message: "Información del medidor obtenida correctamente" });
+    });
+  } catch (error) {
+    console.error("Error al obtener la información del medidor:", error);
+    res.status(500).json({ error: "Error al obtener la información del medidor" });
+  }
+});
+
+
+
 
 module.exports = router;
-

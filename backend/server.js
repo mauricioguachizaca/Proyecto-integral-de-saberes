@@ -1,11 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors'); 
+const cookieParser = require('cookie-parser')
 const apiRoutes = require('./api');
 const swaggerSetup = require('./swagger');
 
 
 const app = express();
+app.use(cookieParser());
 const PORT = 3000;
 
 const corsOptions = {

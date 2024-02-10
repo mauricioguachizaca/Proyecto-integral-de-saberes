@@ -47,12 +47,6 @@ const usuarioSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    // Campo 'medidor' que se conecta con el modelo Medidor
-    medidor: {
-        type: mongoose.Schema.Types.ObjectId, // Tipo ObjectId que hace referencia al modelo Medidor
-        ref: 'Medidor' // Nombre del modelo al que hace referencia (debe coincidir con el nombre del modelo Medidor)
-    }
-    
 });
 
 // Exporta el modelo 'Usuario' basado en el esquema definido
