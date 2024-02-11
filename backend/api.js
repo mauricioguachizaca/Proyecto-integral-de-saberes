@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const Usuario = require('./models/Usuario');
+const Medidor = require('./models/Medidor')
 const bcrypt = require('bcryptjs');
 const jwt =  require('jsonwebtoken')
+
+//rutas para usuarios [para sus peticiones]
 /**
  * @swagger
  * /api/usuarios:
@@ -63,25 +66,7 @@ router.get('/usuarios', async (req, res) => {
 router.post('/usuarios', async (req, res) => {
   try {
     const { nombre, apellido, cedula, correo, provincia, nombreusuario, password } = req.body;
-
-    // Verifica si el correo ya está en uso
-    const correoExistente = await Usuario.findOne({ correo });
-    if (correoExistente) {
-      return res.status(400).json({ message: 'Correo ya registrado' });
-    }
-
-    // Verifica si la cédula ya está en uso
-    const cedulaExistente = await Usuario.findOne({ cedula });
-    if (cedulaExistente) {
-      return res.status(400).json({ message: 'Cédula ya registrada' });
-    }
-
-    // Verifica si el nombre de usuario ya está en uso
-    const usuarioExistente = await Usuario.findOne({ nombreusuario });
-    if (usuarioExistente) {
-      return res.status(400).json({ message: 'Nombre de usuario ya en uso' });
-    }
-
+    
     // Encripta la contraseña antes de almacenarla en la base de datos
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -209,9 +194,8 @@ router.delete('/usuarios/:nombre', async (req, res) => {
     res.status(500).json({ error: 'Error al eliminar el usuario' });
   }
 });
-function createAccessToken(payload) {
-  return jwt.sign(payload, "secret123", { expiresIn: "1d" });
-}
+
+//logica de iniciar y cerrar cesion
 /**
  * @swagger
  * /api/verificarCredenciales:
@@ -284,6 +268,9 @@ router.post('/cerracredenciales', async (req, res) => {
     res.status(500).json({ error: 'Error interno del servidor' });
   }
 });
+function createAccessToken(payload) {
+  return jwt.sign(payload, "secret123", { expiresIn: "1d" });
+}
 /**
  * @swagger
  * /api/perfiles:
@@ -331,46 +318,218 @@ router.get('/perfiles', async (req, res) => {
   }
 });
 
+// LAS RUTAS DE MEDIDOR [PARA SU APIS]
+
 /**
  * @swagger
  * /api/medidor:
  *   get:
- *     summary: Obtiene información del medidor (protegido por token).
+ *     summary: Obtiene información de todos los medidores (protegido por token).
  *     security:
  *       - bearerAuth: []
  *     responses:
  *       200:
- *         description: Información del medidor obtenida correctamente.
+ *         description: Información de los medidores obtenida correctamente.
  *       401:
  *         description: No hay token, autorización denegada.
  *       403:
  *         description: Token inválido.
  *       500:
- *         description: Error al obtener la información del medidor.
+ *         description: Error al obtener la información de los medidores.
  */
-router.get('/medidor', async (req, res) => {
+router.get('/medidor', verifyToken, async (req, res) => {
   try {
-    const token = req.cookies.token;
-
-    if (!token) {
-      return res.status(401).json({ message: "No hay token, autorización denegada" });
-    }
-
-    jwt.verify(token, "secret123", async (err, decoded) => {
-      if (err) {
-        return res.status(403).json({ message: "Token inválido" });
-      }
-
-      // Coloca el código para obtener la información del medidor aquí
-      // ...
-
-      return res.json({ message: "Información del medidor obtenida correctamente" });
-    });
-  } catch (error) {
-    console.error("Error al obtener la información del medidor:", error);
-    res.status(500).json({ error: "Error al obtener la información del medidor" });
+    const medidores = await Medidor.find();
+    usuario: req.usuario.id
+    res.json(medidores);
+  }
+   catch (error) {
+    console.error("Error al obtener la información de los medidores:", error);
+    res.status(500).json({ error: "Error al obtener la información de los medidores" });
   }
 });
+/**
+ * @swagger
+ * /api/medidor:
+ *   post:
+ *     summary: Crea un nuevo medidor.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               nombredispositivo:
+ *                 type: string
+ *               cantidad:
+ *                 type: number
+ *               potencia:
+ *                 type: number
+ *               tiempodeuso:
+ *                 type: number
+ *               numerodeuso:
+ *                 type: number
+ *     responses:
+ *       201:
+ *         description: Medidor creado correctamente.
+ *       500:
+ *         description: Error al crear el medidor.
+ */
+router.post('/medidor', verifyToken, async (req, res) => {
+  try {
+    const { nombredispositivo, cantidad, potencia, tiempodeuso, numerodeuso } = req.body;
+    console.log(req.usuario)
+    const nuevoMedidor = new Medidor({ nombredispositivo, cantidad, potencia, tiempodeuso, numerodeuso, usuario: req.usuario.id });
+    const medidorGuardado = await nuevoMedidor.save();
+    res.status(201).json(medidorGuardado);
+  } catch (error) {
+    console.error("Error al crear el medidor:", error);
+    res.status(500).json({ error: "Error al crear el medidor" });
+  }
+});
+/**
+ * @swagger
+ * /api/medidor/{nombredispositivo}:
+ *   get:
+ *     summary: Obtiene información de un medidor por su nombre.
+ *     parameters:
+ *       - in: path
+ *         name: nombredispositivo
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Nombre del medidor.
+ *     responses:
+ *       200:
+ *         description: Información del medidor obtenida correctamente.
+ *       404:
+ *         description: Medidor no encontrado.
+ *       500:
+ *         description: Error al obtener la información del medidor.
+ */
+router.get('/medidor/:nombredispositivo', verifyToken, async (req, res) => {
+  try {
+    const medidor = await Medidor.findOne({ nombredispositivo: req.params.nombredispositivo }).populate('usuario');
+    if (!medidor) {
+      return res.status(404).json({ message: "Medidor no encontrado" });
+    }
+    res.json(medidor);
+  } catch (error) {
+    console.error("Error al buscar el medidor:", error);
+    res.status(500).json({ error: "Error interno del servidor" });
+  }
+});
+/**
+ * @swagger
+ * /api/medidor/{nombredispositivo}:
+ *   delete:
+ *     summary: Elimina un medidor por su nombre.
+ *     parameters:
+ *       - in: path
+ *         name: nombredispositivo
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Nombre del medidor a eliminar.
+ *     responses:
+ *       200:
+ *         description: Medidor eliminado correctamente.
+ *       404:
+ *         description: Medidor no encontrado.
+ *       500:
+ *         description: Error al eliminar el medidor.
+ */
+router.delete('/medidor/:nombredispositivo', verifyToken, async (req, res) => {
+  try {
+    const medidor = await Medidor.findOneAndDelete({ nombredispositivo: req.params.nombredispositivo });
+    if (!medidor) {
+      return res.status(404).json({ message: "Medidor no encontrado" });
+    }
+    res.json({ message: "Medidor eliminado correctamente" });
+  } catch (error) {
+    console.error("Error al eliminar el medidor:", error);
+    res.status(500).json({ error: "Error interno del servidor" });
+  }
+});
+/**
+ * @swagger
+ * /api/medidor/{nombredispositivo}:
+ *   put:
+ *     summary: Actualiza un medidor por su nombre.
+ *     parameters:
+ *       - in: path
+ *         name: nombredispositivo
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Nombre del medidor a actualizar.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               cantidad:
+ *                 type: number
+ *               potencia:
+ *                 type: number
+ *               tiempodeuso:
+ *                 type: number
+ *               numerodeuso:
+ *                 type: number
+ *     responses:
+ *       200:
+ *         description: Medidor actualizado correctamente.
+ *       404:
+ *         description: Medidor no encontrado.
+ *       500:
+ *         description: Error al actualizar el medidor.
+ */
+router.put('/medidor/:nombredispositivo', verifyToken, async (req, res) => {
+  try {
+    const medidor = await Medidor.findOneAndUpdate(
+      { nombredispositivo: req.params.nombredispositivo },
+      req.body,
+      { new: true }
+    );
+
+    if (!medidor) {
+      return res.status(404).json({ message: "Medidor no encontrado" });
+    }
+
+    res.json(medidor);
+  } catch (error) {
+    console.error("Error al actualizar el medidor:", error);
+    res.status(500).json({ error: "Error interno del servidor" });
+  }
+});
+
+function verifyToken(req, res, next) {
+  const token = req.cookies.token;
+
+  if (!token) {
+    return res.status(401).json({ message: "No hay token, autorización denegada" });
+  }
+
+  jwt.verify(token, "secret123", async (err, decoded) => {
+    if (err) {
+      return res.status(403).json({ message: "Token inválido" });
+    }
+
+    // Verificar si el usuario existe
+    const usuario = await Usuario.findById(decoded.id);
+    if (!usuario) {
+      return res.status(400).json({ message: "Usuario no encontrado" });
+    }
+
+    // Adjuntar el usuario decodificado al objeto de solicitud
+    req.usuario = usuario;
+    next();
+  });
+}
+
 
 
 
