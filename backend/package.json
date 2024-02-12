@@ -25,6 +25,7 @@
     "mongoose": "^7.3.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^4.6.3",
-    "yamljs": "^0.3.0"
+    "yamljs": "^0.3.0",
+    "zod": "^3.22.4"
   }
 }

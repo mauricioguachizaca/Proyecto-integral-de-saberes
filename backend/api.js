@@ -66,7 +66,25 @@ router.get('/usuarios', async (req, res) => {
 router.post('/usuarios', async (req, res) => {
   try {
     const { nombre, apellido, cedula, correo, provincia, nombreusuario, password } = req.body;
-    
+
+    // Verifica si el correo ya está en uso
+    const correoExistente = await Usuario.findOne({ correo });
+    if (correoExistente) {
+      return res.status(400).json({ message: 'Correo ya registrado' });
+    }
+
+    // Verifica si la cédula ya está en uso
+    const cedulaExistente = await Usuario.findOne({ cedula });
+    if (cedulaExistente) {
+      return res.status(400).json({ message: 'Cédula ya registrada' });
+    }
+
+    // Verifica si el nombre de usuario ya está en uso
+    const usuarioExistente = await Usuario.findOne({ nombreusuario });
+    if (usuarioExistente) {
+      return res.status(400).json({ message: 'Nombre de usuario ya en uso' });
+    }
+
     // Encripta la contraseña antes de almacenarla en la base de datos
     const hashedPassword = await bcrypt.hash(password, 10);
 

@@ -21,8 +21,8 @@ const SeccionTestimonios = () => {
         <h2 className="title text-4xl font-bold text-center mb-12">
           <br />Conoce sobre Nosotros
         </h2>
-
-        {/* Testimonio 1 */}
+          
+        {/*  los testimonios son los perfiles de cada integrantes Testimonio 1 */}
         <div className="testimony__item mb-8 bg-[#a2e3f9] p-6 rounded-md flex flex-col md:flex-row items-center justify-between">
           <section className="testimony__body text-center ml-8 mr-4 md:text-left md:w-2/3">
             <h2 className="subtitle text-2xl font-bold mb-2">
