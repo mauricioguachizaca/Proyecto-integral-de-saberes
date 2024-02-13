@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { useAuth } from '../context/AuthContext';
 import TextField from '@material-ui/core/TextField';
 import fondoregistro from './imagenes/fondoregistro.jpg';
 
 export const Registro = () => {
+  const { signup } = useAuth(); // Obtenemos la función signup del contexto de autenticación
   const [formulario, setFormulario] = useState({
     nombre: '',
     apellido: '',
@@ -23,15 +24,15 @@ export const Registro = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      const response = await axios.post('http://localhost:3000/api/usuarios', formulario);
-      console.log('Usuario registrado correctamente', response.data);
+      await signup(formulario); // Llamamos a la función signup del contexto de autenticación con los datos del formulario
+      console.log('Usuario registrado correctamente');
+      // Puedes redirigir al usuario a otra página aquí si es necesario
     } catch (error) {
       console.error('Error al registrar el usuario', error);
+      // Puedes mostrar un mensaje de error al usuario aquí si es necesario
     }
   };
-
   return (
   <div className="flex items-center justify-center h-screen bg-gray-100" style={{
     backgroundImage: `url(${fondoregistro})`,
