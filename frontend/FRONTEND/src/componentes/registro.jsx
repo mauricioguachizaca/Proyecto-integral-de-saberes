@@ -1,156 +1,83 @@
-import React, { useState } from 'react';
-import { useAuth } from '../context/AuthContext';
-import TextField from '@material-ui/core/TextField';
-import fondoregistro from './imagenes/fondoregistro.jpg';
+import { useForm } from 'react-hook-form';
+import { registrorespuesta } from '../api/auth';
 
-export const Registro = () => {
-  const { signup } = useAuth(); // Obtenemos la función signup del contexto de autenticación
-  const [formulario, setFormulario] = useState({
-    nombre: '',
-    apellido: '',
-    cedula: '',
-    correo: '',
-    provincia: '',
-    nombreusuario: '',
-    password: '',
-  });
 
-  const handleInputChange = (e) => {
-    setFormulario({
-      ...formulario,
-      [e.target.name]: e.target.value,
-    });
-  };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await signup(formulario); // Llamamos a la función signup del contexto de autenticación con los datos del formulario
-      console.log('Usuario registrado correctamente');
-      // Puedes redirigir al usuario a otra página aquí si es necesario
-    } catch (error) {
-      console.error('Error al registrar el usuario', error);
-      // Puedes mostrar un mensaje de error al usuario aquí si es necesario
-    }
-  };
-  return (
-  <div className="flex items-center justify-center h-screen bg-gray-100" style={{
-    backgroundImage: `url(${fondoregistro})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
-    minHeight: '100vh',
-}}>
-      <form className="w-full md:w-2/3 lg:w-1/2 xl:w-1/3 bg-white p-8 rounded shadow-md " onSubmit={handleSubmit}>
-        <h2 className="text-3xl font-bold mb-6 text-center text-blue-500">Registro de Usuario</h2>
-
-        <div className="grid grid-cols-2 gap-4">
-          <div className="col-span-1 mb-4">
-            <label htmlFor="nombre" className="block text-sm font-medium text-gray-700 mb-2">Nombre:</label>
-            <TextField
-              id="nombre"
-              name="nombre"
-              value={formulario.nombre}
-              onChange={handleInputChange}
-              variant="outlined"
-              fullWidth
-              required
-            />
-          </div>
-
-          <div className="col-span-1 mb-4">
-            <label htmlFor="apellido" className="block text-sm font-medium text-gray-700 mb-2">Apellido:</label>
-            <TextField
-              id="apellido"
-              name="apellido"
-              value={formulario.apellido}
-              onChange={handleInputChange}
-              variant="outlined"
-              fullWidth
-              required
-            />
-          </div>
-        </div>
-
-        <div className="grid grid-cols-2 gap-4">
-          <div className="col-span-1 mb-4">
-            <label htmlFor="cedula" className="block text-sm font-medium text-gray-700 mb-2">Cédula:</label>
-            <TextField
-              id="cedula"
-              name="cedula"
-              value={formulario.cedula}
-              onChange={handleInputChange}
-              variant="outlined"
-              fullWidth
-              required
-            />
-          </div>
-
-          <div className="col-span-1 mb-4">
-            <label htmlFor="correo" className="block text-sm font-medium text-gray-700 mb-2">Correo:</label>
-            <TextField
-              id="correo"
-              name="correo"
-              value={formulario.correo}
-              onChange={handleInputChange}
-              variant="outlined"
-              fullWidth
-              required
-            />
-          </div>
-        </div>
-
-        <div className="grid grid-cols-2 gap-4">
-          <div className="col-span-1 mb-4">
-            <label htmlFor="provincia" className="block text-sm font-medium text-gray-700 mb-2">Lugar de residencia:</label>
-            <TextField
-              id="provincia"
-              name="provincia"
-              value={formulario.provincia}
-              onChange={handleInputChange}
-              variant="outlined"
-              fullWidth
-              required
-            />
-          </div>
-
-          <div className="col-span-1 mb-4">
-            <label htmlFor="nombreusuario" className="block text-sm font-medium text-gray-700 mb-2">Nombre de usuario:</label>
-            <TextField
-              id="nombreusuario"
-              name="nombreusuario"
-              value={formulario.nombreusuario}
-              onChange={handleInputChange}
-              variant="outlined"
-              fullWidth
-              required
-            />
-          </div>
-        </div>
-
-        <div className="mb-4">
-          <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">Contraseña:</label>
-          <TextField
-            id="password"
-            name="password"
-            value={formulario.password}
-            type='password'
-            onChange={handleInputChange}
-            variant="outlined"
-            fullWidth
-            required
+function Registro() {
+  const { register, handleSubmit } = useForm()
+ 
+ const onSubmit =  handleSubmit( async (values) => {
+    console.log(values);
+    const res = await registrorespuesta(values)
+    console.log(res)   
+     })
+  return(
+     <div className='bg-teal-700 max-w-md p-10 rounded-md' >  
+         <form 
+         onSubmit={onSubmit}
+         >
+      <div className="mb-4">
+          <label htmlFor="nombre" className="block text-black text-sm font-bold mb-2">Nombre:</label>
+          <input
+            type="text"
+            {...register("nombre", { required: true })}
+            className='w-full bg-cyan-400 text-black px-4 py-2 rounded-md my-2'
           />
         </div>
+        <div className="mb-4">
+          <label htmlFor="apellido" className="block text-black text-sm font-bold mb-2">Apellido:</label>
+          <input
+            type="text"
+            {...register("apellido", { required: true })}
+            className='w-full bg-cyan-400 text-black px-4 py-2 rounded-md my-2'
+          />
+          </div>
+          <div className="mb-4">
+          <label htmlFor="cedula" className="block text-black text-sm font-bold mb-2">Cedula:</label>
+          <input
+            type="text"
+            {...register("cedula", { required: true })}
+            className='w-full bg-cyan-400 text-black px-4 py-2 rounded-md my-2'
+          />
+          </div>
+          <div className="mb-4">
+          <label htmlFor="correo" className="block text-black text-sm font-bold mb-2">Correo:</label>
+          <input
+            type="text"
+            {...register("correo", { required: true })}
+            className='w-full bg-cyan-400 text-black px-4 py-2 rounded-md my-2'
+          />
+          </div>
+          <div className="mb-4">
+          <label htmlFor="provincia" className="block text-black text-sm font-bold mb-2">Provincia:</label>
+          <input
+            type="text"
+            {...register("provincia", { required: true })}
+            className='w-full bg-cyan-400 text-black px-4 py-2 rounded-md my-2'
+          />
+          </div><div className="mb-4">
+          <label htmlFor="nombreusuario" className="block text-black text-sm font-bold mb-2">Nombre de usuario:</label>
+          <input
+            type="text"
+            {...register("nombreusuario", { required: true })}
+            className='w-full bg-cyan-400 text-black px-4 py-2 rounded-md my-2'
+          />
+          </div>
+          <div className="mb-4">
+          <label htmlFor="password" className="block text-black text-sm font-bold mb-2">Contraseña:</label>
+          <input
+            type="password"
+            {...register("password", { required: true })}
+            className='w-full bg-cyan-400 text-black px-4 py-2 rounded-md my-2'
+          />
+          </div>
+     
+     <button type="submit"  className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+      Registar
+     </button>
+         </form>
+     </div>
+  )
+}
 
-        <div className="mb-6">
-          <button
-            type="submit"
-            className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 w-full"
-          >
-            Registrar
-          </button>
-        </div>
-      </form>
-    </div>
-  );
-};
+export default Registro;
