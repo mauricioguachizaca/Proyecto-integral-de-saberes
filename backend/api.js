@@ -252,7 +252,7 @@ router.post('/verificarCredenciales', async (req, res) => {
       if (isValidPassword) {
         // Credenciales válidas
         const token = createAccessToken({ id: usuario._id });
-        res.cookie('token', token, { expires: new Date(Date.now() + 24 * 60 * 60 * 1000), httpOnly: true });
+        res.cookie('token', token,{ expires: new Date(Date.now() + 24 * 60 * 60 * 1000), httpOnly: true });
         res.json({ isValidUser: true });
       } else {
         // Credenciales inválidas
@@ -523,6 +523,26 @@ router.put('/medidor/:nombredispositivo', verifyToken, async (req, res) => {
     res.status(500).json({ error: "Error interno del servidor" });
   }
 });
+
+router.get('/verificartoken', verifyToken, async (req,res) =>{
+  const {token} = req.cookies
+
+  if(!token) return res.status(401).json({ message: "No verificado"});
+
+  jwt.verify(token, verifyToken , async (err,user ) => {
+    if (err) return res.status(401).json({ message:"No verificado"})
+    
+    const userFound = await Usuario.findById(user.id)
+    if (!userFound) return res.status(401).json({ message: "No verificado"})
+  })
+     
+  return res.json({
+    id: userFound._id,
+    nombreusuario: userFound.nombreusuario,
+    password: userFound.password,
+  })
+
+})
 
 function verifyToken(req, res, next) {
   const token = req.cookies.token;

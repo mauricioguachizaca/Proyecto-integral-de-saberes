@@ -1,5 +1,6 @@
 import { createContext, useState, useContext, useEffect } from 'react';
-import { registrorespuesta, iniciorespuestas } from '../api/auth';
+import { registrorespuesta, iniciorespuestas, verificarToken } from '../api/auth';
+import Cookies from 'js-cookie';
 
 export const AuthContext = createContext();
 
@@ -33,12 +34,31 @@ export const AuthProvider = ({ children }) => {
         try{
             const res = await iniciorespuestas(user)
             console.log(res)
+            setIsAuthenticated(true)
+            setUser(res.data)
         } catch (error){
             console.log(error)
         }
     }
     
-    
+    useEffect(()=>{
+        const cookies = Cookies.get();
+         
+        if(cookies.token){
+            try{
+                const res = verificarToken(cookies.token)
+                if (!res.data) setIsAuthenticated(false)
+
+                isAuthenticated(true)
+                setUser(res.data)
+            } catch (error){
+                setIsAuthenticated(false)
+                setUser(null)
+
+            }
+            
+        }
+      }, [])
     return (
         <AuthContext.Provider
             value={{
