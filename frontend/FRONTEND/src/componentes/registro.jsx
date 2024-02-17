@@ -107,7 +107,7 @@ function Registro() {
           </button>
         </form>
         <p className="flex gap-x-2 justify-between mt-4">
-          Si ya tienes una cuenta <Link to="/iniciar" className="text-blue-500">Inicia Sesión</Link>
+          Si ya tienes una cuenta <Link to="/iniciar" className="text-blue-500">Iniciar Sesión</Link>
         </p>
       </div>
     </div>
