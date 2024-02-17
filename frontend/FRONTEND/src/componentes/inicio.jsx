@@ -125,14 +125,12 @@ const SeccionTestimonios = () => {
 export const Inicio = () => {
   return (
     <div>
-      <nav className="bg-[#154918] p-5 flex items-center justify-between fixed top-0 w-full z-50 shadow-xl">
+      <nav className="bg-[#478b6d] p-5 flex items-center justify-between fixed top-0 w-full z-50 shadow-xl">
         <div className="mr-8"> {/* Margen de Click Wed con Las demas letras*/}
           <a href="#bienvenida" className="text-white font-extrabold text-2xl">CLIK WED</a>
         </div>
         <div className="flex items-center space-x-4">
           <a href="#bienvenida" className="text-white transition duration-75 hover:font-bold hover:shadow-md">Inicio</a>
-          <span className="text-white">|</span>
-          <a href="/iniciar" className="text-white transition duration-75 hover:font-bold hover:shadow-md">Iniciar sesion/registrarse</a>
           <span className="text-white">|</span>
           <a href="#nosotros" className="text-white transition duration-75 hover:font-bold hover:shadow-md">Conoce sobre nosotros</a>
           <span className="text-white">|</span>
@@ -194,7 +192,7 @@ export const Inicio = () => {
        {/* Sección de los Perfiles de cada colaborador */}
       <SeccionTestimonios />
 
-      <footer className="bg-[#154918] mt-28 p-5 text-blue-gray-100 text-center flex flex-col items-center">
+      <footer className="bg-[#478b6d] mt-28 p-5 text-blue-gray-100 text-center flex flex-col items-center">
         {/* Iconos de redes sociales */}
         <div className="flex">
           <a href="https://www.facebook.com/UNLoficial/?locale=es_LA" target="_blank" rel="noopener noreferrer">
@@ -216,4 +214,6 @@ export const Inicio = () => {
 };
 
 export default Inicio;
+
+
 
