@@ -132,7 +132,7 @@ export const Inicio = () => {
         <div className="flex items-center space-x-4">
           <a href="#bienvenida" className="text-white transition duration-75 hover:font-bold hover:shadow-md">Inicio</a>
           <span className="text-white">|</span>
-          <a href="/iniciar" className="text-white transition duration-75 hover:font-bold hover:shadow-md">Iniciar sesion/registrarse</a>
+          <a href="/iniciar" className="text-white transition duration-75 hover:font-bold hover:shadow-md">Iniciar Sesion/Registrarse</a>
           <span className="text-white">|</span>
           <a href="#nosotros" className="text-white transition duration-75 hover:font-bold hover:shadow-md">Conoce sobre nosotros</a>
           <span className="text-white">|</span>
