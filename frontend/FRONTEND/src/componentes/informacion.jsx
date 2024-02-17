@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import FlujoTrabajo from './imagenes/FlujoDeTrabajoPis.png'; // Imagen original
+import FlujoTrabajo from './imagenes/FlujoDeTrabajoPis.png';
 import DiagramaClases from './imagenes/Diagrama.jpg'; 
 
 export const Informacion = () => {
@@ -48,7 +48,7 @@ export const Informacion = () => {
             <div
               className="fixed top-0 left-0 right-0 bottom-0 z-50 overflow-hidden flex items-center justify-center"
               style={{ background: 'rgba(255, 255, 255, 0.9)' }}
-              onClick={toggleNuevaImagenAmpliada}
+              onClick={toggleDiagramaAmpliada}
             >
               <img
                 src={DiagramaClases}
@@ -57,7 +57,7 @@ export const Informacion = () => {
               />
             </div>
           )}
-            <h2 className="text-xl font-bold mb-2 underline">Diagrama de clases</h2>
+          <h2 className="text-xl font-bold mb-2 underline">Diagrama de clases</h2>
           <img
             src={DiagramaClases}
             alt="Descripción de la nueva imagen"
@@ -71,4 +71,3 @@ export const Informacion = () => {
     </div>
   );
 };
-
