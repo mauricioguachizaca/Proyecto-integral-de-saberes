@@ -34,12 +34,12 @@ function Login() {
               {errors.password && (<p className='text-red-900'>La contraseña es requerida</p>)}
             </div>
           </div>
-          <button type="submit" className="bg-[#478b6d] text-white py-2 px-4 rounded hover:bg-blue-600 w-full">
+          <button type="submit" className="bg-[#478b6d] text-white py-2 px-4 rounded hover:bg-[#5d8dee] w-full">
             Iniciar Sesión
           </button>
         </form>
         <p className="flex gap-x-2 justify-between mt-4">
-          ¿No tienes una cuenta aún? <Link to="/registro" className="text-blue-500">Regístrate</Link>
+          ¿No tienes una cuenta aún? <Link to="/registro" className="text-[#5d8dee]">Regístrate</Link>
         </p>
       </div>
     </div>
