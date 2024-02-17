@@ -102,12 +102,12 @@ function Registro() {
               {errors.correo && (<p className='text-red-900'>Correo es requerido</p>)}
             </div>
           </div>
-          <button type="submit" className="col-span-2  bg-[#478b6d] text-white py-2 px-4 rounded hover:bg-[#478b6d]">
+          <button type="submit" className="col-span-2  bg-[#478b6d] text-white py-2 px-4 rounded hover:bg-[#5d8dee]">
             Registrar
           </button>
         </form>
         <p className="flex gap-x-2 justify-between mt-4">
-          Si ya tienes una cuenta <Link to="/iniciar" className="text-blue-500">Iniciar Sesión</Link>
+          Si ya tienes una cuenta <Link to="/iniciar" className="text-[#5d8dee]">Iniciar Sesión</Link>
         </p>
       </div>
     </div>
