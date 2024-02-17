@@ -11,7 +11,7 @@ function Login() {
   });
 
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex justify-center items-center h-screen bg-blue-100">
       <div className='bg-teal-700 max-w-md p-10 rounded-md'>
         <form onSubmit={onSubmit}>
           <div className="mb-4">
@@ -33,7 +33,7 @@ function Login() {
             {errors.password && (<p className='text-red-900'>La contraseña es requerida</p>)}
           </div>
 
-          <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+          <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded w-full hover:bg-blue-600"> {/* Modificado para ocupar todo el ancho disponible */}
             Iniciar Sesión
           </button>
         </form>
