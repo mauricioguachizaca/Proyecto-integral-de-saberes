@@ -102,7 +102,7 @@ function Registro() {
               {errors.correo && (<p className='text-red-900'>Correo es requerido</p>)}
             </div>
           </div>
-          <button type="submit" className="col-span-2  bg-[#478b6d] text-black py-2 px-4 rounded hover:bg-[#478b6d]">
+          <button type="submit" className="col-span-2  bg-[#478b6d] text-white py-2 px-4 rounded hover:bg-[#478b6d]">
             Registrar
           </button>
         </form>
