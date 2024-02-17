@@ -141,16 +141,15 @@ export const Inicio = () => {
           </a>
         </div>
       </nav>
-
-       {/* Sección de bienvenida */}
-      <section id="bienvenida" className="w-full min-h-screen bg-cover bg-center bg-no-repeat bg-scroll flex items-center justify-center text-white mt-16" style={{ backgroundImage: `url(${fondoImagen})` }}>
-        {/* Contenido de la sección de bienvenida */}
-        <div className="text-center bg-opacity-80 p-6">
-          <h1 className="font-bold text-3xl md:text-5xl lg:text-6xl mb-4 md:mb-8">BIENVENIDO/A A NUESTRA PÁGINA WEB.</h1>
-          <p className="text-base md:text-xl mb-4">¿Quieres conocer cuánto consume de energía tus dispositivos eléctricos?</p>
-          <a href="/registro" className="bg-[#478b6d] text-white py-2 px-4 rounded-full text-lg md:text-xl hover:bg-blue-600 transition duration-300">Descúbrelo aquí</a>
-        </div>
-      </section>
+{/* Sección de bienvenida */}
+<section id="bienvenida" className="w-full min-h-screen bg-cover bg-center bg-no-repeat bg-scroll flex items-center justify-center text-white mt-16" style={{ backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url(${fondoImagen})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}>
+  {/* Contenido de la sección de bienvenida */}
+  <div className="text-center bg-opacity-80 p-6">
+    <h1 className="font-bold text-3xl md:text-5xl lg:text-6xl mb-4 md:mb-8">CLIK WED</h1>
+    <p className="text-lg md:text-2xl mb-5">¿Quieres conocer cuánto consume de energía tus dispositivos eléctricos?</p>
+    <a href="/registro" className="bg-[#478b6d] text-white py-2 px-4 rounded-full text-lg md:text-xl hover:bg-[#5d8dee] transition duration-300">Descúbrelo aquí</a>
+  </div>
+</section>
 
       {/* Sección de botones (Iniciar Sesión, Registrarse, Información) */}
       <div className="mt-10 md:mt-20 mb-40 flex items-center justify-evenly flex-wrap">
