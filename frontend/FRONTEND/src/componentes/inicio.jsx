@@ -125,7 +125,7 @@ const SeccionTestimonios = () => {
 export const Inicio = () => {
   return (
     <div>
-      <nav className="bg-[#154918] p-5 flex items-center justify-between fixed top-0 w-full z-50 shadow-xl">
+      <nav className="bg-[#478b6d] p-5 flex items-center justify-between fixed top-0 w-full z-50 shadow-xl">
         <div className="mr-8"> {/* Margen de Click Wed con Las demas letras*/}
           <a href="#bienvenida" className="text-white font-extrabold text-2xl">CLIK WED</a>
         </div>
@@ -143,12 +143,12 @@ export const Inicio = () => {
       </nav>
 
        {/* Sección de bienvenida */}
-      <section id="bienvenida" className="w-full min-h-screen bg-cover bg-center bg-no-repeat bg-scroll flex items-center justify-center text-white mt-16" style={{ backgroundImage: url(${fondoImagen}) }}>
+      <section id="bienvenida" className="w-full min-h-screen bg-cover bg-center bg-no-repeat bg-scroll flex items-center justify-center text-white mt-16" style={{ backgroundImage: `url(${fondoImagen})` }}>
         {/* Contenido de la sección de bienvenida */}
         <div className="text-center bg-opacity-80 p-6">
           <h1 className="font-bold text-3xl md:text-5xl lg:text-6xl mb-4 md:mb-8">BIENVENIDO/A A NUESTRA PÁGINA WEB.</h1>
           <p className="text-base md:text-xl mb-4">¿Quieres conocer cuánto consume de energía tus dispositivos eléctricos?</p>
-          <a href="/registro" className="bg-[#47d9e1] text-white py-2 px-4 rounded-full text-lg md:text-xl hover:bg-blue-600 transition duration-300">Descúbrelo aquí</a>
+          <a href="/registro" className="bg-[#478b6d] text-white py-2 px-4 rounded-full text-lg md:text-xl hover:bg-blue-600 transition duration-300">Descúbrelo aquí</a>
         </div>
       </section>
 
@@ -160,7 +160,7 @@ export const Inicio = () => {
             <PersonIcon style={{ fontSize: '4rem' }} />
           </div>
           <div className="text-center mt-2">
-            <button className="bg-[#4c4b4c] text-white font-bold py-2 px-4 rounded">
+            <button className="bg-[#a2e3f9] text-black font-bold py-2 px-4 rounded">
               Iniciar Sesión
             </button>
           </div>
@@ -172,7 +172,7 @@ export const Inicio = () => {
             <PersonAddIcon style={{ fontSize: '4rem' }} />
           </div>
           <div className="text-center mt-2">
-            <button className="bg-[#4c4b4c] text-white font-bold py-2 px-4 rounded">
+            <button className="bg-[#a2e3f9] text-black font-bold py-2 px-4 rounded">
               Registrarse
             </button>
           </div>
@@ -184,7 +184,7 @@ export const Inicio = () => {
             <InfoIcon fontSize="large" style={{ fontSize: '4rem' }} />
           </div>
           <div className="text-center mt-2">
-            <button className="bg-[#4c4b4c] text-white font-bold py-2 px-4 rounded">
+            <button className="bg-[#a2e3f9] text-black font-bold py-2 px-4 rounded">
               Información
             </button>
           </div>
@@ -194,7 +194,7 @@ export const Inicio = () => {
        {/* Sección de los Perfiles de cada colaborador */}
       <SeccionTestimonios />
 
-      <footer className="bg-[#154918] mt-28 p-5 text-blue-gray-100 text-center flex flex-col items-center">
+      <footer className="bg-[#478b6d] mt-28 p-5 text-blue-gray-100 text-center flex flex-col items-center">
         {/* Iconos de redes sociales */}
         <div className="flex">
           <a href="https://www.facebook.com/UNLoficial/?locale=es_LA" target="_blank" rel="noopener noreferrer">
@@ -216,6 +216,8 @@ export const Inicio = () => {
 };
 
 export default Inicio;
+
+
 
 
 
