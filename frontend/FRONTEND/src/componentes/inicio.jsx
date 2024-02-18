@@ -123,43 +123,44 @@ const SeccionTestimonios = ({ darkMode }) => {
 
 
 export const Inicio = () => {
- // Obtener el estado del modo oscuro del almacenamiento local, si no está definido, usa false por defecto
- const storedDarkMode = localStorage.getItem('darkMode') === 'true';
- // Estado para controlar el modo oscuro, inicializado con el valor del almacenamiento local
- const [darkMode, setDarkMode] = useState(storedDarkMode);
- 
- // Función para alternar entre el modo oscuro y claro
- const toggleDarkMode = () => {
-   const newDarkMode = !darkMode;
-   setDarkMode(newDarkMode);
-   // Guardar el estado del modo oscuro en el almacenamiento local
-   localStorage.setItem('darkMode', newDarkMode);
- };
+  // Obtener el estado del modo oscuro del almacenamiento local, si no está definido, usa false por defecto
+  const storedDarkMode = localStorage.getItem('darkMode') === 'true';
+  // Estado para controlar el modo oscuro, inicializado con el valor del almacenamiento local
+  const [darkMode, setDarkMode] = useState(storedDarkMode);
 
- // Efecto para aplicar el modo oscuro al cargar la página
- useEffect(() => {
-   document.body.classList.toggle('dark', darkMode);
- }, [darkMode]);
+  // Función para alternar entre el modo oscuro y claro
+  const toggleDarkMode = () => {
+    const newDarkMode = !darkMode;
+    setDarkMode(newDarkMode);
+    // Guardar el estado del modo oscuro en el almacenamiento local
+    localStorage.setItem('darkMode', newDarkMode);
+  };
+
+  // Efecto para aplicar el modo oscuro al cargar la página
+  useEffect(() => {
+    document.body.classList.toggle('dark', darkMode);
+  }, [darkMode]);
 
   return (
     <div className={darkMode ? 'dark' : ''}>
-      <nav className={`${darkMode ? 'bg-[#17301a]' : 'bg-[#478b6d]'}  p-6 flex items-center justify-between fixed top-0 w-full z-50 shadow-xl`}>
-        <div className="mr-8"> {/* Margen de Click Wed con Las demas letras*/}
+      <nav className={`${darkMode ? 'bg-[#17301a]' : 'bg-[#478b6d]'} p-6 flex flex-col sm:flex-row items-center justify-between
+      fixed  w-full z-50 shadow-xl`}>
+        <div className="flex items-center mb-1 sm:ml-4"> {/* Margen de Click Wed con Las demas letras*/}
           <a href="#bienvenida" className="text-white font-extrabold text-2xl">CLIK WED</a>
+          <a href="https://github.com/mauricioguachizaca/Proyecto-integral-de-saberes.github.io" className="text-white flex items-center ml-16 sm:hidden" target="_blank" rel="noopener noreferrer">
+            <GitHubIcon style={{ color: '#ffffff' }} fontSize="large" /> </a>
         </div>
-        <div className="text-center flex items-center space-x-4">
+        <div className="text-center flex flex-wrap items-center justify-center space-x-4">
           <a href="#bienvenida" className="text-white transition duration-75 hover:font-bold hover:shadow-md">Inicio</a>
           <span className="text-white">|</span>
           <a href="#registro" className="text-white transition duration-75 hover:font-bold hover:shadow-md">Registros</a>
           <span className="text-white">|</span>
           <a href="#nosotros" className="text-white transition duration-75 hover:font-bold hover:shadow-md">Conoce sobre nosotros</a>
-          <span className="text-white">|</span>
-          <a href="https://github.com/mauricioguachizaca/Proyecto-integral-de-saberes.github.io" className="text-white flex items-center" target="_blank" rel="noopener noreferrer">
-            <GitHubIcon style={{ color: '#ffffff' }} fontSize="large" className="ml-2" />
-          </a>
+          <span className="text-white">|</span> <a href="https://github.com/mauricioguachizaca/Proyecto-integral-de-saberes.github.io" className="text-white hidden sm:inline-flex items-center" target="_blank" rel="noopener noreferrer">
+            <GitHubIcon style={{ color: '#ffffff' }} fontSize="large" className="ml-2" /> </a>
         </div>
       </nav>
-     
+
       {/* Sección de bienvenida */}
       <div id="bienvenida" className="bg-[#a2e3f9] flex flex-col items-center justify-center h-screen relative">
         <img src={fondoImagen} alt="fondo" className="absolute top-20 left-0 w-full h-full object-cover z-0" />
@@ -176,11 +177,11 @@ export const Inicio = () => {
       </div>
       <section id="registro"></section>
       {/* Sección de botones (Iniciar Sesión, Registrarse, Información) */}
-      <div className= {`flex items-center justify-evenly flex-wrap ${darkMode ? 'bg-[#121212]' : 'bg-white'} py-28 md:mt-20 `}>
+      <div className={`flex items-center justify-evenly flex-wrap ${darkMode ? 'bg-[#121212]' : 'bg-white'} py-28 md:mt-20 `}>
         {/* boton y icono de inicio sesion*/}
         <Link to="/iniciar" className="text-center flex flex-col items-center mb-4">
           <div className="border border-gray-300 p-4 rounded">
-            <PersonIcon style={{ fontSize: '4rem', color: darkMode ? 'white' : ''  }} />
+            <PersonIcon style={{ fontSize: '4rem', color: darkMode ? 'white' : '' }} />
           </div>
           <div className="text-center mt-2">
             <button className="bg-[#a2e3f9] text-black font-bold py-2 px-4 rounded">
@@ -204,7 +205,7 @@ export const Inicio = () => {
         {/* boton y icono de informacion*/}
         <Link to="/informacion" className="text-center flex flex-col items-center mb-4">
           <div className="border border-gray-300 p-4 rounded">
-            <InfoIcon fontSize="large" style={{ fontSize: '4rem', color: darkMode ?  'white' : ''  }} />
+            <InfoIcon fontSize="large" style={{ fontSize: '4rem', color: darkMode ? 'white' : '' }} />
           </div>
           <div className="text-center mt-2">
             <button className="bg-[#a2e3f9] text-black font-bold py-2 px-4 rounded">
@@ -214,9 +215,9 @@ export const Inicio = () => {
         </Link>
       </div>
 
-       {/* Sección de los Perfiles de cada colaborador */}
-       <SeccionTestimonios darkMode={darkMode} />
-     
+      {/* Sección de los Perfiles de cada colaborador */}
+      <SeccionTestimonios darkMode={darkMode} />
+
       {/* Botón para activar/desactivar el modo oscuro */}
       <button onClick={toggleDarkMode} className="fixed bottom-4 right-4 bg-[#6D6E81] text-white rounded-full w-12 h-12 flex items-center justify-center">
         {darkMode ? '🌙' : '🌞'}
