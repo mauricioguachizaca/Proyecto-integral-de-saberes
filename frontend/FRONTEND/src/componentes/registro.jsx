@@ -81,18 +81,6 @@ function Registro() {
               {errors.password && (<p className='text-red-900'>La contraseña es requerida</p>)}
             </div>
             <div className="mb-6">
-              <label htmlFor="confirmarPassword" className="block text-black text-sm font-bold mb-2">Confirmar contraseña:</label>
-              <input
-                type="password"
-                {...register("confirmarPassword", {
-                  required: true,
-                  validate: value => value === password || "Las contraseñas no coinciden"
-                })}
-                className='w-full border border-[#478b6d] text-black px-4 py-2 rounded-md'
-              />
-              {errors.confirmarPassword && <p className='text-red-900'>{errors.confirmarPassword.message}</p>}
-            </div>
-            <div className="mb-6">
               <label htmlFor="correo" className="block text-black text-sm font-bold mb-2">Correo:</label>
               <input
                 type="text"
