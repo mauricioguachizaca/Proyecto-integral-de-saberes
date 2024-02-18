@@ -150,7 +150,7 @@ export const Inicio = () => {
         <div className="text-center flex items-center space-x-4">
           <a href="#bienvenida" className="text-white transition duration-75 hover:font-bold hover:shadow-md">Inicio</a>
           <span className="text-white">|</span>
-          <a href="/iniciar" className="text-white transition duration-75 hover:font-bold hover:shadow-md">Iniciar Sesion / Registro</a>
+          <a href="#registro" className="text-white transition duration-75 hover:font-bold hover:shadow-md">Registros</a>
           <span className="text-white">|</span>
           <a href="#nosotros" className="text-white transition duration-75 hover:font-bold hover:shadow-md">Conoce sobre nosotros</a>
           <span className="text-white">|</span>
@@ -174,7 +174,7 @@ export const Inicio = () => {
           </div>
         </div>
       </div>
-
+      <section id="registro"></section>
       {/* Sección de botones (Iniciar Sesión, Registrarse, Información) */}
       <div className= {`flex items-center justify-evenly flex-wrap ${darkMode ? 'bg-[#121212]' : 'bg-white'} py-28 md:mt-20 `}>
         {/* boton y icono de inicio sesion*/}
