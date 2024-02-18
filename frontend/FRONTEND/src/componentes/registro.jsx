@@ -31,7 +31,7 @@ function Registro() {
                 {...register("nombre", { required: true })}
                 className='w-full border border-[#478b6d] text-black px-4 py-2 rounded-md'
               />
-              {errors.nombre && (<p className='text-red-900'>Nombres es requerido</p>)}
+              {errors.nombre && (<p className='text-red-900'>Campo obligatorio</p>)}
             </div>
             <div className="mb-6">
               <label htmlFor="apellido" className="block text-black text-sm font-bold mb-2">Apellidos:</label>
@@ -40,7 +40,7 @@ function Registro() {
                 {...register("apellido", { required: true })}
                 className='w-full border border-[#478b6d] text-black px-4 py-2 rounded-md'
               />
-              {errors.apellido && (<p className='text-red-900'>Apellidos es requerido</p>)}
+              {errors.apellido && (<p className='text-red-900'>Campo obligatorio</p>)}
             </div>
             <div className="mb-6">
               <label htmlFor="cedula" className="block text-black text-sm font-bold mb-2">Cédula:</label>
@@ -49,7 +49,7 @@ function Registro() {
                 {...register("cedula", { required: true })}
                 className='w-full border border-[#478b6d] text-black px-4 py-2 rounded-md'
               />
-              {errors.cedula && (<p className='text-red-900'>Cédula es requerido</p>)}
+              {errors.cedula && (<p className='text-red-900'>Campo obligatorio</p>)}
             </div>
             <div className="mb-6">
               <label htmlFor="nombreusuario" className="block text-black text-sm font-bold mb-2">Nombre de usuario:</label>
@@ -58,7 +58,7 @@ function Registro() {
                 {...register("nombreusuario", { required: true })}
                 className='w-full border border-[#478b6d] text-black px-4 py-2 rounded-md'
               />
-              {errors.nombreusuario && (<p className='text-red-900'>Nombre de usuario es requerido</p>)}
+              {errors.nombreusuario && (<p className='text-red-900'>Campo obligatorio</p>)}
             </div>
           </div>
           <div>
@@ -69,7 +69,7 @@ function Registro() {
                 {...register("provincia", { required: true })}
                 className='w-full border border-[#478b6d] text-black px-4 py-2 rounded-md'
               />
-              {errors.provincia && (<p className='text-red-900'>Dirección es requerido</p>)}
+              {errors.provincia && (<p className='text-red-900'>Campo obligatorio</p>)}
             </div>
             <div className="mb-6">
               <label htmlFor="password" className="block text-black text-sm font-bold mb-2">Contraseña:</label>
@@ -78,7 +78,7 @@ function Registro() {
                 {...register("password", { required: true })}
                 className='w-full border border-[#478b6d] text-black px-4 py-2 rounded-md'
               />
-              {errors.password && (<p className='text-red-900'>La contraseña es requerida</p>)}
+              {errors.password && (<p className='text-red-900'>Campo obligatorio</p>)}
             </div>
             <div className="mb-6">
               <label htmlFor="correo" className="block text-black text-sm font-bold mb-2">Correo:</label>
@@ -87,7 +87,7 @@ function Registro() {
                 {...register("correo", { required: true })}
                 className='w-full border border-[#478b6d] text-black px-4 py-2 rounded-md'
               />
-              {errors.correo && (<p className='text-red-900'>Correo es requerido</p>)}
+              {errors.correo && (<p className='text-red-900'>Campo obligatorio</p>)}
             </div>
           </div>
           <button type="submit" className="col-span-2  bg-[#478b6d] text-white py-2 px-4 rounded hover:bg-[#5d8dee]">
