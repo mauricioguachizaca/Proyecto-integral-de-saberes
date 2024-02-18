@@ -136,10 +136,10 @@ export const Inicio = () => {
         <div className="mr-8"> {/* Margen de Click Wed con Las demas letras*/}
           <a href="#bienvenida" className="text-white font-extrabold text-2xl">CLIK WED</a>
         </div>
-        <div className="flex items-center space-x-4">
+        <div className="text-center flex items-center space-x-4">
           <a href="#bienvenida" className="text-white transition duration-75 hover:font-bold hover:shadow-md">Inicio</a>
           <span className="text-white">|</span>
-          <a href="/iniciar" className="text-white transition duration-75 hover:font-bold hover:shadow-md">Iniciar Sesion / Registrarse</a>
+          <a href="/iniciar" className="text-white transition duration-75 hover:font-bold hover:shadow-md">Iniciar Sesion / Registro</a>
           <span className="text-white">|</span>
           <a href="#nosotros" className="text-white transition duration-75 hover:font-bold hover:shadow-md">Conoce sobre nosotros</a>
           <span className="text-white">|</span>
