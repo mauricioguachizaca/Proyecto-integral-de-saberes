@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import PersonIcon from '@material-ui/icons/Person';
@@ -123,12 +123,23 @@ const SeccionTestimonios = ({ darkMode }) => {
 
 
 export const Inicio = () => {
-  // Estado para controlar el modo oscuro, inicializado como falso (modo claro) por defecto
-  const [darkMode, setDarkMode] = useState(false);
-  // Función para alternar entre el modo oscuro y claro
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);// Cambiar el estado de darkMode al contrario de su valor actual
-  };
+ // Obtener el estado del modo oscuro del almacenamiento local, si no está definido, usa false por defecto
+ const storedDarkMode = localStorage.getItem('darkMode') === 'true';
+ // Estado para controlar el modo oscuro, inicializado con el valor del almacenamiento local
+ const [darkMode, setDarkMode] = useState(storedDarkMode);
+ 
+ // Función para alternar entre el modo oscuro y claro
+ const toggleDarkMode = () => {
+   const newDarkMode = !darkMode;
+   setDarkMode(newDarkMode);
+   // Guardar el estado del modo oscuro en el almacenamiento local
+   localStorage.setItem('darkMode', newDarkMode);
+ };
+
+ // Efecto para aplicar el modo oscuro al cargar la página
+ useEffect(() => {
+   document.body.classList.toggle('dark', darkMode);
+ }, [darkMode]);
 
   return (
     <div className={darkMode ? 'dark' : ''}>
