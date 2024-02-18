@@ -123,9 +123,11 @@ const SeccionTestimonios = ({ darkMode }) => {
 
 
 export const Inicio = () => {
+  // Estado para controlar el modo oscuro, inicializado como falso (modo claro) por defecto
   const [darkMode, setDarkMode] = useState(false);
+  // Función para alternar entre el modo oscuro y claro
   const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
+    setDarkMode(!darkMode);// Cambiar el estado de darkMode al contrario de su valor actual
   };
 
   return (
