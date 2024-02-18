@@ -14,14 +14,14 @@ import facebook from './imagenes/facebook.svg';
 import twitter from './imagenes/twitter.svg';
 import youtube from './imagenes/youtube.svg';
 
-const SeccionTestimonios = () => {
+const SeccionTestimonios = ({ darkMode }) => {
   return (
-    <section id="nosotros" className="testimony bg-gray-100 py-16">
+    <section id="nosotros" className={`testimony ${darkMode ? 'bg-[#101b11]' : 'bg-gray-100'} py-16`}>
       <div className="container mx-auto">
-        <h2 className="title text-4xl font-bold text-center mb-12">
+        <h2 className={`title ${darkMode ? 'text-white' : ''} text-4xl font-bold text-center mb-12`}>
           <br />Conoce sobre Nosotros
         </h2>
-          
+
         {/*  los testimonios son los perfiles de cada integrantes Testimonio 1 */}
         <div className="testimony__item mb-8 bg-[#a2e3f9] p-6 rounded-md flex flex-col md:flex-row items-center justify-between">
           <section className="testimony__body text-center ml-8 mr-4 md:text-left md:w-2/3">
@@ -123,9 +123,14 @@ const SeccionTestimonios = () => {
 
 
 export const Inicio = () => {
+  const [darkMode, setDarkMode] = useState(false);
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
+
   return (
-    <div>
-      <nav className="bg-[#478b6d] p-5 flex items-center justify-between fixed top-0 w-full z-50 shadow-xl">
+    <div className={darkMode ? 'dark' : ''}>
+      <nav className={`${darkMode ? 'bg-[#17301a]' : 'bg-[#478b6d]'}  p-6 flex items-center justify-between fixed top-0 w-full z-50 shadow-xl`}>
         <div className="mr-8"> {/* Margen de Click Wed con Las demas letras*/}
           <a href="#bienvenida" className="text-white font-extrabold text-2xl">CLIK WED</a>
         </div>
@@ -141,22 +146,28 @@ export const Inicio = () => {
           </a>
         </div>
       </nav>
-{/* Sección de bienvenida */}
-<section id="bienvenida" className="w-full min-h-screen bg-cover bg-center bg-no-repeat bg-scroll flex items-center justify-center text-white mt-16" style={{ backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url(${fondoImagen})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}>
-  {/* Contenido de la sección de bienvenida */}
-  <div className="text-center bg-opacity-80 p-6">
-    <h1 className="font-bold text-3xl md:text-5xl lg:text-6xl mb-4 md:mb-8">CLIK WED</h1>
-    <p className="text-lg md:text-2xl mb-5">¿Quieres conocer cuánto consume de energía tus dispositivos eléctricos?</p>
-    <a href="/registro" className="bg-[#478b6d] text-white py-2 px-4 rounded-full text-lg md:text-xl hover:bg-[#5d8dee] transition duration-300">Descúbrelo aquí</a>
-  </div>
-</section>
+     
+      {/* Sección de bienvenida */}
+      <div id="bienvenida" className="bg-[#a2e3f9] flex flex-col items-center justify-center h-screen relative">
+        <img src={fondoImagen} alt="fondo" className="absolute top-20 left-0 w-full h-full object-cover z-0" />
+        {/* Contenido de la sección de bienvenida */}
+        <div className="container mx-auto text-center relative z-10">
+          <div className="text-center bg-opacity-80 p-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-16">Bienvenido/a a Nuestra Plataforma</h1>
+            <p className="text-white text-lg md:text-xl mb-6">
+              ¿Quieres conocer cuánto consume de energía tus dispositivos eléctricos?
+            </p>
+            <a href="/registro" className="bg-[#478b6d] text-white py-2 px-4 rounded-full text-lg md:text-xl hover:bg-[#5d8dee] transition duration-300">Descúbrelo aquí</a>
+          </div>
+        </div>
+      </div>
 
       {/* Sección de botones (Iniciar Sesión, Registrarse, Información) */}
-      <div className="mt-10 md:mt-20 mb-40 flex items-center justify-evenly flex-wrap">
+      <div className= {`flex items-center justify-evenly flex-wrap ${darkMode ? 'bg-[#121212]' : 'bg-white'} py-28 md:mt-20 `}>
         {/* boton y icono de inicio sesion*/}
         <Link to="/iniciar" className="text-center flex flex-col items-center mb-4">
           <div className="border border-gray-300 p-4 rounded">
-            <PersonIcon style={{ fontSize: '4rem' }} />
+            <PersonIcon style={{ fontSize: '4rem', color: darkMode ? 'white' : ''  }} />
           </div>
           <div className="text-center mt-2">
             <button className="bg-[#a2e3f9] text-black font-bold py-2 px-4 rounded">
@@ -168,7 +179,7 @@ export const Inicio = () => {
         {/* boton y icono de registro*/}
         <Link to="/registro" className="text-center flex flex-col items-center mb-4">
           <div className="border border-gray-300 p-4 rounded">
-            <PersonAddIcon style={{ fontSize: '4rem' }} />
+            <PersonAddIcon style={{ fontSize: '4rem', color: darkMode ? 'white' : '' }} />
           </div>
           <div className="text-center mt-2">
             <button className="bg-[#a2e3f9] text-black font-bold py-2 px-4 rounded">
@@ -180,7 +191,7 @@ export const Inicio = () => {
         {/* boton y icono de informacion*/}
         <Link to="/informacion" className="text-center flex flex-col items-center mb-4">
           <div className="border border-gray-300 p-4 rounded">
-            <InfoIcon fontSize="large" style={{ fontSize: '4rem' }} />
+            <InfoIcon fontSize="large" style={{ fontSize: '4rem', color: darkMode ?  'white' : ''  }} />
           </div>
           <div className="text-center mt-2">
             <button className="bg-[#a2e3f9] text-black font-bold py-2 px-4 rounded">
@@ -191,9 +202,14 @@ export const Inicio = () => {
       </div>
 
        {/* Sección de los Perfiles de cada colaborador */}
-      <SeccionTestimonios />
+       <SeccionTestimonios darkMode={darkMode} />
+     
+      {/* Botón para activar/desactivar el modo oscuro */}
+      <button onClick={toggleDarkMode} className="fixed bottom-4 right-4 bg-[#6D6E81] text-white rounded-full w-12 h-12 flex items-center justify-center">
+        {darkMode ? '🌙' : '🌞'}
+      </button>
 
-      <footer className="bg-[#478b6d] mt-28 p-5 text-blue-gray-100 text-center flex flex-col items-center">
+      <footer className={`${darkMode ? 'bg-[#17301a]' : 'bg-[#478b6d]'}  p-5 text-blue-gray-100 text-center flex flex-col items-center`}>
         {/* Iconos de redes sociales */}
         <div className="flex">
           <a href="https://www.facebook.com/UNLoficial/?locale=es_LA" target="_blank" rel="noopener noreferrer">
@@ -202,7 +218,7 @@ export const Inicio = () => {
           <a href="https://www.youtube.com/c/UNLOficial/videos" target="_blank" rel="noopener noreferrer">
             <img src={youtube} alt="youtube" style={{ width: '30px', height: '30px', color: 'black', marginRight: '10px' }} />
           </a>
-          <a href="uhttps://twitter.com/UNLoficial?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor" target="_blank" rel="noopener noreferrer">
+          <a href="https://twitter.com/UNLoficial" target="_blank" rel="noopener noreferrer">
             <img src={twitter} alt="twitter" style={{ width: '30px', height: '30px', color: 'black', marginRight: '10px' }} />
           </a>
         </div>
