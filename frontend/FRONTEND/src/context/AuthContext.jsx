@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, useEffect } from 'react';
-import { registrorespuesta, iniciorespuestas, verificarToken } from '../api/auth';
+import { registrorespuesta, iniciorespuestas, verificarTokenRe } from '../api/auth';
 import Cookies from 'js-cookie';
 
 export const AuthContext = createContext();
@@ -16,57 +16,72 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null); 
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [errors, setErrors] = useState([])
+    const [loading, setLoading] = useState(true)
 
     const validarcredenciales = async (user) => {
-        try{
-
-        const res = await registrorespuesta(user);
-        console.log(res.data);
-        setUser(res.data);
-        setIsAuthenticated(true)   
+        try {
+            const res = await registrorespuesta(user);
+            console.log("Registro respuesta:", res);
+            setIsAuthenticated(true);  
         } catch (error) {
-            console.log
-          setErrors(error.response.data)
+            console.error("Error en registro respuesta:", error);
+            setErrors(error.response.data)
         }
     };
 
     const inicios = async (user) => {
-        try{
-            const res = await iniciorespuestas(user)
-            console.log(res)
+        try {
+            const res = await iniciorespuestas(user);
+            console.log("Inicio respuestas:", res);
             setIsAuthenticated(true)
             setUser(res.data)
-        } catch (error){
-            console.log(error)
+        } catch (error) {
+            console.error("Error en inicio respuestas:", error);
         }
     }
     
-    useEffect(()=>{
-        const cookies = Cookies.get();
-         
-        if(cookies.token){
-            try{
-                const res = verificarToken(cookies.token)
-                if (!res.data) setIsAuthenticated(false)
+    useEffect(() => {
+        async function checkLogin() {
+            const cookies = Cookies.get();
 
-                isAuthenticated(true)
-                setUser(res.data)
-            } catch (error){
-                setIsAuthenticated(false)
-                setUser(null)
-
+            if (!cookies.token) {
+                setIsAuthenticated(false);
+                setLoading(false);
+                return setUser(null);
             }
-            
+
+            try {
+                const res = await verificarTokenRe(cookies.token);
+                console.log("Verificar token:", res);
+                if (!res.data) {
+                    console.log(res);
+                    setIsAuthenticated(false);
+                    setLoading(false);
+                    return;
+                }
+                
+                setIsAuthenticated(true);
+                setUser(res.data);
+                setLoading(false);
+            } catch (error) {
+                console.error("Error en verificar token:", error);
+                setIsAuthenticated(false);
+                setUser(null);
+                setLoading(false);
+            }
         }
-      }, [])
+        checkLogin();
+    }, []);
+    
     return (
         <AuthContext.Provider
             value={{
                 validarcredenciales,
+                inicios,
+                loading,
                 user,
                 isAuthenticated,
                 errors,
-                inicios,
             }}
         >
             {children}
