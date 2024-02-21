@@ -1,9 +1,9 @@
+import React from 'react'
 
-function Medidor() {
+export const Medidor = () => {
   return (
     <div>
       <div className='bg-purple-700'>hola que haces </div> 
       </div>
   )
 }
-export default Medidor;

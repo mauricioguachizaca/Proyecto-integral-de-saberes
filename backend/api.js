@@ -523,51 +523,29 @@ router.put('/medidor/:nombredispositivo', verifyToken, async (req, res) => {
     res.status(500).json({ error: "Error interno del servidor" });
   }
 });
-/**
- * @swagger
- * /api/verificartoken:
- *   get:
- *     summary: Verifica si el token proporcionado es válido.
- *     description: Verifica si el token proporcionado en las cookies de la solicitud es válido y pertenece a un usuario registrado.
- *     responses:
- *       200:
- *         description: Token válido y usuario encontrado.
- *       401:
- *         description: No se proporcionó ningún token, token inválido o usuario no encontrado.
- *       500:
- *         description: Error interno del servidor al verificar el token.
- */
-router.get('/verificartoken', async (req, res) => {
-  try {
-    const { token } = req.cookies;
 
-    if (!token) return res.status(401).json({ message: "No se proporcionó ningún token" });
+router.get('/verificartoken', verifyToken, async (req,res) =>{
+  const {token} = req.cookies
 
-    jwt.verify(token, "secret123", async (err, decoded) => {
-      if (err) {
-        return res.status(401).json({ message: "Token inválido" });
-      }
+  if(!token) return res.status(401).json({ message: "No verificado"});
 
-      // Verificar si el usuario existe
-      const usuario = await Usuario.findById(decoded.id);
-      if (!usuario) {
-        return res.status(401).json({ message: "Usuario no encontrado" });
-      }
+  jwt.verify(token, verifyToken , async (err,user ) => {
+    if (err) return res.status(401).json({ message:"No verificado"})
+    
+    const userFound = await Usuario.findById(user.id)
+    if (!userFound) return res.status(401).json({ message: "No verificado"})
+  })
+     
+  return res.json({
+    id: userFound._id,
+    nombreusuario: userFound.nombreusuario,
+    password: userFound.password,
+  })
 
-      // Token y usuario válidos
-      return res.json({ message: "Token válido", usuario });
-    });
-  } catch (error) {
-    console.error("Error al verificar el token:", error);
-    res.status(500).json({ error: "Error interno del servidor" });
-  }
-});
-
-
+})
 
 function verifyToken(req, res, next) {
-  const token = req.cookies ? req.cookies.token : null; // Verifica si req.cookies está definido
-
+  const token = req.cookies.token;
 
   if (!token) {
     return res.status(401).json({ message: "No hay token, autorización denegada" });
