@@ -1,5 +1,4 @@
 
-
 function Medidor() {
   return (
     <div>

@@ -41,37 +41,23 @@ export const AuthProvider = ({ children }) => {
     }
     
     useEffect(() => {
-        async function checkLogin() {
-            const cookies = Cookies.get();
-
-            if (!cookies.token) {
-                setIsAuthenticated(false);
-                setLoading(false);
-                return setUser(null);
-            }
-
+        async function checkToken() {
             try {
-                const res = await verificarTokenRe(cookies.token);
-                console.log("Verificar token:", res);
-                if (!res.data) {
-                    console.log(res);
-                    setIsAuthenticated(false);
-                    setLoading(false);
-                    return;
-                }
-                
-                setIsAuthenticated(true);
-                setUser(res.data);
-                setLoading(false);
+                const response = await verificarTokenRe();
+                console.log("Token verificado:", response.data);
+                // Actualiza isAuthenticated basado en el resultado de la verificación del token
+                setIsAuthenticated(response.data.message === "Token válido");
             } catch (error) {
-                console.error("Error en verificar token:", error);
-                setIsAuthenticated(false);
-                setUser(null);
-                setLoading(false);
+                console.error("Error al verificar el token:", error);
+                // Maneja el error según necesites
+            } finally {
+                setLoading(false); // Establece loading en false después de la verificación del token
             }
         }
-        checkLogin();
+        
+        checkToken();
     }, []);
+    
     
     return (
         <AuthContext.Provider
