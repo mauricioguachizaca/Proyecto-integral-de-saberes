@@ -25,10 +25,11 @@ const SeccionTestimonios = ({ darkMode }) => {
         {/*  los testimonios son los perfiles de cada integrantes Testimonio 1 */}
         <div className={`testimony__item ${darkMode ? 'bg-[#2a4f5d]' : 'bg-[#a2e3f9]'} mb-8  p-6 rounded-md flex flex-col md:flex-row items-center justify-between`}>
           <section className="testimony__body text-center ml-8 mr-4 md:text-left md:w-2/3">
-            <h2 className="subtitle text-2xl font-bold mb-2">
+            <h2 className={`subtitle ${darkMode ? 'text-white' : 'text-black'} text-2xl font-bold mb-2`}>
               Nathaly Angamarca, <span className="testimony__course">Estudiante de UNL.</span>
             </h2>
-            <p className="testimony__review mb-4">
+
+            <p className={`testimony__review ${darkMode ? 'text-white' : 'text-black'} mb-4`}>
               Estudiante de la carrera de Ingeniería en Sistemas/Computación de la Universidad Nacional de Loja
             </p>
             <a href="https://github.com/NathalyAngamarca" className={`testimony__github block ${darkMode ? 'bg-[#1e2f50]' : 'bg-[#5d8dee]'} text-white font-bold py-2 px-4 rounded" target="_blank" rel="noopener noreferrer`}>
