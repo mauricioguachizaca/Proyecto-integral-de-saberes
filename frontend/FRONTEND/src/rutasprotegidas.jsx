@@ -1,16 +1,15 @@
-import {useAuth} from './context/AuthContext'
 import { Navigate, Outlet } from 'react-router-dom';
+import {useAuth} from './context/AuthContext';
+
+function Rutasprotegidas() {
+   const { loading, isAuthenticated } =  useAuth();
+   console.log(loading, isAuthenticated);
 
 
-function Rutasprotegidas(){
-   const {user, isAuthenticated} =  useAuth()
+   if (loading) return <h1>cargando...</h1>;
+   if( !loading && !isAuthenticated) return <Navigate to="/iniciar" replace />;
 
-   if(!isAuthenticated) return <Navigate to='/iniciar' replace />
-
-
-  return (
-    <Outlet />
-  )
+  return <Outlet />;
 }
 
 export default Rutasprotegidas;
