@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, useEffect } from 'react';
-import { registrorespuesta, iniciorespuestas, verificarToken } from '../api/auth';
+import { registrorespuesta, iniciorespuestas, verificarTokenRe } from '../api/auth';
 import Cookies from 'js-cookie';
 
 export const AuthContext = createContext();
@@ -16,6 +16,7 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null); 
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [errors, setErrors] = useState([])
+    const [loading, setLoading] = useState(true)
 
     const validarcredenciales = async (user) => {
         try{
@@ -42,29 +43,28 @@ export const AuthProvider = ({ children }) => {
     }
     
     useEffect(()=>{
-        const cookies = Cookies.get();
-         
-        if(cookies.token){
-            try{
-                const res = verificarToken(cookies.token)
-                if (!res.data) setIsAuthenticated(false)
-
-                isAuthenticated(true)
-                setUser(res.data)
-            } catch (error){
-                setIsAuthenticated(false)
-                setUser(null)
-
-            }
-            
+        async function checkToken() {
+            try {
+            const response = await verificarTokenRe();
+            console.log("Token verificado:", response.data);
+            // Actualiza isAuthenticated basado en el resultado de la verificación del token
+            setIsAuthenticated(response.data.message === "Token válido");
+        } catch (error) {
+            console.error("Error al verificar el token:", error);
+            // Maneja el error según necesites
+        } finally {
+            setLoading(false); // Establece loading en false después de la verificación del token
         }
-      }, [])
+    }
+    checkToken();
+}, []);
     return (
         <AuthContext.Provider
             value={{
                 validarcredenciales,
                 user,
                 isAuthenticated,
+                loading,
                 errors,
                 inicios,
             }}
