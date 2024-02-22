@@ -357,8 +357,9 @@ router.get('/perfiles', async (req, res) => {
  */
 router.get('/medidor', verifyToken, async (req, res) => {
   try {
-    const medidores = await Medidor.find();
-    usuario: req.usuario.id
+    const medidores = await Medidor.find({
+      usuario: req.usuario.id
+    });
     res.json(medidores);
   }
    catch (error) {
@@ -561,11 +562,6 @@ router.get('/verificartoken', async (req, res) => {
     res.status(500).json({ error: "Error interno del servidor" });
   }
 });
-
-
-
-
-
 function verifyToken(req, res, next) {
   const token = req.cookies ? req.cookies.token : null;
 
@@ -589,9 +585,4 @@ function verifyToken(req, res, next) {
     next();
   });
 }
-
-
-
-
-
 module.exports = router;

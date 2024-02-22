@@ -1,14 +1,20 @@
 import { useForm } from "react-hook-form";
 import { useAuth } from "../context/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function Login() {
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const { inicios } = useAuth();
+  const { inicios , isAuthenticated } = useAuth();
+  const navigate = useNavigate()
 
   const onSubmit = handleSubmit((data) => {
     inicios(data);
   });
+  
+  useEffect(()=>{
+   if (isAuthenticated) navigate("/medidor")
+  },[isAuthenticated])
 
   return (
     <div className="flex justify-center items-center h-screen bg-[#a2e3f9]">

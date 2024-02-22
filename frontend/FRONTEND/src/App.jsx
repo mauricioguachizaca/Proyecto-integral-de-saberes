@@ -10,10 +10,12 @@ import { AuthProvider } from './context/AuthContext.jsx';
 import Rutasprotegidas from './rutasprotegidas.jsx';
 
 import './App.css';
+import { MedidorProvider } from './context/MedidorContext.jsx';
 
 function App() {
   return (
     <AuthProvider>
+      <MedidorProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Inicio />} />
@@ -27,6 +29,7 @@ function App() {
           </Route>
         </Routes>
         </BrowserRouter>
+      </MedidorProvider>
      </AuthProvider>
   );
 }
