@@ -441,16 +441,16 @@ router.get('/medidor/:nombredispositivo', verifyToken, async (req, res) => {
 });
 /**
  * @swagger
- * /api/medidor/{nombredispositivo}:
+ * /api/medidor/{id}:
  *   delete:
- *     summary: Elimina un medidor por su nombre.
+ *     summary: Elimina un medidor por su ID.
  *     parameters:
  *       - in: path
- *         name: nombredispositivo
+ *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: Nombre del medidor a eliminar.
+ *         description: ID del medidor a eliminar.
  *     responses:
  *       200:
  *         description: Medidor eliminado correctamente.
@@ -459,9 +459,9 @@ router.get('/medidor/:nombredispositivo', verifyToken, async (req, res) => {
  *       500:
  *         description: Error al eliminar el medidor.
  */
-router.delete('/medidor/:nombredispositivo', verifyToken, async (req, res) => {
+router.delete('/medidor/:id', verifyToken, async (req, res) => {
   try {
-    const medidor = await Medidor.findOneAndDelete({ nombredispositivo: req.params.nombredispositivo });
+    const medidor = await Medidor.findByIdAndDelete(req.params.id);
     if (!medidor) {
       return res.status(404).json({ message: "Medidor no encontrado" });
     }
@@ -471,18 +471,19 @@ router.delete('/medidor/:nombredispositivo', verifyToken, async (req, res) => {
     res.status(500).json({ error: "Error interno del servidor" });
   }
 });
+
 /**
  * @swagger
- * /api/medidor/{nombredispositivo}:
+ * /api/medidor/{id}:
  *   put:
- *     summary: Actualiza un medidor por su nombre.
+ *     summary: Actualiza un medidor por su ID.
  *     parameters:
  *       - in: path
- *         name: nombredispositivo
+ *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: Nombre del medidor a actualizar.
+ *         description: ID del medidor a actualizar.
  *     requestBody:
  *       required: true
  *       content:
@@ -506,10 +507,10 @@ router.delete('/medidor/:nombredispositivo', verifyToken, async (req, res) => {
  *       500:
  *         description: Error al actualizar el medidor.
  */
-router.put('/medidor/:nombredispositivo', verifyToken, async (req, res) => {
+router.put('/medidor/:id', verifyToken, async (req, res) => {
   try {
-    const medidor = await Medidor.findOneAndUpdate(
-      { nombredispositivo: req.params.nombredispositivo },
+    const medidor = await Medidor.findByIdAndUpdate(
+      req.params.id,
       req.body,
       { new: true }
     );
@@ -524,6 +525,7 @@ router.put('/medidor/:nombredispositivo', verifyToken, async (req, res) => {
     res.status(500).json({ error: "Error interno del servidor" });
   }
 });
+
 /**
  * @swagger
  * /api/verificartoken:

@@ -9,20 +9,19 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography'; // Importamos Typography para mostrar el mensaje cuando no hay datos
-import { useMedidor } from '../context/MedidorContext'; 
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import { useMedidor } from '../context/MedidorContext';
 
-// Definimos las cabeceras de la tabla
 const headCells = [
-  { id: 'nombredispositivo', numeric: false, disablePadding: false, label: 'Nombre de dispositivos' },
-  { id: 'cantidad', numeric: true, disablePadding: false, label: 'Cantidad' },
-  { id: 'potencia', numeric: true, disablePadding: false, label: 'Potencia' },
-  { id: 'tiempodeuso', numeric: true, disablePadding: false, label: 'Tiempo de uso' },
-  { id: 'numerodeuso', numeric: true, disablePadding: false, label: 'Número de días en uso al mes' },
-  { id: 'Ediciones', numeric: true, disablePadding: false, label: 'Ediciones' }
+  { id: 'nombredispositivo', numeric: false, disablePadding: false, label: 'Nombre de dispositivos', width: '25%' },
+  { id: 'cantidad', numeric: true, disablePadding: false, label: 'Cantidad', width: '15%' },
+  { id: 'potencia', numeric: true, disablePadding: false, label: 'Potencia', width: '15%' },
+  { id: 'tiempodeuso', numeric: true, disablePadding: false, label: 'Tiempo de uso', width: '15%' },
+  { id: 'numerodeuso', numeric: true, disablePadding: false, label: 'Número de días en uso al mes', width: '15%' },
+  { id: 'Ediciones', numeric: true, disablePadding: false, label: 'Ediciones', width: '15%' }
 ];
 
-// Componente para las cabeceras de la tabla
 function EnhancedTableHead(props) {
   const { classes } = props;
 
@@ -34,6 +33,7 @@ function EnhancedTableHead(props) {
             key={headCell.id}
             align={headCell.numeric ? 'right' : 'left'}
             padding={headCell.disablePadding ? 'none' : 'normal'}
+            style={{ width: headCell.width }}
           >
             {headCell.label}
           </TableCell>
@@ -47,7 +47,6 @@ EnhancedTableHead.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-// Estilos para la tabla
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
@@ -55,28 +54,37 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     width: '100%',
     marginBottom: theme.spacing(2),
+    backgroundColor: 'rgba(255, 255, 255, 0.8)', // Color de fondo ligeramente transparente
+    boxShadow: 'none', // Sin sombra para que sea menos prominente
   },
   table: {
     minWidth: 750,
+    border: `1px solid ${theme.palette.divider}`, // Borde menos prominente
   },
   emptyTableMessage: {
     textAlign: 'center',
     padding: theme.spacing(2)
+  },
+  buttonGroup: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    width: '100%'
+  },
+  button: {
+    marginRight: theme.spacing(1)
   }
 }));
 
-// Componente principal de la tabla
 export default function EnhancedTable() {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const { mostrarmedidor, medidor } = useMedidor()
+  const { mostrarmedidor, medidor, eliminarmedidor } = useMedidor();
 
   useEffect(() => {
-    mostrarmedidor()
-  },[])
+    mostrarmedidor();
+  }, []);
 
-  // Funciones para manejar la paginación de la tabla
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -86,7 +94,6 @@ export default function EnhancedTable() {
     setPage(0);
   };
 
-  // Mostrar mensaje si no hay datos
   if (medidor.length === 0) {
     return (
       <Typography variant="h6" className={classes.emptyTableMessage}>
@@ -96,6 +103,10 @@ export default function EnhancedTable() {
   }
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, medidor.length - page * rowsPerPage);
+
+  const handleEdit = (row) => {
+    // Lógica para editar el registro
+  };
 
   return (
     <div className={classes.root}>
@@ -114,12 +125,17 @@ export default function EnhancedTable() {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => (
                   <TableRow key={index}>
-                    <TableCell align="left">{row.nombredispositivo}</TableCell>
-                    <TableCell align="right">{row.cantidad}</TableCell>
-                    <TableCell align="right">{row.potencia}</TableCell>
-                    <TableCell align="right">{row.tiempodeuso}</TableCell>
-                    <TableCell align="right">{row.numerodeuso}</TableCell>
-                    <TableCell align="right">{row.Ediciones}</TableCell>
+                    <TableCell align="left" style={{ width: headCells[0].width }}>{row.nombredispositivo}</TableCell>
+                    <TableCell align="right" style={{ width: headCells[1].width }}>{row.cantidad}</TableCell>
+                    <TableCell align="right" style={{ width: headCells[2].width }}>{row.potencia}</TableCell>
+                    <TableCell align="right" style={{ width: headCells[3].width }}>{row.tiempodeuso}</TableCell>
+                    <TableCell align="right" style={{ width: headCells[4].width }}>{row.numerodeuso}</TableCell>
+                    <TableCell align="right" style={{ width: headCells[5].width }}>
+                      <div className={classes.buttonGroup}>
+                        <Button className={classes.button} variant="contained" color="primary" onClick={() => handleEdit(row)}>Editar</Button>
+                        <Button className={classes.button} variant="contained" color="secondary" onClick={() => eliminarmedidor(row._id)}>Eliminar</Button>
+                      </div>
+                    </TableCell>
                   </TableRow>
                 ))}
               {emptyRows > 0 && (

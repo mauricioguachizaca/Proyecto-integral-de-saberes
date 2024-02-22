@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, useEffect } from 'react';
-import { registrorespuesta, iniciorespuestas, verificarTokenRe } from '../api/auth';
+import { registrorespuesta, iniciorespuestas, verificarTokenRe,  cerrarTokenRe } from '../api/auth';
 import Cookies from 'js-cookie';
 
 export const AuthContext = createContext();
@@ -41,6 +41,19 @@ export const AuthProvider = ({ children }) => {
             console.log(error)
         }
     }
+
+    const cerrar = async () => {
+        try {
+            await cerrarTokenRe(); // Llama a la función para cerrar las credenciales y eliminar la cookie del token
+            Cookies.remove("token");
+            setIsAuthenticated(false);
+            setUser(null);
+        } catch (error) {
+            console.error("Error al cerrar las credenciales:", error);
+            // Maneja el error según necesites
+        }
+    };
+    
     
     useEffect(()=>{
         async function checkToken() {
@@ -65,6 +78,7 @@ export const AuthProvider = ({ children }) => {
                 user,
                 isAuthenticated,
                 loading,
+                cerrar,
                 errors,
                 inicios,
             }}

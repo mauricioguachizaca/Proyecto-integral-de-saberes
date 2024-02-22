@@ -1,5 +1,5 @@
 import { createContext , useContext, useState } from "react";
-import { creadispositivos , misdispositivos } from "../api/medidor";
+import { creadispositivos , misdispositivos, eliminardispositivos } from "../api/medidor";
 
 const MedidorContext = createContext();
 
@@ -28,7 +28,15 @@ export function MedidorProvider({children}){
         const res = await creadispositivos(medidor)
         console.log(res)
     }
+    
+    const eliminarmedidor = async (id) => {
+       try{
+        const res = await eliminardispositivos(id)
+        if(res.status == 204) setMedidor(medidor.filter((medidor) => medidor._id !==  id))
+       }catch (error){
+    console.log(error)}
 
+    }
 
 
     return(
@@ -36,6 +44,7 @@ export function MedidorProvider({children}){
            medidor,
            crearMedidor,
            mostrarmedidor,
+           eliminarmedidor,
 
         }}>
             {children}
