@@ -169,7 +169,7 @@ export const Inicio = () => {
         <div className="container mx-auto text-center relative z-10">
           <div className="text-center bg-opacity-80 p-6">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-16">Bienvenido/a a Nuestra Plataforma</h1>
-            <p className="text-white text-lg md:text-xl mb-6">
+            <p className=" text-white text-lg md:text-xl mb-6">
               ¿Quieres conocer cuánto consume de energía tus dispositivos eléctricos?
             </p>
             <a href="/registro" className="bg-[#478b6d] text-white py-2 px-4 rounded-full text-lg md:text-xl hover:bg-[#5d8dee] transition duration-300">Descúbrelo aquí</a>

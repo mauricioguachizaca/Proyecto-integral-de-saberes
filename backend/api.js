@@ -409,16 +409,16 @@ router.post('/medidor', verifyToken, async (req, res) => {
 });
 /**
  * @swagger
- * /api/medidor/{nombredispositivo}:
+ * /api/medidor/{id}:
  *   get:
- *     summary: Obtiene información de un medidor por su nombre.
+ *     summary: Obtiene información de un medidor por su ID.
  *     parameters:
  *       - in: path
- *         name: nombredispositivo
+ *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: Nombre del medidor.
+ *         description: ID del medidor.
  *     responses:
  *       200:
  *         description: Información del medidor obtenida correctamente.
@@ -427,9 +427,9 @@ router.post('/medidor', verifyToken, async (req, res) => {
  *       500:
  *         description: Error al obtener la información del medidor.
  */
-router.get('/medidor/:nombredispositivo', verifyToken, async (req, res) => {
+router.get('/medidor/:id', verifyToken, async (req, res) => {
   try {
-    const medidor = await Medidor.findOne({ nombredispositivo: req.params.nombredispositivo }).populate('usuario');
+    const medidor = await Medidor.findById(req.params.id).populate('usuario');
     if (!medidor) {
       return res.status(404).json({ message: "Medidor no encontrado" });
     }
@@ -439,6 +439,7 @@ router.get('/medidor/:nombredispositivo', verifyToken, async (req, res) => {
     res.status(500).json({ error: "Error interno del servidor" });
   }
 });
+
 /**
  * @swagger
  * /api/medidor/{id}:
@@ -471,7 +472,6 @@ router.delete('/medidor/:id', verifyToken, async (req, res) => {
     res.status(500).json({ error: "Error interno del servidor" });
   }
 });
-
 /**
  * @swagger
  * /api/medidor/{id}:
@@ -525,7 +525,6 @@ router.put('/medidor/:id', verifyToken, async (req, res) => {
     res.status(500).json({ error: "Error interno del servidor" });
   }
 });
-
 /**
  * @swagger
  * /api/verificartoken:

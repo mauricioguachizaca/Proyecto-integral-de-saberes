@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -12,6 +12,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { useMedidor } from '../context/MedidorContext';
+import { Link, useNavigate } from 'react-router-dom'; // Importa useNavigate
 
 const headCells = [
   { id: 'nombredispositivo', numeric: false, disablePadding: false, label: 'Nombre de dispositivos', width: '25%' },
@@ -80,6 +81,8 @@ export default function EnhancedTable() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const { mostrarmedidor, medidor, eliminarmedidor } = useMedidor();
+  const [, forceUpdate] = useState();
+  const navigate = useNavigate(); // Obteniendo la función navigate
 
   useEffect(() => {
     mostrarmedidor();
@@ -94,18 +97,14 @@ export default function EnhancedTable() {
     setPage(0);
   };
 
-  if (medidor.length === 0) {
-    return (
-      <Typography variant="h6" className={classes.emptyTableMessage}>
-        No hay datos disponibles.
-      </Typography>
-    );
-  }
+  const handleDelete = async (id) => {
+    await eliminarmedidor(id);
+    forceUpdate(Date.now()); // Forzar la actualización de la interfaz de usuario
+  };
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, medidor.length - page * rowsPerPage);
-
-  const handleEdit = (row) => {
-    // Lógica para editar el registro
+  const handleEdit = (id) => {
+    // Redirige a la ruta de edición con el ID del dispositivo
+    navigate(`/agregarmedidor/${id}`);
   };
 
   return (
@@ -121,27 +120,42 @@ export default function EnhancedTable() {
               classes={classes}
             />
             <TableBody>
-              {medidor
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => (
-                  <TableRow key={index}>
-                    <TableCell align="left" style={{ width: headCells[0].width }}>{row.nombredispositivo}</TableCell>
-                    <TableCell align="right" style={{ width: headCells[1].width }}>{row.cantidad}</TableCell>
-                    <TableCell align="right" style={{ width: headCells[2].width }}>{row.potencia}</TableCell>
-                    <TableCell align="right" style={{ width: headCells[3].width }}>{row.tiempodeuso}</TableCell>
-                    <TableCell align="right" style={{ width: headCells[4].width }}>{row.numerodeuso}</TableCell>
-                    <TableCell align="right" style={{ width: headCells[5].width }}>
-                      <div className={classes.buttonGroup}>
-                        <Button className={classes.button} variant="contained" color="primary" onClick={() => handleEdit(row)}>Editar</Button>
-                        <Button className={classes.button} variant="contained" color="secondary" onClick={() => eliminarmedidor(row._id)}>Eliminar</Button>
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              {emptyRows > 0 && (
-                <TableRow style={{ height: 53 * emptyRows }}>
-                  <TableCell colSpan={6} />
+              {medidor.length === 0 && (
+                <TableRow>
+                  <TableCell colSpan={6}>
+                    <Typography variant="h6" className={classes.emptyTableMessage}>
+                      No hay datos disponibles.
+                    </Typography>
+                  </TableCell>
                 </TableRow>
+              )}
+              {medidor.length > 0 && (
+                <>
+                  {medidor
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((row, index) => (
+                      <TableRow key={index}>
+                        <TableCell align="left" style={{ width: headCells[0].width }}>{row.nombredispositivo}</TableCell>
+                        <TableCell align="right" style={{ width: headCells[1].width }}>{row.cantidad}</TableCell>
+                        <TableCell align="right" style={{ width: headCells[2].width }}>{row.potencia}</TableCell>
+                        <TableCell align="right" style={{ width: headCells[3].width }}>{row.tiempodeuso}</TableCell>
+                        <TableCell align="right" style={{ width: headCells[4].width }}>{row.numerodeuso}</TableCell>
+                        <TableCell align="right" style={{ width: headCells[5].width }}>
+                          <div className={classes.buttonGroup}>
+                            <Button className={classes.button} variant="contained" color="primary" onClick={() => handleEdit(row._id)}>
+                              Editar
+                            </Button>
+                            <Button className={classes.button} variant="contained" color="secondary" onClick={() => handleDelete(row._id)}>Eliminar</Button>
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  {rowsPerPage > medidor.length && (
+                    <TableRow style={{ height: 53 * (rowsPerPage - medidor.length) }}>
+                      <TableCell colSpan={6} />
+                    </TableRow>
+                  )}
+                </>
               )}
             </TableBody>
           </Table>

@@ -26,6 +26,7 @@ function App() {
           <Route element={<Rutasprotegidas/>}>
           <Route path="/medidor" element={<Medidor />} />
           <Route path='/agregarmedidor' element={<Agregarmedidor/>}/>
+          <Route path='/agregarmedidor/:id' element={<Agregarmedidor/>}/>
           </Route>
         </Routes>
         </BrowserRouter>

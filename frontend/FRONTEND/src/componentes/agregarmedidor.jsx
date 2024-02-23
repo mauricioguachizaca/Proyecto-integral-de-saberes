@@ -1,12 +1,38 @@
 import { useForm } from 'react-hook-form';
 import { useMedidor } from '../context/MedidorContext';
+import {useNavigate , useParams} from 'react-router-dom'
+import { useEffect } from 'react';
+
 
 function Agregarmedidor() {
-  const { register, handleSubmit } = useForm();
-  const {crearMedidor} = useMedidor()
+  const { register, handleSubmit, setValue } = useForm();
+  const {crearMedidor, mimedidor,actualizarmedidor} = useMedidor()
+  const navitage = useNavigate()
+  const params = useParams()
+
+  useEffect(() => {
+    async function cargaMedidor(){
+      if (params.id) {
+        const medidor = await mimedidor(params.id)
+        console.log(medidor)
+        setValue('nombredispositivo', medidor.nombredispositivo)
+        setValue('cantidad', medidor.cantidad)
+        setValue('potencia', medidor.potencia)
+        setValue('tiempodeuso', medidor.tiempodeuso)
+        setValue('numerodeuso', medidor.numerodeuso)
+
+      }
+    }
+    cargaMedidor()
+  },[])
 
   const onSubmit = handleSubmit((data) => {
-    crearMedidor(data);
+    if (params.id) {
+      actualizarmedidor(params.id, data)
+    } else {
+      crearMedidor(data);
+    }
+    navitage('/medidor')
   });
   return (
     <div className="flex justify-center items-center h-screen">

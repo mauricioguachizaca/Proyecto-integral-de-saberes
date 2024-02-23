@@ -4,7 +4,6 @@ const medidorSchema = new mongoose.Schema({
    nombredispositivo: {
       type: String,
       required: true,
-      unique: true,
       trim: true
    },
    cantidad: {
@@ -33,5 +32,6 @@ const medidorSchema = new mongoose.Schema({
       required: true
    }
 });
+
 
 module.exports = mongoose.model('Medidor', medidorSchema);
