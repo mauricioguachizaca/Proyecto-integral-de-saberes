@@ -749,6 +749,68 @@ router.get('/calculoindividual', verifyToken, async (req, res) => {
   }
 });
 
+/**
+ * @swagger
+ * /api/mayorconsumo:
+ *   get:
+ *     summary: Obtiene el dispositivo que más consume individualmente de un usuario autenticado (protegido por token).
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Dispositivo que más consume individualmente obtenido correctamente.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 nombreDispositivo:
+ *                   type: string
+ *                   description: Nombre del dispositivo que más consume.
+ *                 consumoMensual:
+ *                   type: number
+ *                   description: Consumo mensual del dispositivo que más consume.
+ *       401:
+ *         description: No hay token, autorización denegada.
+ *       403:
+ *         description: Token inválido.
+ *       404:
+ *         description: No se encontraron dispositivos para este usuario.
+ *       500:
+ *         description: Error al obtener la información del dispositivo que más consume.
+ */
+router.get('/mayorconsumo', verifyToken, async (req, res) => {
+  try {
+    // Obtener el ID del usuario autenticado
+    const userId = req.usuario.id;
+
+    // Buscar todos los dispositivos asociados al usuario
+    const dispositivos = await Medidor.find({ usuario: userId });
+
+    if (!dispositivos || dispositivos.length === 0) {
+      return res.status(404).json({ message: "No se encontraron dispositivos para este usuario" });
+    }
+
+    // Encontrar el dispositivo que más consume individualmente
+    let mayorConsumo = dispositivos[0];
+    dispositivos.forEach(dispositivo => {
+      const consumoMensualActual = dispositivo.cantidad * dispositivo.potencia * dispositivo.tiempodeuso * dispositivo.numerodeuso;
+      const consumoMensualMayor = mayorConsumo.cantidad * mayorConsumo.potencia * mayorConsumo.tiempodeuso * mayorConsumo.numerodeuso;
+      if (consumoMensualActual > consumoMensualMayor) {
+        mayorConsumo = dispositivo;
+      }
+    });
+
+    res.json({
+      nombreDispositivo: mayorConsumo.nombredispositivo,
+      consumoMensual: mayorConsumo.cantidad * mayorConsumo.potencia * mayorConsumo.tiempodeuso * mayorConsumo.numerodeuso
+    });
+  } catch (error) {
+    console.error("Error al obtener la información del dispositivo que más consume:", error);
+    res.status(500).json({ error: "Error al obtener la información del dispositivo que más consume" });
+  }
+});
+
 
 
 

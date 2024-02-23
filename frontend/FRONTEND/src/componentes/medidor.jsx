@@ -11,7 +11,7 @@ function Medidor() {
     <div className="bg-blue-gray-50 flex flex-col min-h-screen">
       <nav className='bg-blue-gray-900 justify-center align'>
         <button className='bg-light-blue-200 ml-5 mr-10'>
-          <Link>Editar mi perfil</Link>
+          <Link to="/perfil/:id">Editar mi perfil</Link>
         </button>
       {/* Muestra el nombre de usuario si está disponible */}
         <button className='bg-purple-300 ml-5 mr-10 '>
