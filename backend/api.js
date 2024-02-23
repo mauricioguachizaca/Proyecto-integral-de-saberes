@@ -119,16 +119,53 @@ router.post('/usuarios', async (req, res) => {
 });
 /**
  * @swagger
-* /api/usuarios/{nombre}:
- *   put:
- *     summary: Actualizar un usuario.
+ * /api/usuarios/{id}:
+ *   get:
+ *     summary: Obtiene un usuario por su ID.
  *     parameters:
  *       - in: path
- *         name: nombre
+ *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: Nombre del usuario a actualizar.
+ *         description: ID del usuario a obtener.
+ *     responses:
+ *       200:
+ *         description: Usuario obtenido correctamente.
+ *       404:
+ *         description: Usuario no encontrado.
+ *       500:
+ *         description: Error al obtener el usuario.
+ */
+router.get('/usuarios/:id', async (req, res) => {
+  try {
+    const { id } = req.params; // Obtener el ID del parámetro de la ruta
+
+    // Busca el usuario por su ID
+    const usuario = await Usuario.findById(id);
+
+    if (!usuario) {
+      return res.status(404).json({ message: 'Usuario no encontrado' });
+    }
+
+    res.json(usuario);
+  } catch (error) {
+    console.error('Error al obtener el usuario:', error);
+    res.status(500).json({ error: 'Error al obtener el usuario' });
+  }
+});
+/**
+ * @swagger
+ * /api/usuarios/{id}:
+ *   put:
+ *     summary: Actualizar un usuario por su ID.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID del usuario a actualizar.
  *     requestBody:
  *       required: true
  *       content:
@@ -146,45 +183,42 @@ router.post('/usuarios', async (req, res) => {
  *                 type: string
  *               provincia:
  *                 type: string
- *               nombre de usuario:
+ *               nombreusuario:
  *                 type: string
  *               password:
  *                 type: string
  *     responses:
  *       200:
  *         description: Usuario actualizado correctamente.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 nombre:
- *                 type: string
- *               apellido:
- *                 type: string
- *               cedula:
- *                 type: string
- *               correo:
- *                 type: string
- *               provincia:
- *                 type: string
- *               nombre de usuario:
- *                 type: string
- *               password:
- *                 type: string
  *       500:
- *         description: Error al cambiar la información del usuario.
+ *         description: Error al actualizar el usuario.
  */
-router.put('/usuarios/:nombre', async (req, res) => {
+router.put('/usuarios/:id', async (req, res) => {
   try {
-    const { nombre: nombreParam } = req.params;
+    const { id } = req.params; // Obtener el ID del parámetro de la ruta
     const { nombre, apellido, cedula, correo, provincia, nombreusuario, password } = req.body;
-    const cambiar = await Usuario.findOneAndUpdate({ nombre: nombreParam }, { nombre, apellido, cedula, correo, provincia, nombreusuario, password: hashedPassword }, { new: true });
-    res.json(cambiar);
+    
+    // Encripta la contraseña antes de almacenarla en la base de datos
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Actualiza el usuario por su ID
+    const usuarioActualizado = await Usuario.findByIdAndUpdate(id, {
+      nombre,
+      apellido,
+      cedula,
+      correo,
+      provincia,
+      nombreusuario,
+      password: hashedPassword // Guardar la contraseña encriptada
+    }, { new: true }); // Devuelve el usuario actualizado
+
+    res.json(usuarioActualizado);
   } catch (error) {
-    res.status(500).json({ error: 'Error al cambiar la información del usuario' });
+    console.error('Error al actualizar el usuario:', error);
+    res.status(500).json({ error: 'Error al actualizar el usuario' });
   }
 });
+
 /**
  * @swagger
  * /api/usuarios/{nombre}:
@@ -439,7 +473,6 @@ router.get('/medidor/:id', verifyToken, async (req, res) => {
     res.status(500).json({ error: "Error interno del servidor" });
   }
 });
-
 /**
  * @swagger
  * /api/medidor/{id}:
@@ -586,4 +619,139 @@ function verifyToken(req, res, next) {
     next();
   });
 }
+
+/// para el consumo y calculo 
+/**
+ * @swagger
+ * /api/calculo:
+ *   get:
+ *     summary: Obtiene información de los dispositivos de un usuario y su consumo total de energía al mes (protegido por token).
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Información de los dispositivos y su consumo total obtenida correctamente.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 dispositivos:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       _id:
+ *                         type: string
+ *                       nombre:
+ *                         type: string
+ *                       cantidad:
+ *                         type: number
+ *                       potencia:
+ *                         type: number
+ *                       tiempodeuso:
+ *                         type: number
+ *                       numerodeuso:
+ *                         type: number
+ *                 consumoTotalUsuario:
+ *                   type: number
+ *       401:
+ *         description: No hay token, autorización denegada.
+ *       403:
+ *         description: Token inválido.
+ *       404:
+ *         description: No se encontraron dispositivos para este usuario.
+ *       500:
+ *         description: Error al obtener la información de los dispositivos.
+ */
+router.get('/calculo', verifyToken, async (req, res) => {
+  try {
+    // Obtener el ID del usuario autenticado
+    const userId = req.usuario.id;
+
+    // Buscar todos los dispositivos asociados al usuario
+    const dispositivos = await Medidor.find({ usuario: userId });
+
+    if (!dispositivos || dispositivos.length === 0) {
+      return res.status(404).json({ message: "No se encontraron dispositivos para este usuario" });
+    }
+
+    // Calcular el consumo total de energía al mes para el usuario
+    let consumoTotalUsuario = 0;
+    dispositivos.forEach(dispositivo => {
+      // Calcular el consumo total de cada dispositivo
+      const consumoDiario = dispositivo.cantidad * dispositivo.potencia * dispositivo.tiempodeuso;
+      const consumoMensual = consumoDiario * dispositivo.numerodeuso;
+      consumoTotalUsuario += consumoMensual;
+    });
+
+    res.json({ dispositivos, consumoTotalUsuario });
+  } catch (error) {
+    console.error("Error al obtener la información de los dispositivos:", error);
+    res.status(500).json({ error: "Error al obtener la información de los dispositivos" });
+  }
+});
+/**
+ * @swagger
+ * /api/calculoindividual:
+ *   get:
+ *     summary: Obtiene información de los dispositivos de un usuario y su consumo individual de energía (protegido por token).
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Información de los dispositivos y su consumo individual obtenida correctamente.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 dispositivos:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       nombre:
+ *                         type: string
+ *                       consumoMensual:
+ *                         type: number
+ *       401:
+ *         description: No hay token, autorización denegada.
+ *       403:
+ *         description: Token inválido.
+ *       404:
+ *         description: No se encontraron dispositivos para este usuario.
+ *       500:
+ *         description: Error al obtener la información de los dispositivos.
+ */
+router.get('/calculoindividual', verifyToken, async (req, res) => {
+  try {
+    // Obtener el ID del usuario autenticado
+    const userId = req.usuario.id;
+
+    // Buscar todos los dispositivos asociados al usuario
+    const dispositivos = await Medidor.find({ usuario: userId });
+
+    if (!dispositivos || dispositivos.length === 0) {
+      return res.status(404).json({ message: "No se encontraron dispositivos para este usuario" });
+    }
+
+    // Crear un array de objetos con el nombre del dispositivo y su consumo mensual
+    const dispositivosConsumo = dispositivos.map(dispositivo => ({
+      nombredispositivo: dispositivo.nombredispositivo,
+      consumoMensual: dispositivo.cantidad * dispositivo.potencia * dispositivo.tiempodeuso * dispositivo.numerodeuso
+    }));
+
+    res.json({ dispositivos: dispositivosConsumo });
+  } catch (error) {
+    console.error("Error al obtener la información de los dispositivos:", error);
+    res.status(500).json({ error: "Error al obtener la información de los dispositivos" });
+  }
+});
+
+
+
+
+
+
 module.exports = router;

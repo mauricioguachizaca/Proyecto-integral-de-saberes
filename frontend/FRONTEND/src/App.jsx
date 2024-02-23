@@ -7,6 +7,7 @@ import  Registro  from './componentes/registro.jsx';
 import Agregarmedidor from './componentes/agregarmedidor.jsx';
 import { Informacion } from './componentes/informacion';
 import  Medidor  from './componentes/medidor';
+import Tabla from './componentes/tabla.jsx';
 import Rutasprotegidas from './rutasprotegidas.jsx';
 
 import './App.css';
@@ -27,6 +28,7 @@ function App() {
           <Route path="/medidor" element={<Medidor />} />
           <Route path='/agregarmedidor' element={<Agregarmedidor/>}/>
           <Route path='/agregarmedidor/:id' element={<Agregarmedidor/>}/>
+          <Route path='/mostrar' element={<Tabla />}  />
           </Route>
         </Routes>
         </BrowserRouter>

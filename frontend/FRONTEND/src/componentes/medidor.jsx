@@ -29,7 +29,11 @@ function Medidor() {
       </div>
       <div className="flex-grow mx-6 my-6">
         <EnhancedTable />
-        <button className='ml-2 bg-deep-orange-500'>calcular mi consumo</button>
+        <button className='ml-2 bg-deep-orange-500'>
+          <Link to="/mostrar">
+          Calcular mi consumo 
+          </Link>
+          </button>
       </div>
     </div>
   );
