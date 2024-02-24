@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../../api/axios';
-import { Bar } from 'react-chartjs-2';
 import Chart from 'chart.js/auto'; // Import Chart.js
 
 const BarsChart = () => {

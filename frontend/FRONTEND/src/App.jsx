@@ -7,17 +7,19 @@ import  Registro  from './componentes/registro.jsx';
 import Agregarmedidor from './componentes/agregarmedidor.jsx';
 import { Informacion } from './componentes/informacion';
 import  Medidor  from './componentes/medidor';
-import Tabla from './componentes/tabla.jsx';
+import Mostrar from './componentes/mostrar.jsx';
 import Perfil from './componentes/perfil.jsx'
 import Rutasprotegidas from './rutasprotegidas.jsx';
 
 import './App.css';
 import { MedidorProvider } from './context/MedidorContext.jsx';
+import { ConsumoProvider } from './context/ConsumoContext.jsx';
 
 function App() {
   return (
     <AuthProvider>
       <MedidorProvider>
+        <ConsumoProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Inicio />} />
@@ -30,10 +32,11 @@ function App() {
           <Route path='/agregarmedidor' element={<Agregarmedidor/>}/>
           <Route path='/agregarmedidor/:id' element={<Agregarmedidor/>}/>
           <Route path='/perfil/:id' element={<Perfil/>}/>
-          <Route path='/mostrar' element={<Tabla />}  />
+          <Route path='/mostrar' element={<Mostrar />}  />
           </Route>
         </Routes>
         </BrowserRouter>
+        </ConsumoProvider>
       </MedidorProvider>
      </AuthProvider>
   );

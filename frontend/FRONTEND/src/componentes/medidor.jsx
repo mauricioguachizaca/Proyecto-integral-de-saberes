@@ -24,8 +24,7 @@ function Medidor() {
           <button className='bg-teal-700 mr-4'>
             <Link to="/agregarmedidor" >Agregar dispositivo</Link>
           </button>
-          <button className='bg-teal-700 mr-4'>Mi último consumo</button>
-        </div>
+         </div>
       </div>
       <div className="flex-grow mx-6 my-6">
         <EnhancedTable />

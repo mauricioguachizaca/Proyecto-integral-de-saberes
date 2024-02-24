@@ -17,7 +17,7 @@ import { Link, useNavigate } from 'react-router-dom'; // Importa useNavigate
 const headCells = [
   { id: 'nombredispositivo', numeric: false, disablePadding: false, label: 'Nombre de dispositivos', width: '25%' },
   { id: 'cantidad', numeric: true, disablePadding: false, label: 'Cantidad', width: '15%' },
-  { id: 'potencia', numeric: true, disablePadding: false, label: 'Potencia', width: '15%' },
+  { id: 'potencia(W)', numeric: true, disablePadding: false, label: 'Potencia(Wh)', width: '15%' },
   { id: 'tiempodeuso', numeric: true, disablePadding: false, label: 'Tiempo de uso', width: '15%' },
   { id: 'numerodeuso', numeric: true, disablePadding: false, label: 'Número de días en uso al mes', width: '15%' },
   { id: 'Ediciones', numeric: true, disablePadding: false, label: 'Ediciones', width: '15%' }
@@ -161,6 +161,7 @@ export default function EnhancedTable() {
           </Table>
         </TableContainer>
         <TablePagination
+          labelRowsPerPage="Filas por página"
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
           count={medidor.length}

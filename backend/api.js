@@ -685,7 +685,7 @@ router.get('/calculo', verifyToken, async (req, res) => {
       consumoTotalUsuario += consumoMensual;
     });
 
-    res.json({ dispositivos, consumoTotalUsuario });
+    res.json({ consumoTotalUsuario });
   } catch (error) {
     console.error("Error al obtener la información de los dispositivos:", error);
     res.status(500).json({ error: "Error al obtener la información de los dispositivos" });
@@ -808,6 +808,63 @@ router.get('/mayorconsumo', verifyToken, async (req, res) => {
   } catch (error) {
     console.error("Error al obtener la información del dispositivo que más consume:", error);
     res.status(500).json({ error: "Error al obtener la información del dispositivo que más consume" });
+  }
+});
+
+/**
+ * @swagger
+ * /api/dispositivos:
+ *   get:
+ *     summary: Obtiene el nombre de todos los dispositivos del usuario y su cantidad.
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Lista de dispositivos y su cantidad obtenida correctamente.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   nombreDispositivo:
+ *                     type: string
+ *                     description: Nombre del dispositivo.
+ *                   cantidad:
+ *                     type: number
+ *                     description: Cantidad del dispositivo.
+ *       401:
+ *         description: No hay token, autorización denegada.
+ *       403:
+ *         description: Token inválido.
+ *       404:
+ *         description: No se encontraron dispositivos para este usuario.
+ *       500:
+ *         description: Error al obtener la información de los dispositivos.
+ */
+router.get('/dispositivos', verifyToken, async (req, res) => {
+  try {
+    // Obtener el ID del usuario autenticado
+    const userId = req.usuario.id;
+
+    // Buscar todos los dispositivos asociados al usuario
+    const dispositivos = await Medidor.find({ usuario: userId });
+
+    if (!dispositivos || dispositivos.length === 0) {
+      return res.status(404).json({ message: "No se encontraron dispositivos para este usuario" });
+    }
+
+    // Crear un array de objetos con el nombre del dispositivo y su cantidad
+    const dispositivosInfo = dispositivos.map(dispositivo => ({
+      nombreDispositivo: dispositivo.nombredispositivo,
+      cantidad: dispositivo.cantidad
+    }));
+
+    res.json(dispositivosInfo);
+  } catch (error) {
+    console.error("Error al obtener la información de los dispositivos:", error);
+    res.status(500).json({ error: "Error al obtener la información de los dispositivos" });
   }
 });
 

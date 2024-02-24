@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 // Definición del esquema para el modelo 'Usuario'
 const usuarioSchema = new mongoose.Schema({
-    // Campo 'nombre' de tipo String, requerido y sin espacios en blanco al inicio y al final
+    // Campo ' nombre ' de tipo String, requerido y sin espacios en blanco al inicio y al final
     nombre: {
         type: String,
         required: true,
