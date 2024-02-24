@@ -63,13 +63,13 @@ function Registro() {
           </div>
           <div>
             <div className="mb-6">
-              <label htmlFor="provincia" className="block text-black text-sm font-bold mb-2">Dirección:</label>
+              <label htmlFor="provincia" className="block text-black text-sm font-bold mb-2">Provincia:</label>
               <input
                 type="text"
                 {...register("provincia", { required: true })}
                 className='w-full border border-[#478b6d] text-black px-4 py-2 rounded-md'
               />
-              {errors.provincia && (<p className='text-red-900'>Dirección es requerido</p>)}
+              {errors.provincia && (<p className='text-red-900'>Provincia es requerida</p>)}
             </div>
             <div className="mb-6">
               <label htmlFor="password" className="block text-black text-sm font-bold mb-2">Contraseña:</label>
