@@ -1,12 +1,13 @@
 import { useForm } from "react-hook-form";
 import { useAuth } from "../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react"; // Agregamos el useState
 
 function Login() {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const { inicios , isAuthenticated } = useAuth();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false); // Estado para controlar la visibilidad de la contraseña
 
   const onSubmit = handleSubmit((data) => {
     inicios(data);
@@ -32,11 +33,20 @@ function Login() {
             </div>
             <div className="mb-3">
               <label htmlFor="password" className="block text-black text-sm font-bold mb-2">Contraseña:</label>
-              <input
-                type="password"
-                {...register("password", { required: true })}
-                className='w-full border border-[#478b6d] text-black px-4 py-2 rounded-md'
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  {...register("password", { required: true })}
+                  className='w-full border border-[#478b6d] text-black px-4 py-2 rounded-md'
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute inset-y-0 right-0 flex items-center px-3 focus:outline-none"
+                >
+                  {showPassword ? "Ocultar" : "Mostrar"}
+                </button>
+              </div>
               {errors.password && (<p className='text-red-900'>La contraseña es requerida</p>)}
             </div>
           </div>
