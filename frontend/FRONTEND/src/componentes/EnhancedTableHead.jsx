@@ -12,15 +12,15 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { useMedidor } from '../context/MedidorContext';
-import { Link, useNavigate } from 'react-router-dom'; // Importa useNavigate
+import { Link, useNavigate } from 'react-router-dom';
 
 const headCells = [
-  { id: 'nombredispositivo', numeric: false, disablePadding: false, label: 'Nombre de dispositivos', width: '15%',textAlign: 'center' },
-  { id: 'cantidad', numeric: true, disablePadding: false, label: 'Cantidad', width: '15%',textAlign: 'center' },
-  { id: 'potencia(W)', numeric: true, disablePadding: false, label: 'Potencia(Wh)', width: '15%' },
-  { id: 'tiempodeuso', numeric: true, disablePadding: false, label: 'Tiempo de uso', width: '15%' },
-  { id: 'numerodeuso', numeric: true, disablePadding: false, label: 'Número de días en uso al mes', width: '15%' },
-  { id: 'Ediciones', numeric: true, disablePadding: false, label: 'Ediciones', width: '20%', textAlign: 'center' }
+  { id: 'nombredispositivo', numeric: false, disablePadding: false, label: 'Nombre de Dispositivo', width: '20%', textAlign: 'center' },
+  { id: 'cantidad', numeric: true, disablePadding: false, label: 'Cantidad', width: '15%', textAlign: 'center' },
+  { id: 'potencia(W)', numeric: true, disablePadding: false, label: 'Potencia (Wh)', width: '15%', textAlign: 'center' },
+  { id: 'tiempodeuso', numeric: true, disablePadding: false, label: 'Tiempo de Uso', width: '15%', textAlign: 'center' },
+  { id: 'numerodeuso', numeric: true, disablePadding: false, label: 'Días de Uso al Mes', width: '15%', textAlign: 'center' },
+  { id: 'acciones', numeric: true, disablePadding: false, label: 'Acciones', width: '20%', textAlign: 'center' }
 ];
 
 function EnhancedTableHead(props) {
@@ -28,13 +28,13 @@ function EnhancedTableHead(props) {
 
   return (
     <TableHead>
-      <TableRow>
+      <TableRow style={{ backgroundColor: '#a2e3f9' }}>
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
-            align={headCell.numeric ? 'right' : 'left'}
+            align={headCell.textAlign ? headCell.textAlign : 'center'} // Añadimos alineación personalizada si está definida, de lo contrario, usamos 'center'
             padding={headCell.disablePadding ? 'none' : 'normal'}
-            style={{ width: headCell.width }}
+            style={{ width: headCell.width, fontWeight: 'bold', color: '#000' }}
           >
             {headCell.label}
           </TableCell>
@@ -55,25 +55,44 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     width: '100%',
     marginBottom: theme.spacing(2),
-    backgroundColor: 'rgba(255, 255, 255, 0.8)', // Color de fondo ligeramente transparente
-    boxShadow: 'none', // Sin sombra para que sea menos prominente
+    backgroundColor: '#fafafa',
+    borderRadius: 10,
   },
   table: {
     minWidth: 750,
-    border: `1px solid ${theme.palette.divider}`, // Borde menos prominente
+    border: `1px solid ${theme.palette.divider}`,
   },
   emptyTableMessage: {
     textAlign: 'center',
-    padding: theme.spacing(2)
+    padding: theme.spacing(2),
   },
   buttonGroup: {
     display: 'flex',
-    justifyContent: 'space-between',
-    width: '100%'
+    justifyContent: 'space-evenly',
+    width: '100%',
+    margin: theme.spacing(1, 0),
   },
-  button: {
-    marginRight: theme.spacing(1)
-  }
+  editButton: {
+    backgroundColor: '#a2e3f9',
+    color: '#000',
+    '&:hover': {
+      backgroundColor: '#7acde8',
+    },
+  },
+  deleteButton: {
+    backgroundColor: '#FF0C0C',
+    color: '#fff',
+    '&:hover': {
+      backgroundColor: '#d32f2f',
+    },
+  },
+  pagination: {
+    borderTop: `1px solid ${theme.palette.divider}`,
+    paddingTop: theme.spacing(2),
+    '& .MuiTypography-body2': {
+      color: '#666',
+    },
+  },
 }));
 
 export default function EnhancedTable() {
@@ -82,7 +101,7 @@ export default function EnhancedTable() {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const { mostrarmedidor, medidor, eliminarmedidor } = useMedidor();
   const [, forceUpdate] = useState();
-  const navigate = useNavigate(); // Obteniendo la función navigate
+  const navigate = useNavigate();
 
   useEffect(() => {
     mostrarmedidor();
@@ -99,11 +118,10 @@ export default function EnhancedTable() {
 
   const handleDelete = async (id) => {
     await eliminarmedidor(id);
-    forceUpdate(Date.now()); // Forzar la actualización de la interfaz de usuario
+    forceUpdate(Date.now());
   };
 
   const handleEdit = (id) => {
-    // Redirige a la ruta de edición con el ID del dispositivo
     navigate(`/agregarmedidor/${id}`);
   };
 
@@ -122,9 +140,7 @@ export default function EnhancedTable() {
             <TableBody>
               {medidor.length === 0 && (
                 <TableRow>
-                  <TableCell colSpan={6}
-                   align="center" 
-                   >
+                  <TableCell colSpan={6} align="center">
                     <Typography variant="h6" className={classes.emptyTableMessage}>
                       No hay datos disponibles.
                     </Typography>
@@ -137,17 +153,17 @@ export default function EnhancedTable() {
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row, index) => (
                       <TableRow key={index}>
-                        <TableCell align="left" style={{ width: headCells[0].width, }}>{row.nombredispositivo}</TableCell>
-                        <TableCell align="right" style={{ width: headCells[1].width,  }}>{row.cantidad}</TableCell>
-                        <TableCell align="right" style={{ width: headCells[2].width,  }}>{row.potencia}</TableCell>
-                        <TableCell align="right" style={{ width: headCells[3].width,  }}>{row.tiempodeuso}</TableCell>
-                        <TableCell align="right" style={{ width: headCells[4].width,  }}>{row.numerodeuso}</TableCell>
-                        <TableCell align="right" style={{ width: headCells[5].width,}}>
+                        <TableCell align="center" style={{ width: headCells[0].width }}>{row.nombredispositivo}</TableCell>
+                        <TableCell align="center" style={{ width: headCells[1].width }}>{row.cantidad}</TableCell>
+                        <TableCell align="center" style={{ width: headCells[2].width }}>{row.potencia}</TableCell>
+                        <TableCell align="center" style={{ width: headCells[3].width }}>{row.tiempodeuso}</TableCell>
+                        <TableCell align="center" style={{ width: headCells[4].width }}>{row.numerodeuso}</TableCell>
+                        <TableCell align="center" style={{ width: headCells[5].width }}>
                           <div className={classes.buttonGroup}>
-                            <Button className={classes.button} variant="contained" color="primary" onClick={() => handleEdit(row._id)}>
+                            <Button className={classes.editButton} variant="contained" onClick={() => handleEdit(row._id)}>
                               Editar
                             </Button>
-                            <Button className={classes.button} variant="contained" color="secondary" onClick={() => handleDelete(row._id)}>Eliminar</Button>
+                            <Button className={classes.deleteButton} variant="contained" onClick={() => handleDelete(row._id)}>Eliminar</Button>
                           </div>
                         </TableCell>
                       </TableRow>
@@ -163,6 +179,7 @@ export default function EnhancedTable() {
           </Table>
         </TableContainer>
         <TablePagination
+          className={classes.pagination}
           labelRowsPerPage="Filas por página"
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
