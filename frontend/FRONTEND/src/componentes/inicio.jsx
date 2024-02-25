@@ -14,25 +14,25 @@ import facebook from './imagenes/facebook.svg';
 import twitter from './imagenes/twitter.svg';
 import youtube from './imagenes/youtube.svg';
 
-const SeccionTestimonios = ({ darkMode }) => {
+const SeccionTestimonios = ({ modoNoche }) => {
   return (
-    <section id="nosotros" className={`testimony ${darkMode ? 'bg-[#101b11]' : 'bg-gray-100'} py-16`}>
+    <section id="nosotros" className={`testimony ${modoNoche ? 'bg-[#101b11]' : 'bg-gray-100'} py-16`}>
       <div className="container mx-auto">
-        <h2 className={`title ${darkMode ? 'text-white' : ''} text-4xl font-bold text-center mb-12`}>
+        <h2 className={`title ${modoNoche ? 'text-white' : ''} text-4xl font-bold text-center mb-12`}>
           <br />Conoce sobre Nosotros
         </h2>
 
         {/*  los testimonios son los perfiles de cada integrantes Testimonio 1 */}
-        <div className={`testimony__item ${darkMode ? 'bg-[#2a4f5d]' : 'bg-[#a2e3f9]'} mb-8  p-6 rounded-md flex flex-col md:flex-row items-center justify-between`}>
+        <div className={`testimony__item ${modoNoche ? 'bg-[#2a4f5d]' : 'bg-[#a2e3f9]'} mb-8  p-6 rounded-md flex flex-col md:flex-row items-center justify-between`}>
           <section className="testimony__body text-center ml-8 mr-4 md:text-left md:w-2/3">
-            <h2 className={`subtitle ${darkMode ? 'text-white' : 'text-black'} text-2xl font-bold mb-2`}>
+            <h2 className={`subtitle ${modoNoche ? 'text-white' : 'text-black'} text-2xl font-bold mb-2`}>
               Nathaly Angamarca, <span className="testimony__course">Estudiante de UNL.</span>
             </h2>
 
-            <p className={`testimony__review ${darkMode ? 'text-white' : 'text-black'} mb-4`}>
+            <p className={`testimony__review ${modoNoche ? 'text-white' : 'text-black'} mb-4`}>
               Estudiante de la carrera de Ingeniería en Sistemas/Computación de la Universidad Nacional de Loja
             </p>
-            <a href="https://github.com/NathalyAngamarca" className={`testimony__github block ${darkMode ? 'bg-[#1e2f50]' : 'bg-[#5d8dee]'} text-white font-bold py-2 px-4 rounded" target="_blank" rel="noopener noreferrer`}>
+            <a href="https://github.com/NathalyAngamarca" className={`testimony__github block ${modoNoche ? 'bg-[#1e2f50]' : 'bg-[#5d8dee]'} text-white font-bold py-2 px-4 rounded" target="_blank" rel="noopener noreferrer`}>
               Visita mi Github
             </a>
           </section>
@@ -42,35 +42,36 @@ const SeccionTestimonios = ({ darkMode }) => {
         </div>
 
         {/* Testimonio 2 */}
-        <div className="testimony__item mb-8 bg-[#cff4e0] p-6 rounded-md flex flex-col md:flex-row items-center justify-between">
+        <div className={`testimony__item ${modoNoche ? 'bg-[#313f38]' : 'bg-[#cff4e0]'} mb-8  p-6 rounded-md flex flex-col md:flex-row items-center justify-between`}>
           <figure className="testimony__picture mt-4 md:mt-0 flex items-center justify-center">
             <div className="mb-4 md:mb-0" style={{ maxWidth: '80%', maxHeight: '80%' }}>
               <img src={testimonio2} className="testimonio rounded-full" alt="Letty" />
             </div>
           </figure>
           <section className="testimony__body text-center ml-8 mr-4 md:text-left md:w-2/3">
-            <h2 className="subtitle text-2xl font-bold mb-2">
+            <h2 className={`subtitle ${modoNoche ? 'text-white' : 'text-black'} text-2xl font-bold mb-2`}>
               Letty Cañar, <span className="testimony__course">Estudiante de UNL.</span>
             </h2>
-            <p className="testimony__review mb-4">
+            <p className={`testimony__review ${modoNoche ? 'text-white' : 'text-black'} mb-4`}>
               Estudiante de la carrera de Ingeniería en Sistemas/Computación de la Universidad Nacional de Loja
             </p>
-            <a href="https://github.com/LettyYas" className="testimony__github block bg-[#478b6d] text-white font-bold py-2 px-4 rounded" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/LettyYas" className={`testimony__github block ${modoNoche ? 'bg-[#162b22]' : 'bg-[#478b6d]'} text-white font-bold py-2 px-4 rounded" target="_blank" rel="noopener noreferrer`}>
               Visita mi Github
             </a>
           </section>
         </div>
 
         {/* Testimonio 3 */}
-        <div className="testimony__item mb-8 bg-[#a2e3f9] p-6 rounded-md flex flex-col md:flex-row items-center justify-between">
+        <div className={`testimony__item ${modoNoche ? 'bg-[#2a4f5d]' : 'bg-[#a2e3f9]'} mb-8  p-6 rounded-md flex flex-col md:flex-row items-center justify-between`}>
           <section className="testimony__body text-center ml-8 mr-4 md:text-left md:w-2/3">
-            <h2 className="subtitle text-2xl font-bold mb-2">
+            <h2 className={`subtitle ${modoNoche ? 'text-white' : 'text-black'} text-2xl font-bold mb-2`}>
               Jose Encalada, <span className="testimony__course">Estudiante de UNL.</span>
             </h2>
-            <p className="testimony__review mb-4">
+
+            <p className={`testimony__review ${modoNoche ? 'text-white' : 'text-black'} mb-4`}>
               Estudiante de la carrera de Ingeniería en Sistemas/Computación de la Universidad Nacional de Loja
             </p>
-            <a href="https://github.com/FerminEncalada" className="testimony__github block bg-[#5d8dee] text-white font-bold py-2 px-4 rounded" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/FerminEncalada" className={`testimony__github block ${modoNoche ? 'bg-[#1e2f50]' : 'bg-[#5d8dee]'} text-white font-bold py-2 px-4 rounded" target="_blank" rel="noopener noreferrer`}>
               Visita mi Github
             </a>
           </section>
@@ -80,35 +81,37 @@ const SeccionTestimonios = ({ darkMode }) => {
         </div>
 
         {/* Testimonio 4 */}
-        <div className="testimony__item mb-8 bg-[#cff4e0] p-6 rounded-md flex flex-col md:flex-row items-center justify-between">
+        <div className={`testimony__item ${modoNoche ? 'bg-[#313f38]' : 'bg-[#cff4e0]'} mb-8  p-6 rounded-md flex flex-col md:flex-row items-center justify-between`}>
           <figure className="testimony__picture mt-4 md:mt-0 flex items-center justify-center">
             <div className="mb-4 md:mb-0" style={{ maxWidth: '80%', maxHeight: '80%' }}>
               <img src={testimonio4} className="testimonio rounded-full" alt="Mauricio" />
             </div>
           </figure>
           <section className="testimony__body text-center ml-8 mr-4 md:text-left md:w-2/3">
-            <h2 className="subtitle text-2xl font-bold mb-2">
+            <h2 className={`subtitle ${modoNoche ? 'text-white' : 'text-black'} text-2xl font-bold mb-2`}>
               Mauricio Guachizaca, <span className="testimony__course">Estudiante de UNL.</span>
             </h2>
-            <p className="testimony__review mb-4">
+            <p className={`testimony__review ${modoNoche ? 'text-white' : 'text-black'} mb-4`}>
               Estudiante de la carrera de Ingeniería en Sistemas/Computación de la Universidad Nacional de Loja
             </p>
-            <a href="https://github.com/mauricioguachizaca" className="testimony__github block bg-[#478b6d] text-white font-bold py-2 px-4 rounded" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/mauricioguachizaca" className={`testimony__github block ${modoNoche ? 'bg-[#162b22]' : 'bg-[#478b6d]'} text-white font-bold py-2 px-4 rounded" target="_blank" rel="noopener noreferrer`}>
               Visita mi Github
             </a>
           </section>
         </div>
 
+
         {/* Testimonio 5 */}
-        <div className="testimony__item mb-8 bg-[#a2e3f9] p-6 rounded-md flex flex-col md:flex-row items-center justify-between">
+        <div className={`testimony__item ${modoNoche ? 'bg-[#2a4f5d]' : 'bg-[#a2e3f9]'} mb-8  p-6 rounded-md flex flex-col md:flex-row items-center justify-between`}>
           <section className="testimony__body text-center ml-8 mr-4 md:text-left md:w-2/3">
-            <h2 className="subtitle text-2xl font-bold mb-2">
+            <h2 className={`subtitle ${modoNoche ? 'text-white' : 'text-black'} text-2xl font-bold mb-2`}>
               Boris Rengel, <span className="testimony__course">Estudiante de UNL.</span>
             </h2>
-            <p className="testimony__review mb-4">
+
+            <p className={`testimony__review ${modoNoche ? 'text-white' : 'text-black'} mb-4`}>
               Estudiante de la carrera de Ingeniería en Sistemas/Computación de la Universidad Nacional de Loja
             </p>
-            <a href="https://github.com/borisir" className="testimony__github block bg-[#5d8dee] text-white font-bold py-2 px-4 rounded" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/borisir" className={`testimony__github block ${modoNoche ? 'bg-[#1e2f50]' : 'bg-[#5d8dee]'} text-white font-bold py-2 px-4 rounded" target="_blank" rel="noopener noreferrer`}>
               Visita mi Github
             </a>
           </section>
@@ -123,28 +126,11 @@ const SeccionTestimonios = ({ darkMode }) => {
 };
 
 
-export const Inicio = () => {
-  // Obtener el estado del modo oscuro del almacenamiento local, si no está definido, usa false por defecto
-  const storedDarkMode = localStorage.getItem('darkMode') === 'true';
-  // Estado para controlar el modo oscuro, inicializado con el valor del almacenamiento local
-  const [darkMode, setDarkMode] = useState(storedDarkMode);
-
-  // Función para alternar entre el modo oscuro y claro
-  const toggleDarkMode = () => {
-    const newDarkMode = !darkMode;
-    setDarkMode(newDarkMode);
-    // Guardar el estado del modo oscuro en el almacenamiento local
-    localStorage.setItem('darkMode', newDarkMode);
-  };
-
-  // Efecto para aplicar el modo oscuro al cargar la página
-  useEffect(() => {
-    document.body.classList.toggle('dark', darkMode);
-  }, [darkMode]);
+export const Inicio = ({modoNoche}) => {
 
   return (
-    <div className={darkMode ? 'dark' : ''}>
-      <nav className={`${darkMode ? 'bg-[#17301a]' : 'bg-[#478b6d]'} p-6 flex flex-col sm:flex-row items-center justify-between
+    <div className={modoNoche ? 'dark' : ''}>
+      <nav className={`${modoNoche ? 'bg-[#17301a]' : 'bg-[#478b6d]'} p-6 flex flex-col sm:flex-row items-center justify-between
       fixed  w-full z-50 shadow-xl`}>
         <div className="flex items-center mb-1 sm:ml-4"> {/* Margen de Click Wed con Las demas letras*/}
           <a href="#bienvenida" className="text-white font-extrabold text-2xl">CLIK WED</a>
@@ -172,17 +158,17 @@ export const Inicio = () => {
             <p className=" text-white text-lg md:text-xl mb-6">
               ¿Quieres conocer cuánto consume de energía tus dispositivos eléctricos?
             </p>
-            <a href="/registro" className="bg-[#478b6d] text-white py-2 px-4 rounded-full text-lg md:text-xl hover:bg-[#5d8dee] transition duration-300">Descúbrelo aquí</a>
+            <Link to="/registro" className="bg-[#478b6d] text-white py-2 px-4 rounded-full text-lg md:text-xl hover:bg-[#5d8dee] transition duration-300">Descúbrelo aquí</Link>
           </div>
         </div>
       </div>
       <section id="registro"></section>
       {/* Sección de botones (Iniciar Sesión, Registrarse, Información) */}
-      <div className={`flex items-center justify-evenly flex-wrap ${darkMode ? 'bg-[#121212]' : 'bg-white'} py-28 md:mt-20 `}>
+      <div className={`flex items-center justify-evenly flex-wrap ${modoNoche ? 'bg-[#121212]' : 'bg-white'} py-28 md:mt-20 `}>
         {/* boton y icono de inicio sesion*/}
         <Link to="/iniciar" className="text-center flex flex-col items-center mb-4">
           <div className="border border-gray-300 p-4 rounded">
-            <PersonIcon style={{ fontSize: '4rem', color: darkMode ? 'white' : '' }} />
+            <PersonIcon style={{ fontSize: '4rem', color: modoNoche ? 'white' : '' }} />
           </div>
           <div className="text-center mt-2">
             <button className="bg-[#a2e3f9] text-black font-bold py-2 px-4 rounded">
@@ -194,7 +180,7 @@ export const Inicio = () => {
         {/* boton y icono de registro*/}
         <Link to="/registro" className="text-center flex flex-col items-center mb-4">
           <div className="border border-gray-300 p-4 rounded">
-            <PersonAddIcon style={{ fontSize: '4rem', color: darkMode ? 'white' : '' }} />
+            <PersonAddIcon style={{ fontSize: '4rem', color: modoNoche ? 'white' : '' }} />
           </div>
           <div className="text-center mt-2">
             <button className="bg-[#a2e3f9] text-black font-bold py-2 px-4 rounded">
@@ -206,7 +192,7 @@ export const Inicio = () => {
         {/* boton y icono de informacion*/}
         <Link to="/informacion" className="text-center flex flex-col items-center mb-4">
           <div className="border border-gray-300 p-4 rounded">
-            <InfoIcon fontSize="large" style={{ fontSize: '4rem', color: darkMode ? 'white' : '' }} />
+            <InfoIcon fontSize="large" style={{ fontSize: '4rem', color: modoNoche ? 'white' : '' }} />
           </div>
           <div className="text-center mt-2">
             <button className="bg-[#a2e3f9] text-black font-bold py-2 px-4 rounded">
@@ -217,14 +203,9 @@ export const Inicio = () => {
       </div>
 
       {/* Sección de los Perfiles de cada colaborador */}
-      <SeccionTestimonios darkMode={darkMode} />
+      <SeccionTestimonios modoNoche={modoNoche} />
 
-      {/* Botón para activar/desactivar el modo oscuro */}
-      <button onClick={toggleDarkMode} className="fixed bottom-4 right-4 bg-[#6D6E81] text-white rounded-full w-12 h-12 flex items-center justify-center">
-        {darkMode ? '🌙' : '🌞'}
-      </button>
-
-      <footer className={`${darkMode ? 'bg-[#17301a]' : 'bg-[#478b6d]'}  p-5 text-blue-gray-100 text-center flex flex-col items-center`}>
+      <footer className={`${modoNoche ? 'bg-[#17301a]' : 'bg-[#478b6d]'}  p-5 text-blue-gray-100 text-center flex flex-col items-center`}>
         {/* Iconos de redes sociales */}
         <div className="flex">
           <a href="https://www.facebook.com/UNLoficial/?locale=es_LA" target="_blank" rel="noopener noreferrer">
