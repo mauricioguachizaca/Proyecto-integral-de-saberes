@@ -99,6 +99,13 @@ function Agregarmedidor({ modoNoche }) {
 >
   Guardar
 </button>
+<button 
+            type="button"
+            className={`bg-[#478b6d] hover:bg-[#5d8dee] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2 ${modoNoche ? 'bg-[#478b6d] hover:bg-[#5d8dee]' : ''}`}
+            onClick={() => navigate(-1)} // Regresa a la página anterior
+          >
+            Regresar
+          </button>
       </form>
     </div>
   );
