@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import CharComponent from './Grafica/ChartComponent';
 import Pastel from './Grafica/Pastel';
 import { useConsumo } from '../context/ConsumoContext';
-import {Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 function Mostrar() {
   const { dispositivoMasConsumo, consumoTotal } = useConsumo();
@@ -17,12 +17,12 @@ function Mostrar() {
 
   return (
     <div className="flex flex-col items-center justify-center mb-16">
-      <div className="mb-4">Mis gráficas</div>
+      <div className="mb-9">Mis gráficas</div>
       <div className="flex flex-col items-center mb-8 h-60">
         <CharComponent />
         <Pastel height={200} />
       </div>
-      <div className="bg-gray-100 mt-44 p-8 rounded-lg text-center">
+      <div className="bg-gray-100 p-8 rounded-lg text-center" style={{ marginTop: '900px' }}>
         {isLoading ? (
           <p>Cargando...</p>
         ) : (
@@ -32,9 +32,13 @@ function Mostrar() {
           </div>
         )}
       </div>
-      <button type="submit" className="col-span-2  bg-[#478b6d] text-white py-2 px-4 rounded hover:bg-[#5d8dee]">
-            <Link to="/medidor">Regresar</Link>
-          </button>
+      <button
+        type="submit"
+        className="col-span-2 bg-[#478b6d] text-white py-2 px-4 rounded hover:bg-[#5d8dee]"
+        style={{ marginTop: '1cm' }}
+      >
+        <Link to="/medidor">Regresar</Link>
+      </button>
     </div>
   );
 }
