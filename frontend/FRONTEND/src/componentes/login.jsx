@@ -24,7 +24,7 @@ const Login = ({ modoNoche }) => {
 
 
   return (
-    <div className={`${modoNoche ? 'bg-[#1c201e]' : 'bg-gray-200'} flex justify-center items-center h-screen`}>
+    <div className={`${modoNoche ? 'bg-[#1c201e]' : 'bg-[#a2e3f9]'} flex justify-center items-center h-screen`}>
       <div className={`${modoNoche ? 'bg-gray-800' : 'bg-white'} max-w-sm p-6 rounded-md border border-[#478b6d]`}>
         <form onSubmit={onSubmit} className="grid grid-cols-1 gap-6">
           <div>
@@ -71,3 +71,4 @@ const Login = ({ modoNoche }) => {
 }
 
 export default Login;
+
