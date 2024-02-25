@@ -158,9 +158,11 @@ export const Inicio = ({modoNoche}) => {
             <p className=" text-white text-lg md:text-xl mb-6">
               ¿Quieres conocer cuánto consume de energía tus dispositivos eléctricos?
             </p>
-            <Link to="/registro" className="bg-[#478b6d] text-white py-2 px-4 rounded-full text-lg md:text-xl hover:bg-[#5d8dee] transition duration-300">Descúbrelo aquí</Link>
-          </div>
+            <Link to="/registro" className={`${modoNoche ? 'bg-[#17301a]' : 'bg-[#478b6d]'} text-white py-2 px-4 rounded-full text-lg md:text-xl hover:bg-[#5d8dee] transition duration-300`}>
+       Descúbrelo aquí
+      </Link>
         </div>
+      </div>
       </div>
       <section id="registro"></section>
       {/* Sección de botones (Iniciar Sesión, Registrarse, Información) */}
@@ -171,9 +173,9 @@ export const Inicio = ({modoNoche}) => {
             <PersonIcon style={{ fontSize: '4rem', color: modoNoche ? 'white' : '' }} />
           </div>
           <div className="text-center mt-2">
-            <button className="bg-[#a2e3f9] text-black font-bold py-2 px-4 rounded">
-              Iniciar Sesión
-            </button>
+          <button className={modoNoche ? 'bg-[#1e2f50] text-white font-bold py-2 px-4 rounded' : 'bg-[#a2e3f9] text-black font-bold py-2 px-4 rounded'}>
+    Iniciar Sesión
+</button>
           </div>
         </Link>
 
@@ -183,9 +185,9 @@ export const Inicio = ({modoNoche}) => {
             <PersonAddIcon style={{ fontSize: '4rem', color: modoNoche ? 'white' : '' }} />
           </div>
           <div className="text-center mt-2">
-            <button className="bg-[#a2e3f9] text-black font-bold py-2 px-4 rounded">
-              Registrarse
-            </button>
+          <button className={modoNoche ? 'bg-[#1e2f50] text-white font-bold py-2 px-4 rounded' : 'bg-[#a2e3f9] text-black font-bold py-2 px-4 rounded'}>
+    Registrarse
+</button>
           </div>
         </Link>
 
@@ -195,9 +197,9 @@ export const Inicio = ({modoNoche}) => {
             <InfoIcon fontSize="large" style={{ fontSize: '4rem', color: modoNoche ? 'white' : '' }} />
           </div>
           <div className="text-center mt-2">
-            <button className="bg-[#a2e3f9] text-black font-bold py-2 px-4 rounded">
-              Información
-            </button>
+          <button className={modoNoche ? 'bg-[#1e2f50] text-white font-bold py-2 px-4 rounded' : 'bg-[#a2e3f9] text-black font-bold py-2 px-4 rounded'}>
+    Información
+</button>
           </div>
         </Link>
       </div>
