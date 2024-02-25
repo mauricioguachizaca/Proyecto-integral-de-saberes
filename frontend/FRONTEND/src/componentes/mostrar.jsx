@@ -17,7 +17,7 @@ function Mostrar() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br bg-[#a2e3f9]  text-black">
-      <div className="text-5xl font-bold mb-8 text-center">¡Tus Datos Energéticos!</div>
+      <div className="text-5xl font-bold mb-8 mt-4 text-center">¡Tus Datos Energéticos!</div> {/* Agregar margen superior */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="flex flex-col items-center p-4 bg-white opacity-70 rounded-xl backdrop-blur-md shadow-md">
           <div className="text-3xl font-bold mb-4">Visualización Gráfica</div>
@@ -33,14 +33,14 @@ function Mostrar() {
           <p className="text-lg">Cargando...</p>
         ) : (
           <div>
-            <p className="text-xl mb-4">Tu dispositivo que más consume es: {dispositivoMasConsumo.nombreDispositivo}</p>
+            <p className="text-xl mb-4">El dispositivo que más consume es: {dispositivoMasConsumo.nombreDispositivo}</p>
             <p className="text-xl">El consumo total de energía al mes es: {consumoTotal} W</p>
           </div>
         )}
       </div>
       <button
         type="submit"
-        className="bg-[#478b6d] text-white py-2 px-4 rounded hover:bg-[#5d8dee]"
+        className="bg-[#478b6d] text-white py-2 px-4 rounded hover:bg-[#5d8dee] mt-4 mb-4" // Agregar el margen inferior de 1cm aquí
       >
         <Link to="/medidor">Regresar</Link>
       </button>
