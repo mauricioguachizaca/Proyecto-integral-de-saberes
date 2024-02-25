@@ -76,7 +76,7 @@ const BarsChart = () => {
 
   return (
     <div>
-      <canvas id="myChart"></canvas>
+      <canvas id="myChart" style={{ width: '400px', height: '300px' }}></canvas>
     </div>
   );
 };
