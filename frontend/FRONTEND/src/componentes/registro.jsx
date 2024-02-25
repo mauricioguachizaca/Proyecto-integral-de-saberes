@@ -1,30 +1,24 @@
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../context/AuthContext';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
-
 const Registro = ({ modoNoche }) => {
-
-
   const { register, handleSubmit, formState: { errors }, watch } = useForm();
   const { validarcredenciales, isAuthenticated } = useAuth();
   const navigation = useNavigate();
-
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     if (isAuthenticated) navigation("/medidor");
   }, [isAuthenticated]);
-
 
   const onSubmit = handleSubmit(async (values) => {
     console.log(values);
     validarcredenciales(values);
   });
 
-
   const password = watch("password", "");
-
 
   return (
     <div className={`${modoNoche ? 'bg-[#1c201e]' : 'bg-gray-200'} flex justify-center items-center h-screen`}>
@@ -80,11 +74,20 @@ const Registro = ({ modoNoche }) => {
             </div>
             <div className="mb-6">
               <label htmlFor="password" className={`block ${modoNoche ? 'text-white' : 'text-black'} text-sm font-bold mb-2`}>Contraseña:</label>
-              <input
-                type="password"
-                {...register("password", { required: true })}
-                className='w-full border border-[#478b6d] text-black px-4 py-2 rounded-md'
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  {...register("password", { required: true })}
+                  className='w-full border border-[#478b6d] text-black px-4 py-2 rounded-md'
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute inset-y-0 right-0 flex items-center px-3 focus:outline-none"
+                >
+                  {showPassword ? "Ocultar" : "Mostrar"}
+                </button>
+              </div>
               {errors.password && (<p className='text-red-900'>La contraseña es requerida</p>)}
             </div>
             <div className="mb-6">
@@ -108,6 +111,5 @@ const Registro = ({ modoNoche }) => {
     </div>
   );
 }
-
 
 export default Registro;
