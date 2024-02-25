@@ -30,7 +30,7 @@ const Registro = ({ modoNoche }) => {
               <input
                 type="text"
                 {...register("nombre", { required: true })}
-                className='w-full border border-[#478b6d] text-black px-4 py-2 rounded-md'
+                className='w-full border border-[#478b6d] text-black bg-[#d4e8ee] px-4 py-2 rounded-md '
               />
               {errors.nombre && (<p className='text-red-900'>Nombres es requerido</p>)}
             </div>
@@ -39,7 +39,7 @@ const Registro = ({ modoNoche }) => {
               <input
                 type="text"
                 {...register("apellido", { required: true })}
-                className='w-full border border-[#478b6d] text-black px-4 py-2 rounded-md'
+                className='w-full border border-[#478b6d] text-black bg-[#d4e8ee] px-4 py-2 rounded-md'
               />
               {errors.apellido && (<p className='text-red-900'>Apellidos es requerido</p>)}
             </div>
@@ -48,7 +48,7 @@ const Registro = ({ modoNoche }) => {
               <input
                 type="text"
                 {...register("cedula", { required: true })}
-                className='w-full border border-[#478b6d] text-black px-4 py-2 rounded-md'
+                className='w-full border border-[#478b6d] text-black bg-[#d4e8ee] px-4 py-2 rounded-md'
               />
               {errors.cedula && (<p className='text-red-900'>Cédula es requerido</p>)}
             </div>
@@ -57,7 +57,7 @@ const Registro = ({ modoNoche }) => {
               <input
                 type="text"
                 {...register("nombreusuario", { required: true })}
-                className='w-full border border-[#478b6d] text-black px-4 py-2 rounded-md'
+                className='w-full border border-[#478b6d] text-black bg-[#d4e8ee] px-4 py-2 rounded-md'
               />
               {errors.nombreusuario && (<p className='text-red-900'>Nombre de usuario es requerido</p>)}
             </div>
@@ -68,7 +68,7 @@ const Registro = ({ modoNoche }) => {
               <input
                 type="text"
                 {...register("provincia", { required: true })}
-                className='w-full border border-[#478b6d] text-black px-4 py-2 rounded-md'
+                className='w-full border border-[#478b6d] text-black bg-[#d4e8ee] px-4 py-2 rounded-md'
               />
               {errors.provincia && (<p className='text-red-900'>Provincia es requerida</p>)}
             </div>
@@ -78,7 +78,7 @@ const Registro = ({ modoNoche }) => {
                 <input
                   type={showPassword ? "text" : "password"}
                   {...register("password", { required: true })}
-                  className='w-full border border-[#478b6d] text-black px-4 py-2 rounded-md'
+                  className='w-full border border-[#478b6d] text-black bg-[#d4e8ee] px-4 py-2 rounded-md'
                 />
                 <button
                   type="button"
@@ -95,7 +95,7 @@ const Registro = ({ modoNoche }) => {
               <input
                 type="text"
                 {...register("correo", { required: true })}
-                className='w-full border border-[#478b6d] text-black px-4 py-2 rounded-md'
+                className='w-full border border-[#478b6d] text-black bg-[#d4e8ee] px-4 py-2 rounded-md'
               />
               {errors.correo && (<p className='text-red-900'>Correo es requerido</p>)}
             </div>
