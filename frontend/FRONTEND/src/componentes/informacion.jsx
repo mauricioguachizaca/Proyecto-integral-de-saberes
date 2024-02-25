@@ -20,7 +20,7 @@ export const Informacion = ({ modoNoche }) => {
 
   return (
     <div className={`min-h-screen flex flex-col items-center justify-center ${modoNoche ? 'bg-[#1b1a1b]' : 'bg-gray-200'}`}>
-      <div className={`w-full max-w-screen-xl p-6 text-center rounded-md shadow-md relative ${modoNoche ? 'bg-gray-800' : 'bg-[#dadacbb9]'}`}>
+      <div className={`w-full max-w-screen-xl p-6 text-center rounded-md shadow-md relative ${modoNoche ? 'bg-[#1c201e]' : 'bg-[#dadacbb9]'}`}>
         <div className="mt-4">
           <div className="mb-4">
             <h1 className={`text-3xl font-bold ${modoNoche ? 'text-white' : 'text-black'}`}>Información Del Proyecto</h1>
