@@ -24,7 +24,7 @@ export default function Pies() {
   }, []);
 
   const data = {
-    label : 'Cantidad de mis dispositivos' ,
+    label: 'Cantidad de mis dispositivos',
     labels: dispositivosInfo ? dispositivosInfo.map(dispositivo => dispositivo.nombreDispositivo) : [],
     datasets: [
       {
@@ -46,9 +46,13 @@ export default function Pies() {
         ],
         borderWidth: 1,
       },
-      
     ],
   };
 
-  return <Pie data={data} options={options} />;
+  return (
+    <div style={{ marginTop: '2cm' }}>
+      <Pie data={data} options={options} width={600} height={400} />
+    </div>
+  );
+}
 }
