@@ -33,7 +33,7 @@ const Login = ({ modoNoche }) => {
               <input
                 type="text"
                 {...register("nombreusuario", { required: true })}
-                className='w-full border border-[#478b6d] text-black px-4 py-2 rounded-md'
+                className='w-full border border-[#478b6d] text-black bg-[#d4e8ee] px-4 py-2 rounded-md'
               />
               {errors.nombreusuario && (<p className='text-red-900'>Nombre de usuario es requerido</p>)}
             </div>
@@ -43,7 +43,7 @@ const Login = ({ modoNoche }) => {
                 <input
                   type={showPassword ? "text" : "password"}
                   {...register("password", { required: true })}
-                  className='w-full border border-[#478b6d] text-black px-4 py-2 rounded-md'
+                  className='w-full border border-[#478b6d] text-black bg-[#d4e8ee] px-4 py-2 rounded-md'
                 />
                 <button
                   type="button"
