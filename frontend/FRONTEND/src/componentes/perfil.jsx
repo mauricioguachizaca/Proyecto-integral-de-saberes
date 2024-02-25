@@ -25,7 +25,7 @@ const Perfil = ({ modoNoche }) => {
   
 
     return (
-      <div className={`${modoNoche ? 'bg-[#1c201e]' : 'bg-gray-200'} flex justify-center items-center h-screen`}>
+      <div className={`${modoNoche ? 'bg-[#1c201e]' : 'bg-[#a2e3f9]'} flex justify-center items-center h-screen`}>
       <div className={`${modoNoche ? 'bg-gray-800' : 'bg-white'}  max-w-4xl p-10 rounded-md border border-[#478b6d]`}>
       <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-2 gap-6">
           <div>
@@ -108,7 +108,7 @@ const Perfil = ({ modoNoche }) => {
             REGISTRO
           </button>
           <button type="submit" className="col-span-2  bg-[#478b6d] text-white py-2 px-4 rounded hover:bg-[#5d8dee]">
-            <Link to="/medidor">Regresar</Link>
+            <Link to="/medidor">REGRESAR</Link>
           </button>
         </form> 
       </div>
