@@ -1,38 +1,35 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
-import EnhancedTable from './EnhancedTableHead.jsx'
+import EnhancedTable from './EnhancedTableHead.jsx';
 
 function Medidor() {
-  const { cerrar } = useAuth(); // Accede al contexto de autenticación y obtén el usuario
-
+  const { cerrar } = useAuth();
 
   return (
     <div className="bg-blue-gray-50 flex flex-col min-h-screen">
-      <nav className='bg-blue-gray-900 justify-center align'>
-        <button className='bg-light-blue-200 ml-5 mr-10'>
-          <Link to="/perfil">Editar mi perfil</Link>
+      <nav className={`bg-[#478b6d] p-6 flex flex-col sm:flex-row items-center justify-between fixed w-full z-50 shadow-xl`}>
+        <div className="flex items-center mb-1 sm:ml-4">
+          <Link to="/" className="text-white font-extrabold text-2xl">CLIK WED</Link>
+        </div>
+        <div className="text-center flex flex-wrap items-center justify-center space-x-4">
+          <Link to="/perfil" className="text-white transition duration-75 hover:font-bold hover:shadow-md">Editar mi perfil</Link>
+          <span className="text-white">|</span>
+          <Link to="/" onClick={() => { cerrar() }} className="text-white transition duration-75 hover:font-bold hover:shadow-md">Cerrar sesión</Link>
+        </div>
+      </nav>
+
+      <div className="flex justify-between items-center ml-6 mt-24 mb-4 mr-6"> {/* Ajuste para alinear horizontalmente */}
+        <h1 className="text-2xl">Mis dispositivos</h1>
+        <button className="bg-teal-700">
+          <Link to="/agregarmedidor">Agregar dispositivo</Link>
         </button>
-      {/* Muestra el nombre de usuario si está disponible */}
-        <button className='bg-purple-300 ml-5 mr-10 '>
-          <Link to="/" onClick={() => { cerrar() }}>Cerrar sesión</Link>
-        </button>
-        </nav>
-      <div className="flex justify-between items-center px-4 mt-16">
-        <h1 className="text-2xl ml-4">Mis dispositivos</h1>
-        <div>
-          <button className='bg-teal-700 mr-4'>
-            <Link to="/agregarmedidor" >Agregar dispositivo</Link>
-          </button>
-         </div>
       </div>
-      <div className="flex-grow mx-6 my-6">
+      <div className="flex-grow mx-6 my-2">
         <EnhancedTable />
-        <button className='ml-2 bg-deep-orange-500'>
-          <Link to="/mostrar">
-          Calcular mi consumo 
-          </Link>
-          </button>
+        <button className="bg-deep-orange-500 mt-4">
+          <Link to="/mostrar">Calcular mi consumo</Link>
+        </button>
       </div>
     </div>
   );
