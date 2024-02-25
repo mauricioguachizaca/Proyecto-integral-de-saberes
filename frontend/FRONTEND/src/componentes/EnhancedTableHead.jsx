@@ -55,12 +55,12 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     width: '100%',
     marginBottom: theme.spacing(2),
-    backgroundColor: 'rgba(255, 255, 255, 0.8)', // Color de fondo ligeramente transparente
-    boxShadow: 'none', // Sin sombra para que sea menos prominente
+    backgroundColor: theme.palette.type === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.8)',
+    boxShadow: 'none',
   },
   table: {
     minWidth: 750,
-    border: `1px solid ${theme.palette.divider}`, // Borde menos prominente
+    border: `1px solid ${theme.palette.divider}`,
   },
   emptyTableMessage: {
     textAlign: 'center',
@@ -76,13 +76,13 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function EnhancedTable() {
+export default function EnhancedTable({ modoNoche }) {
   const classes = useStyles();
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
   const { mostrarmedidor, medidor, eliminarmedidor } = useMedidor();
   const [, forceUpdate] = useState();
-  const navigate = useNavigate(); // Obteniendo la función navigate
+  const navigate = useNavigate();
 
   useEffect(() => {
     mostrarmedidor();
@@ -99,32 +99,23 @@ export default function EnhancedTable() {
 
   const handleDelete = async (id) => {
     await eliminarmedidor(id);
-    forceUpdate(Date.now()); // Forzar la actualización de la interfaz de usuario
+    forceUpdate(Date.now());
   };
 
   const handleEdit = (id) => {
-    // Redirige a la ruta de edición con el ID del dispositivo
     navigate(`/agregarmedidor/${id}`);
   };
 
   return (
-    <div className={classes.root}>
-      <Paper className={classes.paper}>
+    <div className={`${classes.root} ${modoNoche ? 'dark' : ''}`}>
+      <Paper className={`${classes.paper} ${modoNoche ? 'bg-[#121212]' : 'bg-[#a2e3f9]'}`}>
         <TableContainer>
-          <Table
-            className={classes.table}
-            aria-labelledby="tableTitle"
-            aria-label="enhanced table"
-          >
-            <EnhancedTableHead
-              classes={classes}
-            />
+          <Table className={classes.table} aria-labelledby="tableTitle" aria-label="enhanced table">
+            <EnhancedTableHead classes={classes} />
             <TableBody>
               {medidor.length === 0 && (
                 <TableRow>
-                  <TableCell colSpan={6}
-                   align="center" 
-                   >
+                  <TableCell colSpan={6} align="center">
                     <Typography variant="h6" className={classes.emptyTableMessage}>
                       No hay datos disponibles.
                     </Typography>
@@ -137,12 +128,12 @@ export default function EnhancedTable() {
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row, index) => (
                       <TableRow key={index}>
-                        <TableCell align="left" style={{ width: headCells[0].width, }}>{row.nombredispositivo}</TableCell>
-                        <TableCell align="right" style={{ width: headCells[1].width,  }}>{row.cantidad}</TableCell>
-                        <TableCell align="right" style={{ width: headCells[2].width,  }}>{row.potencia}</TableCell>
-                        <TableCell align="right" style={{ width: headCells[3].width,  }}>{row.tiempodeuso}</TableCell>
-                        <TableCell align="right" style={{ width: headCells[4].width,  }}>{row.numerodeuso}</TableCell>
-                        <TableCell align="right" style={{ width: headCells[5].width,}}>
+                        <TableCell align="left" style={{ width: headCells[0].width }}>{row.nombredispositivo}</TableCell>
+                        <TableCell align="right" style={{ width: headCells[1].width }}>{row.cantidad}</TableCell>
+                        <TableCell align="right" style={{ width: headCells[2].width }}>{row.potencia}</TableCell>
+                        <TableCell align="right" style={{ width: headCells[3].width }}>{row.tiempodeuso}</TableCell>
+                        <TableCell align="right" style={{ width: headCells[4].width }}>{row.numerodeuso}</TableCell>
+                        <TableCell align="right" style={{ width: headCells[5].width }}>
                           <div className={classes.buttonGroup}>
                             <Button className={classes.button} variant="contained" color="primary" onClick={() => handleEdit(row._id)}>
                               Editar
