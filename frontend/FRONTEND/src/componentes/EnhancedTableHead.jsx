@@ -15,12 +15,12 @@ import { useMedidor } from '../context/MedidorContext';
 import { Link, useNavigate } from 'react-router-dom'; // Importa useNavigate
 
 const headCells = [
-  { id: 'nombredispositivo', numeric: false, disablePadding: false, label: 'Nombre de dispositivos', width: '25%' },
-  { id: 'cantidad', numeric: true, disablePadding: false, label: 'Cantidad', width: '15%' },
+  { id: 'nombredispositivo', numeric: false, disablePadding: false, label: 'Nombre de dispositivos', width: '15%',textAlign: 'center' },
+  { id: 'cantidad', numeric: true, disablePadding: false, label: 'Cantidad', width: '15%',textAlign: 'center' },
   { id: 'potencia(W)', numeric: true, disablePadding: false, label: 'Potencia(Wh)', width: '15%' },
   { id: 'tiempodeuso', numeric: true, disablePadding: false, label: 'Tiempo de uso', width: '15%' },
   { id: 'numerodeuso', numeric: true, disablePadding: false, label: 'Número de días en uso al mes', width: '15%' },
-  { id: 'Ediciones', numeric: true, disablePadding: false, label: 'Ediciones', width: '15%' }
+  { id: 'Ediciones', numeric: true, disablePadding: false, label: 'Ediciones', width: '20%', textAlign: 'center' }
 ];
 
 function EnhancedTableHead(props) {
@@ -122,7 +122,9 @@ export default function EnhancedTable() {
             <TableBody>
               {medidor.length === 0 && (
                 <TableRow>
-                  <TableCell colSpan={6}>
+                  <TableCell colSpan={6}
+                   align="center" 
+                   >
                     <Typography variant="h6" className={classes.emptyTableMessage}>
                       No hay datos disponibles.
                     </Typography>
@@ -135,12 +137,12 @@ export default function EnhancedTable() {
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row, index) => (
                       <TableRow key={index}>
-                        <TableCell align="left" style={{ width: headCells[0].width }}>{row.nombredispositivo}</TableCell>
-                        <TableCell align="right" style={{ width: headCells[1].width }}>{row.cantidad}</TableCell>
-                        <TableCell align="right" style={{ width: headCells[2].width }}>{row.potencia}</TableCell>
-                        <TableCell align="right" style={{ width: headCells[3].width }}>{row.tiempodeuso}</TableCell>
-                        <TableCell align="right" style={{ width: headCells[4].width }}>{row.numerodeuso}</TableCell>
-                        <TableCell align="right" style={{ width: headCells[5].width }}>
+                        <TableCell align="left" style={{ width: headCells[0].width, }}>{row.nombredispositivo}</TableCell>
+                        <TableCell align="right" style={{ width: headCells[1].width,  }}>{row.cantidad}</TableCell>
+                        <TableCell align="right" style={{ width: headCells[2].width,  }}>{row.potencia}</TableCell>
+                        <TableCell align="right" style={{ width: headCells[3].width,  }}>{row.tiempodeuso}</TableCell>
+                        <TableCell align="right" style={{ width: headCells[4].width,  }}>{row.numerodeuso}</TableCell>
+                        <TableCell align="right" style={{ width: headCells[5].width,}}>
                           <div className={classes.buttonGroup}>
                             <Button className={classes.button} variant="contained" color="primary" onClick={() => handleEdit(row._id)}>
                               Editar

@@ -19,7 +19,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Conexión a la base de datos MongoDB usando Mongoose
-mongoose.connect('mongodb://127.0.0.1:27017/prueba', {
+mongoose.connect('mongodb+srv://mauricioguachizaca:amigosdebesos10@cluster0.bbxftjy.mongodb.net/prueba', {
   useNewUrlParser: true, // Configuración para usar el nuevo analizador de URL de MongoDB
   useUnifiedTopology: true, // Configuración para usar el nuevo motor de detección de servidores de MongoDB
 })

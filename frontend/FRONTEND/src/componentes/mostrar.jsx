@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import CharComponent from './Grafica/ChartComponent';
 import Pastel from './Grafica/Pastel';
 import { useConsumo } from '../context/ConsumoContext';
+import {Link } from 'react-router-dom'
 
 function Mostrar() {
   const { dispositivoMasConsumo, consumoTotal } = useConsumo();
@@ -31,6 +32,9 @@ function Mostrar() {
           </div>
         )}
       </div>
+      <button type="submit" className="col-span-2  bg-[#478b6d] text-white py-2 px-4 rounded hover:bg-[#5d8dee]">
+            <Link to="/medidor">Regresar</Link>
+          </button>
     </div>
   );
 }

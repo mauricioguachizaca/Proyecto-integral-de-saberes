@@ -54,7 +54,7 @@ function App() {
                   <Route path="/medidor" element={<Medidor modoNoche={modoNoche} />} />
                   <Route path="/agregarmedidor" element={<Agregarmedidor modoNoche={modoNoche} />} />
                   <Route path="/agregarmedidor/:id" element={<Agregarmedidor modoNoche={modoNoche} />} />
-                  <Route path="/perfil/:id" element={<Perfil modoNoche={modoNoche} />} />
+                  <Route path="/perfil" element={<Perfil modoNoche={modoNoche} />} />
                   <Route path="/mostrar" element={<Mostrar modoNoche={modoNoche} />} />
                 </Route>
               </Routes>

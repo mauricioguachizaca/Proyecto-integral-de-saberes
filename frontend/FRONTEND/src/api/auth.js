@@ -9,3 +9,6 @@ export const iniciorespuestas = (user) => axios.post(`/verificarcredenciales`, u
 export const verificarTokenRe = () => axios.get(`/verificartoken`)
 
 export const cerrarTokenRe = () => axios.post(`/cerracredenciales`)
+
+export const actualizarperfil= (id, user) => 
+axios.put(`/usuarios/${id}`, user)

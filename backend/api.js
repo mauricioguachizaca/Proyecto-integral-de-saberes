@@ -4,6 +4,8 @@ const Usuario = require('./models/Usuario');
 const Medidor = require('./models/Medidor')
 const bcrypt = require('bcryptjs');
 const jwt =  require('jsonwebtoken')
+const mongoose = require('mongoose');
+
 
 //rutas para usuarios [para sus peticiones]
 /**
@@ -141,6 +143,11 @@ router.get('/usuarios/:id', async (req, res) => {
   try {
     const { id } = req.params; // Obtener el ID del parámetro de la ruta
 
+    // Verifica si el ID proporcionado es válido
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: 'ID de usuario inválido' });
+    }
+
     // Busca el usuario por su ID
     const usuario = await Usuario.findById(id);
 
@@ -154,6 +161,7 @@ router.get('/usuarios/:id', async (req, res) => {
     res.status(500).json({ error: 'Error al obtener el usuario' });
   }
 });
+
 /**
  * @swagger
  * /api/usuarios/{id}:
@@ -327,46 +335,27 @@ function createAccessToken(payload) {
  * @swagger
  * /api/perfiles:
  *   get:
- *     summary: Obtiene los perfiles de usuario.
+ *     summary: Obtiene la información del usuario actual (protegido por token).
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
- *         description: Perfiles obtenidos correctamente.
+ *         description: Información del usuario obtenida correctamente.
  *       401:
  *         description: No hay token, autorización denegada.
  *       403:
  *         description: Token inválido.
  *       500:
- *         description: Error al obtener los perfiles.
+ *         description: Error al obtener la información del usuario.
  */
-router.get('/perfiles', async (req, res) => {
+router.get('/perfiles', verifyToken, async (req, res) => {
   try {
-    const token = req.cookies.token;
-
-    if (!token) {
-      return res.status(401).json({ message: "No hay token, autorización denegada" });
-    }
-
-    jwt.verify(token, "secret123", async (err, decoded) => {
-      if (err) {
-        return res.status(403).json({ message: "Token inválido" });
-      }
-      
-      // Accede a la información del usuario desde decoded
-      const usuario = await Usuario.findById(decoded.id);
-
-      if (!usuario) {
-        return res.status(400).json({ message: "Usuario no encontrado" });
-      }
-
-      return res.json({
-        id: usuario._id,
-        nombre: usuario.nombre
-        // Agrega más propiedades del usuario según tus necesidades
-      });
-    });
+    // Obtener el usuario autenticado desde el middleware verifyToken
+    const usuario = req.usuario;
+    res.json(usuario);
   } catch (error) {
-    console.error("Error al obtener los perfiles:", error);
-    res.status(500).json({ error: "Error al obtener los perfiles" });
+    console.error("Error al obtener la información del usuario:", error);
+    res.status(500).json({ error: "Error al obtener la información del usuario" });
   }
 });
 
@@ -867,6 +856,34 @@ router.get('/dispositivos', verifyToken, async (req, res) => {
     res.status(500).json({ error: "Error al obtener la información de los dispositivos" });
   }
 });
+/**
+ * @swagger
+ * /api/usuarioSesion:
+ *   get:
+ *     summary: Obtiene la ID del usuario en sesión.
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: ID del usuario en sesión obtenida correctamente.
+ *       401:
+ *         description: No hay token, autorización denegada.
+ *       403:
+ *         description: Token inválido.
+ *       500:
+ *         description: Error al obtener la ID del usuario en sesión.
+ */
+router.get('/usuarioSesion', verifyToken, async (req, res) => {
+  try {
+    // Obtener el ID del usuario autenticado desde el middleware verifyToken
+    const userId = req.usuario.id;
+    res.json({ userId });
+  } catch (error) {
+    console.error("Error al obtener la ID del usuario en sesión:", error);
+    res.status(500).json({ error: "Error al obtener la ID del usuario en sesión" });
+  }
+});
+
 
 
 
