@@ -19,20 +19,23 @@ function Medidor() {
         </div>
       </nav>
 
-      <div className="flex justify-between items-center ml-6 mt-24 mb-4 mr-6"> {/* Ajuste para alinear horizontalmente */}
+      <div className="flex justify-between items-center ml-6 mt-24 mb-4 mr-6"> 
         <h1 className="text-2xl">Mis dispositivos</h1>
-        <button className="bg-teal-700">
-          <Link to="/agregarmedidor">Agregar dispositivo</Link>
-        </button>
+        <div className="flex space-x-4"> {/* Contenedor para los botones */}
+          <button className="bg-teal-700 text-white py-2 px-4 rounded hover:bg-teal-600">
+            <Link to="/agregarmedidor">Agregar dispositivo</Link>
+          </button>
+          <button className="bg-[#a2e3f9] text-black py-2 px-4 rounded hover:bg-[#53ccf1]">
+            <Link to="/mostrar">Calcular mi consumo</Link>
+          </button>
+        </div>
       </div>
       <div className="flex-grow mx-6 my-2">
         <EnhancedTable />
-        <button className="bg-deep-orange-500 mt-4">
-          <Link to="/mostrar">Calcular mi consumo</Link>
-        </button>
       </div>
     </div>
   );
 }
 
 export default Medidor;
+
