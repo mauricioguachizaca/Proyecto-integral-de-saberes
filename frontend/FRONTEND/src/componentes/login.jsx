@@ -3,27 +3,33 @@ import { useAuth } from "../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react"; // Agregamos el useState
 
-function Login() {
+
+
+
+const Login = ({ modoNoche }) => {
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const { inicios , isAuthenticated } = useAuth();
+  const { inicios, isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false); // Estado para controlar la visibilidad de la contraseña
+
 
   const onSubmit = handleSubmit((data) => {
     inicios(data);
   });
-  
-  useEffect(()=>{
-   if (isAuthenticated) navigate("/medidor")
-  },[isAuthenticated])
+
+
+  useEffect(() => {
+    if (isAuthenticated) navigate("/medidor")
+  }, [isAuthenticated])
+
 
   return (
-    <div className="flex justify-center items-center h-screen bg-[#a2e3f9]">
-      <div className='bg-white max-w-sm p-6 rounded-md border border-[#478b6d]'>
+    <div className={`${modoNoche ? 'bg-[#1c201e]' : 'bg-gray-200'} flex justify-center items-center h-screen`}>
+      <div className={`${modoNoche ? 'bg-gray-800' : 'bg-white'} max-w-sm p-6 rounded-md border border-[#478b6d]`}>
         <form onSubmit={onSubmit} className="grid grid-cols-1 gap-6">
           <div>
             <div className="mb-3">
-              <label htmlFor="nombreusuario" className="block text-black text-sm font-bold mb-2">Nombre de usuario:</label>
+              <label htmlFor="nombreusuario" className={`block ${modoNoche ? 'text-white' : 'text-black'} text-sm font-bold mb-2`}>Nombre de usuario:</label>
               <input
                 type="text"
                 {...register("nombreusuario", { required: true })}
@@ -32,7 +38,7 @@ function Login() {
               {errors.nombreusuario && (<p className='text-red-900'>Nombre de usuario es requerido</p>)}
             </div>
             <div className="mb-3">
-              <label htmlFor="password" className="block text-black text-sm font-bold mb-2">Contraseña:</label>
+              <label htmlFor="password" className={`block ${modoNoche ? 'text-white' : 'text-black'} text-sm font-bold mb-2`}>Contraseña:</label>
               <div className="relative">
                 <input
                   type={showPassword ? "text" : "password"}
@@ -51,11 +57,13 @@ function Login() {
             </div>
           </div>
           <button type="submit" className="bg-[#478b6d] text-white py-2 px-4 rounded hover:bg-[#5d8dee] w-full">
-            Iniciar Sesión
+            INICIAR SESION
           </button>
         </form>
-        <p className="flex gap-x-2 justify-between mt-4">
-          ¿No tienes una cuenta aún? <Link to="/registro" className="text-[#5d8dee]">Regístrate</Link>
+        <p className={`${modoNoche ? 'text-white' : 'text-black'} flex items-center justify-between mt-4`}>
+          <span>¿No tienes una cuenta aún?</span>
+          <span className="mr-8"></span>
+          <Link to="/registro" className={`font-bold ${modoNoche ? 'text-[#84dcec]' : 'text-[#47728b]'}`}>Regístrate</Link>
         </p>
       </div>
     </div>
