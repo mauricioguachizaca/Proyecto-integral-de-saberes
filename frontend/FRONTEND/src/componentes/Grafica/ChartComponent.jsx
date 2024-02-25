@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../../api/axios';
-import Chart from 'chart.js/auto'; // Import Chart.js
+import Chart from 'chart.js/auto';
 
 const BarsChart = () => {
   const [data, setData] = useState(null);
@@ -36,7 +36,13 @@ const BarsChart = () => {
         {
           label: 'Consumo Mensual',
           data: consumosMensuales,
-          backgroundColor: 'rgba(0, 220, 195, 0.5)'
+          backgroundColor: [
+            'rgba(255, 159, 64, 0.6)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 99, 132, 0.6)',
+            'rgba(75, 192, 192, 0.6)',
+            'rgba(153, 102, 255, 0.6)'
+          ]
         }
       ]
     };
@@ -44,17 +50,21 @@ const BarsChart = () => {
     const options = {
       scales: {
         y: {
-          beginAtZero: true // Asegura que el eje y empiece en cero
+          beginAtZero: true
         }
       },
       plugins: {
         title: {
           display: true,
-          text: 'Consumo Mensual de todos los dispositivos',
-          padding: {
-            top: 10,
-            bottom: 30
+          text: 'Consumo Mensual de Dispositivos',
+          padding: 20,
+          font: {
+            size: 28,
+            weight: 'bold'
           }
+        },
+        legend: {
+          display: false
         }
       }
     };
@@ -63,7 +73,6 @@ const BarsChart = () => {
       chartInstance.destroy();
     }
 
-    // Create new chart instance
     const ctx = document.getElementById('myChart');
     const newChartInstance = new Chart(ctx, {
       type: 'bar',
@@ -75,10 +84,11 @@ const BarsChart = () => {
   };
 
   return (
-    <div style={{ marginTop: '2cm' }}>
-      <canvas id="myChart" style={{ width: '1000x', height: '500px' }}></canvas>
+    <div style={{ marginTop: '2cm', borderRadius: '10px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)', padding: '20px' }}>
+      <canvas id="myChart" style={{ width: '100%', height: '500px' }}></canvas>
     </div>
   );
 };
 
 export default BarsChart;
+
