@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import FlujoTrabajo from './imagenes/FlujoDeTrabajoPis.png';
-import DiagramaClases from './imagenes/Diagrama.jpg';
+import DiagramaClases from './imagenes/Diagrama2.jpg';
 
 export const Informacion = ({ modoNoche }) => {
   const [flujoAmpliada, setFlujoAmpliada] = useState(false);
