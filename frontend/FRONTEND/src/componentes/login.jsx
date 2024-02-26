@@ -57,7 +57,7 @@ const Login = ({ modoNoche }) => {
             </div>
           </div>
           <button type="submit" className="bg-[#478b6d] text-white py-2 px-4 rounded hover:bg-[#5d8dee] w-full">
-            INICIAR SESION
+            INICIAR SESIÓN
           </button>
         </form>
         <p className={`${modoNoche ? 'text-white' : 'text-black'} flex items-center justify-between mt-4`}>
