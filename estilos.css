@@ -1,0 +1,194 @@
+/* Estilos para las secciones de Historias de Usuario y Conclusiones */
+
+/* Div contenedor */
+.info > div {
+  margin-bottom: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 800px; /* Ancho máximo del contenido */
+  padding-left: 20px; /* Espaciado a la izquierda */
+  padding-right: 20px; /* Espaciado a la derecha */
+  box-sizing: border-box; /* Incluye el relleno en el ancho total */
+}
+
+/* Títulos */
+.info h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Texto de las historias de usuario y conclusiones */
+.info p {
+  font-size: 16px;
+  line-height: 1.6; /* Espaciado entre líneas */
+  margin-bottom: 10px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f0f0f0;
+    padding: 50px 0;
+   }
+   body {
+    background-color: #f0f0f0; /* Reemplaza con el color que desees, puedes usar nombres de color o códigos hexadecimales */
+    margin: 0; /* Para eliminar el margen predeterminado del cuerpo de la página */
+    padding: 0; /* Para eliminar el relleno predeterminado del cuerpo de la página */
+    font-family: Arial, sans-serif;
+    padding-top: 60px;
+  }
+
+    img {
+    text-align: center;
+    width: 80%;
+    height: 80%;
+    Border: 3px solid #101010;
+    margin-bottom: 50px;
+    }
+  
+   .titulo {
+    text-align: center;
+    margin-bottom: 100px;
+   }
+   
+   .contenido {
+    display: inline-flex;
+    justify-content: space-around;
+    width: 80%;
+   }
+   
+   .card {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 30px;
+    margin-bottom: 50px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 40%;
+   }
+.capturas {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 40%;
+ }
+       
+   .card button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #000000;
+    color: rgb(255, 255, 255);
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+   }
+   .card2 button {
+    margin-top: 0px;
+    padding: 10px 20px;
+    margin-bottom: 40px;
+    background-color: #000000;
+    color: rgb(255, 255, 255);
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+   }
+   .container {
+    text-align: center;
+  }
+  
+  .container img {
+    display: inline-block;
+  }
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    padding-top: 60px; /* Ajusta el valor según la altura de tu nav */
+}
+nav {
+  width: 100%;
+  height: 80px; /* Aumenta la altura del cuadro a 80px o el tamaño deseado */
+  background-color: #15194e;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+
+nav div {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 80px; /* Ajusta la altura del texto al centro verticalmente */
+}
+
+nav a:hover {
+  color: #ddd;
+  font-weight: bold;
+}
+
+/*Responsive*/
+/* Estilos para dispositivos móviles */
+@media screen and (max-width: 768px) {
+  .card p {
+    text-align: center; /* Centra los párrafos de texto */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .info > div {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  nav {
+    height: 60px; /* Ajusta la altura del cuadro para pantallas más pequeñas */
+  }
+
+  nav a {
+    font-size: 3.5vw; /* Ajusta el tamaño del texto usando unidades de viewport width */
+    margin: 0 5px; /* Ajusta el espacio horizontal entre los enlaces */
+    line-height: 1.5; /* Ajusta el interlineado entre las palabras */
+  }
+}
+  @media screen and (max-width: 768px) {
+    .contenido {
+      flex-direction: column;
+      align-items: center;
+    }
+    .card {
+      width: 80%;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .card {
+      width: 80%;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .card2 {
+      width: 80%;
+    }
+  }
