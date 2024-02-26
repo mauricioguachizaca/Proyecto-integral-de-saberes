@@ -10,7 +10,7 @@ function Medidor() {
     <div className="bg-blue-gray-50 dark:bg-[#1c201e] flex flex-col min-h-screen">
       <nav className={`bg-[#478b6d] dark:bg-[#17301a] p-6 flex flex-col sm:flex-row items-center justify-between fixed w-full z-50 shadow-xl`}>
         <div className="flex items-center mb-1 sm:ml-4">
-          <Link to="/" className="text-white font-extrabold text-2xl">CLIK WED</Link>
+          <Link to="/" className="text-white font-extrabold text-2xl">Watt Control</Link>
         </div>
         <div className="text-center flex flex-wrap items-center justify-center space-x-4">
           <Link to="/perfil" className="text-white transition duration-75 hover:font-bold hover:shadow-md">Editar mi perfil</Link>

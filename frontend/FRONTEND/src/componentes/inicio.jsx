@@ -133,7 +133,7 @@ export const Inicio = ({modoNoche}) => {
       <nav className={`${modoNoche ? 'bg-[#17301a]' : 'bg-[#478b6d]'} p-6 flex flex-col sm:flex-row items-center justify-between
       fixed  w-full z-50 shadow-xl`}>
         <div className="flex items-center mb-1 sm:ml-4"> {/* Margen de Click Wed con Las demas letras*/}
-          <a href="#bienvenida" className="text-white font-extrabold text-2xl">CLIK WED</a>
+          <a href="#bienvenida" className="text-white font-extrabold text-2xl">Watt Control</a>
           <a href="https://github.com/mauricioguachizaca/Proyecto-integral-de-saberes.github.io" className="text-white flex items-center ml-16 sm:hidden" target="_blank" rel="noopener noreferrer">
             <GitHubIcon style={{ color: '#ffffff' }} fontSize="large" /> </a>
         </div>
@@ -154,7 +154,7 @@ export const Inicio = ({modoNoche}) => {
         {/* Contenido de la sección de bienvenida */}
         <div className="container mx-auto text-center relative z-10">
           <div className="text-center bg-opacity-80 p-6">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-16">Bienvenido/a a Nuestra Plataforma</h1>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-16">Bienvenido/a a Nuestra Aplicación Web</h1>
             <p className=" text-white text-lg md:text-xl mb-6">
               ¿Quieres conocer cuánto consume de energía tus dispositivos eléctricos?
             </p>
@@ -221,7 +221,7 @@ export const Inicio = ({modoNoche}) => {
           </a>
         </div>
         <div>
-          Derechos reservados © Clik Wed
+          Derechos reservados © Watt Control
         </div>
       </footer>
     </div>

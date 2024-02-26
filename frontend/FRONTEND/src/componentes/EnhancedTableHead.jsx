@@ -17,7 +17,7 @@ import { Link, useNavigate } from 'react-router-dom';
 const headCells = [
   { id: 'nombredispositivo', numeric: false, disablePadding: false, label: 'Nombre de Dispositivo', width: '20%', textAlign: 'center' },
   { id: 'cantidad', numeric: true, disablePadding: false, label: 'Cantidad', width: '15%', textAlign: 'center' },
-  { id: 'potencia(W)', numeric: true, disablePadding: false, label: 'Potencia (Wh)', width: '15%', textAlign: 'center' },
+  { id: 'potencia(W)', numeric: true, disablePadding: false, label: 'Potencia (W)', width: '15%', textAlign: 'center' },
   { id: 'tiempodeuso', numeric: true, disablePadding: false, label: 'Tiempo de Uso', width: '15%', textAlign: 'center' },
   { id: 'numerodeuso', numeric: true, disablePadding: false, label: 'Días de Uso al Mes', width: '15%', textAlign: 'center' },
   { id: 'acciones', numeric: true, disablePadding: false, label: 'Acciones', width: '20%', textAlign: 'center' }
