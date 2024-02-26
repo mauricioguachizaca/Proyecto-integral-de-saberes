@@ -28,13 +28,13 @@ function EnhancedTableHead(props) {
 
   return (
     <TableHead>
-      <TableRow style={{ backgroundColor: '#a2e3f9' }}>
+      <TableRow style={{ backgroundColor: '#2a4f5d' }}> {/* Cambio de color de fondo para el modo oscuro */}
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
             align={headCell.textAlign ? headCell.textAlign : 'center'} // Añadimos alineación personalizada si está definida, de lo contrario, usamos 'center'
             padding={headCell.disablePadding ? 'none' : 'normal'}
-            style={{ width: headCell.width, fontWeight: 'bold', color: '#000' }}
+            style={{ width: headCell.width, fontWeight: 'bold', color: '#fff' }} // Cambio de color de texto a blanco
           >
             {headCell.label}
           </TableCell>
@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     width: '100%',
     marginBottom: theme.spacing(2),
-    backgroundColor: '#fafafa',
+    backgroundColor: '#2a4f5d', // Cambio de color de fondo para el modo oscuro
     borderRadius: 10,
   },
   table: {
@@ -65,6 +65,7 @@ const useStyles = makeStyles((theme) => ({
   emptyTableMessage: {
     textAlign: 'center',
     padding: theme.spacing(2),
+    color: '#fff', // Cambio de color de texto a blanco
   },
   buttonGroup: {
     display: 'flex',
@@ -73,10 +74,10 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1, 0),
   },
   editButton: {
-    backgroundColor: '#a2e3f9',
-    color: '#000',
+    backgroundColor: '#3f51b5', // Cambio de color para el botón Editar en modo noche
+    color: '#fff', // Letras blancas
     '&:hover': {
-      backgroundColor: '#7acde8',
+      backgroundColor: '#2e6df5', // Cambio de color al pasar el cursor
     },
   },
   deleteButton: {
@@ -90,7 +91,10 @@ const useStyles = makeStyles((theme) => ({
     borderTop: `1px solid ${theme.palette.divider}`,
     paddingTop: theme.spacing(2),
     '& .MuiTypography-body2': {
-      color: '#666',
+      color: '#fff', // Cambio de color de texto a blanco
+    },
+    '& .MuiSelect-select.MuiSelect-select.MuiSelect-selectMenu': {
+      color: '#fff', // Cambio de color de texto a blanco
     },
   },
 }));
@@ -153,11 +157,11 @@ export default function EnhancedTable() {
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row, index) => (
                       <TableRow key={index}>
-                        <TableCell align="center" style={{ width: headCells[0].width }}>{row.nombredispositivo}</TableCell>
-                        <TableCell align="center" style={{ width: headCells[1].width }}>{row.cantidad}</TableCell>
-                        <TableCell align="center" style={{ width: headCells[2].width }}>{row.potencia}</TableCell>
-                        <TableCell align="center" style={{ width: headCells[3].width }}>{row.tiempodeuso}</TableCell>
-                        <TableCell align="center" style={{ width: headCells[4].width }}>{row.numerodeuso}</TableCell>
+                        <TableCell align="center" style={{ width: headCells[0].width, color: '#fff' }}>{row.nombredispositivo}</TableCell> {/* Cambio de color de texto a blanco */}
+                        <TableCell align="center" style={{ width: headCells[1].width, color: '#fff' }}>{row.cantidad}</TableCell> {/* Cambio de color de texto a blanco */}
+                        <TableCell align="center" style={{ width: headCells[2].width, color: '#fff' }}>{row.potencia}</TableCell> {/* Cambio de color de texto a blanco */}
+                        <TableCell align="center" style={{ width: headCells[3].width, color: '#fff' }}>{row.tiempodeuso}</TableCell> {/* Cambio de color de texto a blanco */}
+                        <TableCell align="center" style={{ width: headCells[4].width, color: '#fff' }}>{row.numerodeuso}</TableCell> {/* Cambio de color de texto a blanco */}
                         <TableCell align="center" style={{ width: headCells[5].width }}>
                           <div className={classes.buttonGroup}>
                             <Button className={classes.editButton} variant="contained" onClick={() => handleEdit(row._id)}>
