@@ -25,17 +25,16 @@ function Medidor() {
           <button className="bg-teal-700 text-white py-2 px-4 rounded hover:bg-teal-600">
             <Link to="/agregarmedidor">Agregar dispositivo</Link>
           </button>
-          <button className="bg-[#a2e3f9] dark:bg-[#1e2f50] text-black dark:text-white py-2 px-4 rounded hover:bg-[#53ccf1] ">
+          <button className="bg-[#3f51b5] dark:bg-[#1e2f50] text-white dark:text-white py-2 px-4 rounded hover:bg-[#3f51b5] ">
             <Link to="/mostrar">Calcular mi consumo</Link>
           </button>
         </div>
       </div>
       <div className="flex-grow mx-6 my-2">
-        <EnhancedTable />
+      <EnhancedTable modoNoche={true} />
       </div>
     </div>
   );
 }
 
 export default Medidor;
-
