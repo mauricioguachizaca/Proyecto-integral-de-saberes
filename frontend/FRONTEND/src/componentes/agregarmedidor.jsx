@@ -125,12 +125,15 @@ function Agregarmedidor({ modoNoche }) {
             className={`shadow appearance-none border rounded w-full border-[#478b6d] py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline ${modoNoche ? 'bg-[#d4e8ee] text-black' : 'bg-[#d4e8ee] text-black'}`} 
             id="tiempodeuso" 
             type="number" 
-            {...register("tiempodeuso", { required: true, min: 1 })}
+            {...register("tiempodeuso", { required: true, min: 1, max: 24})}
           />
           {errors.tiempodeuso && errors.tiempodeuso.type === 'required' && (
             <p className='text-red-900'>Complete este campo</p>
           )}
           {errors.tiempodeuso && errors.tiempodeuso.type === 'min' && (
+            <p className='text-red-900'>Ingrese un valor válido</p>
+          )}
+          {errors.tiempodeuso && errors.tiempodeuso.type === 'max' && (
             <p className='text-red-900'>Ingrese un valor válido</p>
           )}
         </div>
@@ -154,20 +157,25 @@ function Agregarmedidor({ modoNoche }) {
             <p className='text-red-900'>Ingrese un valor válido</p>
           )}
         </div>
-
-        <button 
-          type="submit"
-          className={`bg-[#478b6d] hover:bg-[#5d8dee] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${modoNoche ? 'bg-[#478b6d] hover:bg-[#5d8dee]' : ''}`}
-        >
-          Guardar
-        </button>
-        <button 
-          type="button"
-          className={`bg-[#478b6d] hover:bg-[#5d8dee] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2 ${modoNoche ? 'bg-[#478b6d] hover:bg-[#5d8dee]' : ''}`}
-          onClick={() => navigate(-1)} // Regresa a la página anterior
-        >
-          Regresar
-        </button>
+        <div className="flex justify-between">
+          <div className="w-1/2 mr-2">
+            <button 
+              type="submit"
+              className={`w-full bg-[#478b6d] hover:bg-[#5d8dee] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${modoNoche ? 'bg-[#478b6d] hover:bg-[#5d8dee]' : ''}`}
+            >
+              Guardar
+            </button>
+          </div>
+          <div className="w-1/2 ml-2">
+            <button 
+              type="button"
+              className={`w-full bg-[#478b6d] hover:bg-[#5d8dee] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${modoNoche ? 'bg-[#478b6d] hover:bg-[#5d8dee]' : ''}`}
+              onClick={() => navigate(-1)} // Regresa a la página anterior
+            >
+              Regresar
+            </button>
+          </div>
+        </div>
       </form>
     </div>
   );
