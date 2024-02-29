@@ -25,8 +25,6 @@ export const Informacion = ({ modoNoche }) => {
         <div className="text-center flex flex-wrap items-center justify-center space-x-4">
           <a href="/" className="text-white transition duration-75 hover:font-bold hover:shadow-md">Inicio</a>
           <span className="text-white">|</span>
-          <a href="/informacion" className="text-white transition duration-75 hover:font-bold hover:shadow-md">Información</a>
-          <span className="text-white">|</span>
           <a href="https://github.com/mauricioguachizaca/Proyecto-integral-de-saberes.github.io" target="_blank" rel="noopener noreferrer">
             <GitHubIcon style={{ color: '#ffffff' }} fontSize="large" className="ml-2" />
           </a>
