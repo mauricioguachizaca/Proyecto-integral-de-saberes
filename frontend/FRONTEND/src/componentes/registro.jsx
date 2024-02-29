@@ -10,15 +10,18 @@ const Registro = ({ modoNoche }) => {
   const navigation = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
+  // Efecto para redireccionar si el usuario está autenticado
   useEffect(() => {
     if (isAuthenticated) navigation("/medidor");
   }, [isAuthenticated]);
 
+  // Función para validar la contraseña
   const validatePassword = (value) => {
     const regex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
     return regex.test(value);
   };
 
+    // Función para manejar el envío del formulario
   const onSubmit = handleSubmit(async (values) => {
     if (!validatePassword(values.password)) {
       alert("La contraseña debe tener al menos 8 caracteres, una letra mayúscula y un carácter especial.");
@@ -45,6 +48,8 @@ const Registro = ({ modoNoche }) => {
           </a>
         </div>
       </nav>
+
+      {/* Contenido del formulario */}
       <div className={`${modoNoche ? 'bg-[#1c201e]' : 'bg-[#a2e3f9]'} flex justify-center items-center h-screen`}>
         <div className={`${modoNoche ? 'bg-gray-800' : 'bg-white'}  max-w-4xl p-10 rounded-md border border-[#478b6d]`}>
           <h1 className={`${modoNoche ? 'text-white' : 'text-black'} text-3xl font-bold mb-6 text-center`}>Registro de Usuarios</h1>
