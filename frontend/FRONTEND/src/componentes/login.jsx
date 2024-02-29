@@ -4,9 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react"; // Agregamos el useState
 import GitHubIcon from '@material-ui/icons/GitHub';
 
-
-
-
 const Login = ({ modoNoche }) => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const { inicios, isAuthenticated } = useAuth();
@@ -26,6 +23,7 @@ const Login = ({ modoNoche }) => {
 
   return (
     <div>
+      {/* Seccion de Navegacion Nav*/}
       <nav className={`${modoNoche ? 'bg-[#17301a]' : 'bg-[#478b6d]'} p-6 flex flex-col sm:flex-row items-center justify-between fixed w-full z-50 shadow-xl`}>
         <div className="flex items-center mb-1 sm:ml-4">
           <Link to="#bienvenida" className="text-white font-extrabold text-2xl">Watt Control</Link>
