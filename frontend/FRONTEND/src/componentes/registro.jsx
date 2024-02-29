@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import { useAuth } from '../context/AuthContext';
 import { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import GitHubIcon from '@material-ui/icons/GitHub';
 
 const Registro = ({ modoNoche }) => {
   const { register, handleSubmit, formState: { errors }, watch } = useForm();
@@ -21,6 +22,21 @@ const Registro = ({ modoNoche }) => {
   const password = watch("password", "");
 
   return (
+    <div>
+      <nav className={`${modoNoche ? 'bg-[#17301a]' : 'bg-[#478b6d]'} p-6 flex flex-col sm:flex-row justify-between items-center`}>
+        <div className="mb-4 sm:mb-0">
+          <Link to="#bienvenida" className="text-white font-extrabold text-2xl">Watt Control</Link>
+        </div>
+        <div className="text-center px-2 ">
+          <Link to="/" className="text-white transition duration-75 hover:font-bold hover:shadow-md px-4">Inicio</Link>
+          <span className="text-white">|</span>
+          <Link to="/informacion" className="text-white transition duration-75 hover:font-bold hover:shadow-md px-4">Información</Link>
+          <span className="text-white">|</span>
+          <a href="https://github.com/mauricioguachizaca/Proyecto-integral-de-saberes.github.io" target="_blank" rel="noopener noreferrer">
+            <GitHubIcon style={{ color: '#ffffff' }} fontSize="large" className="ml-4" />
+          </a>
+        </div>
+      </nav>
     <div className={`${modoNoche ? 'bg-[#1c201e]' : 'bg-[#a2e3f9]'} flex justify-center items-center h-screen`}>
       <div className={`${modoNoche ? 'bg-gray-800' : 'bg-white'}  max-w-4xl p-10 rounded-md border border-[#478b6d]`}>
       <h1 className={`${modoNoche ? 'text-white' : 'text-black'} text-3xl font-bold mb-6 text-center`}>Registro de Usuarios</h1>
@@ -109,6 +125,7 @@ const Registro = ({ modoNoche }) => {
           ¿Si ya tienes una cuenta? <Link to="/iniciar" className={`font-bold ${modoNoche ? 'text-[#84dcec]' : 'text-[#47728b]'}`}>Iniciar Sesión</Link>
         </p>
       </div>
+    </div>
     </div>
   );
 }
