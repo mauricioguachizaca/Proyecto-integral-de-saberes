@@ -37,7 +37,7 @@ function Mostrar({ modoNoche }) {
   ) : (
     <div>
       <p className={`text-xl mb-4 ${modoNoche ? 'text-white' : 'text-black'}`}>El dispositivo que más consume es: {dispositivoMasConsumo.nombreDispositivo}</p>
-      <p className={`text-xl ${modoNoche ? 'text-white' : 'text-black'}`}>El consumo total de energía al mes es: {consumoTotal} W</p>
+      <p className={`text-xl ${modoNoche ? 'text-white' : 'text-black'}`}>El consumo total de energía al mes es: {(consumoTotal)/1000} KW</p>
     </div>
   )}
 </div>
